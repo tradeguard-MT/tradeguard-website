@@ -1,0 +1,95 @@
+---
+// src/pages/privacy.astro
+import '../styles/global.css';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Privacy Policy - TradeGuard Assistant Extension</title>
+  </head>
+  <body class="bg-slate-900 text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white">
+    
+    <!-- Navigation Menu -->
+    <nav class="flex justify-between items-center p-6 border-b border-slate-800 max-w-4xl mx-auto">
+      <a href="/" class="text-xl font-bold text-sky-400 flex items-center gap-2">
+        <span>🛡️</span> TradeGuard <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
+      </a>
+      <a href="/" class="text-slate-400 hover:text-sky-400 text-sm transition">
+        ← Back to Home
+      </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-12 leading-relaxed space-y-8">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">Privacy Policy</h1>
+        <p class="text-slate-400 text-sm">Last Updated: October 15, 2026</p>
+      </div>
+
+      <section class="bg-slate-800/60 p-6 rounded-xl border border-slate-700 space-y-3">
+        <h2 class="text-xl font-bold text-sky-400">1. Core Commitment: Zero Remote Data Collection</h2>
+        <p class="text-slate-300 text-sm">
+          TradeGuard Assistant ("the Extension") is designed with a privacy-first, zero-knowledge architecture. 
+          <strong>We do not collect, store, transmit, process, or sell any personal data, browsing history, credentials, or trading metrics to any remote servers or third parties.</strong>
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">2. Local IPC Communication Only</h2>
+        <p class="text-slate-300 text-sm">
+          The Extension functions solely as a local sensor for the TradeGuard desktop application:
+        </p>
+        <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 pl-2">
+          <li>All real-time risk evaluations and enforcement calculations occur entirely on your local machine.</li>
+          <li>Data exchange occurs exclusively via an encrypted local WebSocket loopback connection (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs">127.0.0.1</code>) between the Extension and the local TradeGuard Windows Desktop Agent.</li>
+          <li>No web requests or telemetry data are sent outside your personal device environment.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">3. Explanation of Extension Permissions</h2>
+        <p class="text-slate-300 text-sm">
+          To enforce strict trading discipline, the Extension requests only the minimal necessary Manifest V3 permissions:
+        </p>
+        <div class="grid md:grid-cols-2 gap-4 pt-2">
+          <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs space-y-1">
+            <div class="font-bold text-sky-400">chrome.storage</div>
+            <p class="text-slate-400">Used strictly to persist local state, UI configuration preferences, and active lockout timers within your local browser storage.</p>
+          </div>
+          <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs space-y-1">
+            <div class="font-bold text-sky-400">chrome.alarms</div>
+            <p class="text-slate-400">Used to maintain background connection keep-alive heartbeat timers with the local desktop agent.</p>
+          </div>
+          <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs space-y-1 md:col-span-2">
+            <div class="font-bold text-sky-400">Host Permissions & WebSockets</div>
+            <p class="text-slate-400">Used solely to intercept local trading execution packets on supported broker platforms in real-time memory to trigger HUD overlays and discipline rules.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">4. Data Sharing and Sale</h2>
+        <p class="text-slate-300 text-sm">
+          Because TradeGuard does not collect any user data, we do not share, sell, transfer, or use user data for advertising, credit evaluation, or analytics under any circumstances.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">5. Contact Us</h2>
+        <p class="text-slate-300 text-sm">
+          If you have any questions regarding this Privacy Policy or TradeGuard's local security model, please contact us at:
+        </p>
+        <p class="text-sky-400 font-semibold text-sm">
+          ✉️ <a href="mailto:support@gettradeguard.app" class="hover:underline">support@gettradeguard.app</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-xs text-slate-600 border-t border-slate-800">
+      <p>© 2026 TradeGuard Project. All rights reserved.</p>
+    </footer>
+
+  </body>
+</html>
