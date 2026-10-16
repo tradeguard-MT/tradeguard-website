@@ -40,10 +40,16 @@ import '../styles/global.css';
         <p class="text-slate-300 text-sm">
           The Extension functions solely as a local sensor for the TradeGuard desktop application:
         </p>
-        <ul class="list-disc list-inside text-slate-400 text-sm space-y-2 pl-2">
-          <li>All real-time risk evaluations and enforcement calculations occur entirely on your local machine.</li>
-          <li>Data exchange occurs exclusively via an encrypted local WebSocket loopback connection (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs">127.0.0.1</code>) between the Extension and the local TradeGuard Windows Desktop Agent.</li>
-          <li>No web requests or telemetry data are sent outside your personal device environment.</li>
+        <ul class="list-disc pl-5 text-slate-400 text-sm space-y-2">
+          <li>
+            All real-time risk evaluations and discipline lockout calculations occur entirely on your local machine.
+          </li>
+          <li>
+            Data exchange occurs exclusively via a isolated local WebSocket loopback connection (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs">127.0.0.1:18090</code>) between the Extension and the local TradeGuard Desktop Application.
+          </li>
+          <li>
+            No web requests, external telemetry, passwords, or session tokens are ever transmitted outside your personal device environment.
+          </li>
         </ul>
       </section>
 
