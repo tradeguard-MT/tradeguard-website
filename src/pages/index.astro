@@ -1,18 +1,439 @@
 ---
+// src/pages/index.astro
 import '../styles/global.css';
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>TradeGuard - Under Maintenance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TradeGuard - Hardcore Risk Control for Forex & Binary Options</title>
   </head>
-  <body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center font-sans">
-    <div class="text-center p-8 border border-slate-800 bg-slate-800/40 rounded-2xl max-w-md">
-      <div class="text-4xl mb-4">🛡️</div>
-      <h1 class="text-2xl font-bold text-white mb-2">TradeGuard Under Maintenance</h1>
-      <p class="text-slate-400 text-sm mb-6">We are currently upgrading our infrastructure for the official launch.</p>
-      <a href="/privacy" class="text-sky-400 hover:underline text-xs">Privacy Policy</a>
+  <body class="bg-slate-900 text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white">
+    
+    <!-- 1. Navigation Menu -->
+    <nav class="flex justify-between items-center p-6 border-b border-slate-800 max-w-6xl mx-auto">
+      <div class="text-xl font-bold text-sky-400 flex items-center gap-2">
+        <span>🛡️</span> TradeGuard <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
+      </div>
+      <div class="hidden md:flex space-x-6 text-sm">
+        <a href="#features" class="hover:text-sky-400 transition">Features</a>
+        <a href="#architecture" class="hover:text-sky-400 transition">Dual-Engine</a>
+        <a href="#pricing" class="hover:text-sky-400 transition">Pricing</a>
+        <a href="#portal" class="hover:text-sky-400 transition">User Portal</a>
+        <a href="#faq" class="hover:text-sky-400 transition">FAQ</a>
+      </div>
+      <a href="#pricing" class="bg-sky-500 hover:bg-sky-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition">
+        Get License
+      </a>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <section class="py-20 text-center max-w-4xl mx-auto px-4">
+      <div class="inline-block bg-slate-800 text-sky-400 text-xs px-3 py-1 rounded-full border border-slate-700 mb-6">
+        🚀 Next-Gen Anti-Revenge Trading Technology
+      </div>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+        Eliminate Emotional Trading.<br/><span class="text-sky-400">Locked-in Discipline You Can't Override.</span>
+      </h1>
+      <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
+        TradeGuard combines a lightweight Chrome Manifest V3 Extension with a hardened Windows Desktop Enforcement Agent to strictly control your trading risks and stop tilt-trading in real time.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#pricing" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition">
+          🔒 Lock Your Discipline Now
+        </a>
+        <a href="#architecture" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-lg font-bold text-lg border border-slate-700 transition">
+          How It Works
+        </a>
+      </div>
+      <!-- Badges -->
+      <div class="flex flex-wrap justify-center items-center gap-6 mt-12 text-xs text-slate-500">
+        <span>⚡ MV3 Web Socket Interceptor</span>
+        <span>🛡️ Windows Policy Enforcement</span>
+        <span>🐕 Active Process Watchdog</span>
+        <span>💳 USDT / Crypto Instant Auto-Key</span>
+      </div>
+    </section>
+
+    <!-- 3. Dual-Engine Architecture & Features Section -->
+    <section id="features" class="py-16 bg-slate-800/40 border-t border-slate-800">
+      <div id="architecture" class="max-w-5xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Dual-Engine Anti-Tilt Architecture</h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">Traditional proxies fail and VPNs get turned off. TradeGuard operates at both the browser DOM layer and Windows system level.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Engine 1 -->
+          <div class="bg-slate-800 p-8 rounded-xl border border-slate-700">
+            <div class="text-sky-400 text-sm font-bold uppercase tracking-wider mb-2">Frontend Sensor</div>
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🌐</span> Chrome Extension (MV3)
+            </h3>
+            <ul class="space-y-3 text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Real-Time Packet Tapping:</strong> Intercepts raw WebSocket & HTTP trade execution packets directly in browser memory.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Live HUD Overlay:</strong> Injects real-time Health Bar (HP) widgets and account metrics right onto Pocket Option & brokers.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Policy Force-Locked:</strong> Enforced via Windows Group Policy. Users cannot disable, remove, or incognito-bypass the extension.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Engine 2 -->
+          <div class="bg-slate-800 p-8 rounded-xl border border-slate-700">
+            <div class="text-red-400 text-sm font-bold uppercase tracking-wider mb-2">Backend Enforcer</div>
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🖥️</span> Windows Desktop Agent
+            </h3>
+            <ul class="space-y-3 text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span><strong>Local IPC Server:</strong> Communicates via encrypted 127.0.0.1 WebSocket with zero external proxy overhead.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span><strong>Tamper-Proof Watchdog:</strong> Active background guard prevents process termination via Task Manager, CMD, or PowerShell.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span><strong>Uncompromising Countdown:</strong> Hard-coded 24h+ lockout countdown timer with zero emergency reset buttons.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Pricing Section -->
+    <section id="pricing" class="py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Protect Your Capital Today</h2>
+          <p class="text-slate-400">One emotional trade can cost hundreds. Invest in automatic discipline.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Monthly Pass -->
+          <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold mb-2">1-Month Pass</h3>
+              <p class="text-slate-400 text-sm mb-6">Ideal for testing out automated discipline.</p>
+              <div class="text-4xl font-extrabold mb-6">$19 <span class="text-sm font-normal text-slate-400">/ mo</span></div>
+              <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                <li>✓ Full MV3 Extension Protection</li>
+                <li>✓ Windows Desktop Watchdog</li>
+                <li>✓ 1 License Key (1 Active PC)</li>
+                <li>✓ Self-Service HWID Reset</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('1m', 19, '1-Month Pass')" 
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
+              Pay $19 with USDT / Crypto
+            </button>
+          </div>
+
+          <!-- Annual Pass (Featured) -->
+          <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-8 rounded-2xl border-2 border-sky-500 shadow-2xl flex flex-col justify-between relative">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Most Popular
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2 text-sky-400">1-Year Pass</h3>
+              <p class="text-slate-400 text-sm mb-6">Long-term consistency & maximum savings.</p>
+              <div class="text-4xl font-extrabold mb-6">$99 <span class="text-sm font-normal text-slate-400">/ yr</span></div>
+              <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                <li>✓ Everything in Monthly</li>
+                <li>✓ Priority Auto-Updates</li>
+                <li>✓ Advanced Risk HUD Customization</li>
+                <li>✓ 2 Free HWID Resets / Month</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('1y', 99, '1-Year Pass')" 
+              class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
+              Pay $99 with USDT / Crypto
+            </button>
+          </div>
+
+          <!-- Lifetime Freedom -->
+          <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-bold mb-2">Lifetime Freedom</h3>
+              <p class="text-slate-400 text-sm mb-6">Pay once, protected for life.</p>
+              <div class="text-4xl font-extrabold mb-6">$199 <span class="text-sm font-normal text-slate-400 font-bold">LIFETIME</span></div>
+              <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                <li>✓ Permanent License & Updates</li>
+                <li>✓ All Future Features & Brokers</li>
+                <li>✓ VIP Support</li>
+                <li>✓ Unlimited Self-Service HWID Resets</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('lifetime', 199, 'Lifetime Freedom')" 
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
+              Pay $199 with USDT / Crypto
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. User Self-Service Portal Section -->
+    <section id="portal" class="py-16 bg-slate-800/50 border-t border-b border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-4">Buyer Self-Service Portal</h2>
+        <p class="text-slate-400 mb-10">Lost your key? Switched to a new PC? Manage your license instantly with zero waiting for support.</p>
+        
+        <div class="grid md:grid-cols-2 gap-6 text-left">
+          <!-- Reset HWID -->
+          <div class="bg-slate-900 p-6 rounded-xl border border-slate-700">
+            <div class="text-xl mb-2">💻</div>
+            <h3 class="text-lg font-bold mb-2">Reset PC Binding (HWID)</h3>
+            <p class="text-slate-400 text-xs mb-4">Upgraded your PC or reinstalled Windows? Unbind your old computer Hardware ID instantly.</p>
+            <a href="/portal/reset-hwid" class="text-sky-400 text-sm font-bold hover:underline inline-block">
+              Open HWID Reset Portal →
+            </a>
+          </div>
+
+          <!-- Retrieve Key -->
+          <div class="bg-slate-900 p-6 rounded-xl border border-slate-700">
+            <div class="text-xl mb-2">🔍</div>
+            <h3 class="text-lg font-bold mb-2">Retrieve Key via TxHash</h3>
+            <p class="text-slate-400 text-xs mb-4">Query your license key using your Blockchain Order ID or TxHash.</p>
+            <a href="/portal/lookup-key" class="text-sky-400 text-sm font-bold hover:underline inline-block">
+              Lookup Key by TxHash →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FAQ Section -->
+    <section id="faq" class="py-16">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+            <h3 class="font-bold text-lg mb-2">Q: How do I receive my License Key after Crypto payment?</h3>
+            <p class="text-slate-400 text-sm">Once your USDT / USDC transaction gets confirmed on the blockchain, the License Key will instantly render on the checkout success screen AND be registered under your email address.</p>
+          </div>
+
+          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+            <h3 class="font-bold text-lg mb-2">Q: Can I kill TradeGuard via Windows Task Manager if I want to trade?</h3>
+            <p class="text-slate-400 text-sm">No. TradeGuard incorporates a background Watchdog process and Windows Policy locks. Once a risk lock is triggered, the agent actively resists forced termination until the timer expires.</p>
+          </div>
+
+          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+            <h3 class="font-bold text-lg mb-2">Q: Will this slow down my PC or conflict with my VPN?</h3>
+            <p class="text-slate-400 text-sm">Not at all. TradeGuard no longer uses system-wide proxy drivers or CA certificates. It communicates strictly via local 127.0.0.1 IPC, leaving your regular VPNs and network traffic completely untouched.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-xs text-slate-600 border-t border-slate-800 space-y-2">
+      <p>© 2026 TradeGuard Project. Hardcore discipline for smart traders.</p>
+      <p class="space-x-4">
+        <a href="/privacy" class="text-slate-400 hover:text-sky-400 transition underline">Privacy Policy</a>
+        <span>•</span>
+        <span>Disclaimer: TradeGuard is an independent risk control utility and is not affiliated with Pocket Option.</span>
+      </p>
+    </footer>
+
+    <!-- 7. Tailwind Dark Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-6">
+        <!-- Close Button (X) -->
+        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <!-- Modal Title -->
+        <div>
+          <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Instant Checkout</div>
+          <h3 class="text-xl font-bold text-white">Enter Email for License Delivery</h3>
+        </div>
+
+        <!-- Plan Order Summary Box -->
+        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+          <div>
+            <div id="modal-plan-name" class="font-bold text-white">1-Month Pass</div>
+            <div class="text-xs text-slate-400">TradeGuard PRO License</div>
+          </div>
+          <div id="modal-plan-price" class="text-xl font-extrabold text-sky-400">$19</div>
+        </div>
+
+        <!-- Input Form Section -->
+        <div class="space-y-4">
+          <div>
+            <label for="modal-email-input" class="block text-xs font-semibold text-slate-300 mb-1.5">
+              Your Email Address <span class="text-red-400">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="modal-email-input" 
+              placeholder="trader@example.com" 
+              class="w-full bg-slate-950 border border-slate-700 focus:border-sky-500 text-white rounded-lg px-4 py-3 text-sm outline-none transition placeholder:text-slate-600"
+              onkeydown="if(event.key === 'Enter') submitCheckout()"
+            />
+            <p id="modal-error" class="text-red-400 text-xs mt-2 hidden"></p>
+          </div>
+
+          <p class="text-xs text-slate-400 leading-relaxed">
+            🔒 Your License Key and HWID recovery details will be bound and sent to this email address.
+          </p>
+
+          <button 
+            id="modal-submit-btn" 
+            onclick="submitCheckout()" 
+            class="w-full bg-sky-500 hover:bg-sky-600 active:scale-98 text-white font-bold py-3.5 rounded-lg shadow-lg transition duration-150 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50">
+            <span>Proceed to Crypto Payment</span>
+            <span class="text-lg">🚀</span>
+          </button>
+        </div>
+
+        <!-- Security Footer -->
+        <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-4 flex justify-center items-center gap-2">
+          <span>💳 Powered by NOWPayments</span>
+          <span>•</span>
+          <span>Instant Auto-Key</span>
+        </div>
+      </div>
     </div>
+
+    <!-- Client-side Checkout & Modal Logic -->
+    <script is:inline>
+      let currentTier = '';
+      let currentAmount = 0;
+      let currentPlanName = '';
+
+      function openCheckoutModal(tier, amount, planName) {
+        currentTier = tier;
+        currentAmount = amount;
+        currentPlanName = planName;
+
+        const planNameEl = document.getElementById('modal-plan-name');
+        const planPriceEl = document.getElementById('modal-plan-price');
+        if (planNameEl) planNameEl.innerText = planName;
+        if (planPriceEl) planPriceEl.innerText = `$${amount}`;
+
+        const errorEl = document.getElementById('modal-error');
+        if (errorEl) {
+          errorEl.classList.add('hidden');
+          errorEl.innerText = '';
+        }
+
+        const submitBtn = document.getElementById('modal-submit-btn');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+        }
+
+        const modal = document.getElementById('checkout-modal');
+        if (modal) modal.classList.remove('hidden');
+
+        setTimeout(() => {
+          const input = document.getElementById('modal-email-input');
+          if (input) input.focus();
+        }, 50);
+      }
+
+      function closeCheckoutModal() {
+        const modal = document.getElementById('checkout-modal');
+        if (modal) modal.classList.add('hidden');
+      }
+
+      async function submitCheckout() {
+        const inputEl = document.getElementById('modal-email-input');
+        const errorEl = document.getElementById('modal-error');
+        const submitBtn = document.getElementById('modal-submit-btn');
+
+        // 防刷保護：若按鈕已處於停用或處理中，則拒絕重複發送
+        if (!submitBtn || submitBtn.disabled) return;
+
+        const emailTrimmed = inputEl ? inputEl.value.trim() : '';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailTrimmed) {
+          if (errorEl) {
+            errorEl.innerText = "Please enter your email address.";
+            errorEl.classList.remove('hidden');
+          }
+          if (inputEl) inputEl.focus();
+          return;
+        }
+
+        if (!emailRegex.test(emailTrimmed)) {
+          if (errorEl) {
+            errorEl.innerText = "Please enter a valid email address (e.g. name@domain.com).";
+            errorEl.classList.remove('hidden');
+          }
+          if (inputEl) inputEl.focus();
+          return;
+        }
+
+        if (errorEl) errorEl.classList.add('hidden');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="animate-pulse">Generating Invoice...</span>`;
+
+        try {
+          const API_ENDPOINT = "https://api.gettradeguard.app/api/checkout";
+
+          const response = await fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              tier: currentTier,
+              email: emailTrimmed
+            })
+          });
+
+          const data = await response.json();
+
+          if (data.success && data.invoice_url) {
+            window.location.href = data.invoice_url;
+          } else {
+            const errMsg = data.message || (data.error && (data.error.message || JSON.stringify(data.error))) || "Failed to generate invoice.";
+            if (errorEl) {
+              errorEl.innerText = "Checkout Error: " + errMsg;
+              errorEl.classList.remove('hidden');
+            }
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+          }
+        } catch (err) {
+          if (errorEl) {
+            errorEl.innerText = "Network connection error: " + err.message;
+            errorEl.classList.remove('hidden');
+          }
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+        }
+      }
+
+      // 監聽鍵盤 Esc 鍵與背景點擊，自動關閉 Modal
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeCheckoutModal();
+      });
+
+      document.getElementById('checkout-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'checkout-modal') closeCheckoutModal();
+      });
+
+      window.openCheckoutModal = openCheckoutModal;
+      window.closeCheckoutModal = closeCheckoutModal;
+      window.submitCheckout = submitCheckout;
+    </script>
+
   </body>
 </html>
