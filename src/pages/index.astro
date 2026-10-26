@@ -132,7 +132,7 @@ import '../styles/global.css';
               </ul>
             </div>
             <button 
-              onclick="openCheckoutModal('1m', 19, '1-Month Pass')" 
+              onclick="openCheckoutModal('pro_monthly', 19, '1-Month Pass')"
               class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
               Pay $19 with USDT / Crypto
             </button>
@@ -155,7 +155,7 @@ import '../styles/global.css';
               </ul>
             </div>
             <button 
-              onclick="openCheckoutModal('1y', 99, '1-Year Pass')" 
+              onclick="openCheckoutModal('pro_annual', 99, '1-Year Pass')"
               class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
               Pay $99 with USDT / Crypto
             </button>
@@ -175,7 +175,7 @@ import '../styles/global.css';
               </ul>
             </div>
             <button 
-              onclick="openCheckoutModal('lifetime', 199, 'Lifetime Freedom')" 
+              onclick="openCheckoutModal('lifetime', 199, 'Lifetime Freedom')"
               class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
               Pay $199 with USDT / Crypto
             </button>
@@ -387,7 +387,8 @@ import '../styles/global.css';
         submitBtn.innerHTML = `<span class="animate-pulse">Generating Invoice...</span>`;
 
         try {
-          const API_ENDPOINT = "https://api.gettradeguard.app/api/checkout";
+          //const API_ENDPOINT = "https://api.gettradeguard.app/api/checkout";
+          const API_ENDPOINT = "https://test.gettradeguard.app/api/checkout";
 
           const response = await fetch(API_ENDPOINT, {
             method: "POST",
