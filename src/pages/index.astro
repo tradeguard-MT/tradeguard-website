@@ -225,6 +225,12 @@ import '../styles/global.css';
             <p class="text-slate-400 text-sm">Once your USDT / USDC transaction gets confirmed on the blockchain, the License Key will instantly render on the checkout success screen AND be registered under your email address.</p>
           </div>
 
+          <!-- 新增：自動順延 / 續費 FAQ 說明 -->
+          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+            <h3 class="font-bold text-lg mb-2">Q: What happens if I renew or buy another pass using the same email?</h3>
+            <p class="text-slate-400 text-sm">TradeGuard supports automatic license stacking! If you use the same email address at checkout, your new subscription days will be automatically added to your existing License Key without needing to re-enter a new key in TradeGuard.exe.</p>
+          </div>
+
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
             <h3 class="font-bold text-lg mb-2">Q: Can I kill TradeGuard via Windows Task Manager if I want to trade?</h3>
             <p class="text-slate-400 text-sm">No. TradeGuard incorporates a background Watchdog process and Windows Policy locks. Once a risk lock is triggered, the agent actively resists forced termination until the timer expires.</p>
@@ -289,8 +295,9 @@ import '../styles/global.css';
             <p id="modal-error" class="text-red-400 text-xs mt-2 hidden"></p>
           </div>
 
+          <!-- 優化：提示續費請使用同一 Email -->
           <p class="text-xs text-slate-400 leading-relaxed">
-            🔒 Your License Key and HWID recovery details will be bound and sent to this email address.
+            🔒 License & HWID recovery details will be sent here. <strong>Existing user?</strong> Use the same email to automatically stack subscription time!
           </p>
 
           <button 
@@ -358,7 +365,6 @@ import '../styles/global.css';
         const errorEl = document.getElementById('modal-error');
         const submitBtn = document.getElementById('modal-submit-btn');
 
-        // 防刷保護：若按鈕已處於停用或處理中，則拒絕重複發送
         if (!submitBtn || submitBtn.disabled) return;
 
         const emailTrimmed = inputEl ? inputEl.value.trim() : '';
@@ -387,7 +393,7 @@ import '../styles/global.css';
         submitBtn.innerHTML = `<span class="animate-pulse">Generating Invoice...</span>`;
 
         try {
-          //const API_ENDPOINT = "https://api.gettradeguard.app/api/checkout";
+          // 正式上線時請切換為正式 API 網域: "https://api.gettradeguard.app/api/checkout"
           const API_ENDPOINT = "https://test.gettradeguard.app/api/checkout";
 
           const response = await fetch(API_ENDPOINT, {
@@ -422,7 +428,6 @@ import '../styles/global.css';
         }
       }
 
-      // 監聽鍵盤 Esc 鍵與背景點擊，自動關閉 Modal
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeCheckoutModal();
       });
