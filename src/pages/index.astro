@@ -109,7 +109,7 @@ import '../styles/global.css';
       </div>
     </section>
 
-    <!-- 4. Pricing Section -->
+    <!-- 4. Pricing Section (4-Tier Matrix: Trial / 7-Day / 1-Month / 1-Year) -->
     <section id="pricing" class="py-20">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16">
@@ -117,38 +117,91 @@ import '../styles/global.css';
           <p class="text-slate-400">One emotional trade can cost hundreds. Invest in automatic discipline.</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-          <!-- Monthly Pass -->
-          <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col justify-between">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- 1. 3-Day Free Trial -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
             <div>
-              <h3 class="text-xl font-bold mb-2">1-Month Pass</h3>
-              <p class="text-slate-400 text-sm mb-6">Ideal for testing out automated discipline.</p>
-              <div class="text-4xl font-extrabold mb-6">$19 <span class="text-sm font-normal text-slate-400">/ mo</span></div>
-              <ul class="space-y-3 text-sm text-slate-300 mb-8">
-                <li>✓ Full MV3 Extension Protection</li>
-                <li>✓ Windows Desktop Watchdog</li>
+              <div class="inline-block bg-slate-700 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide mb-3">
+                1 Free per PC
+              </div>
+              <h3 class="text-lg font-bold mb-1">3-Day Free Trial</h3>
+              <p class="text-slate-400 text-xs mb-4">Test full enforcement on your PC with zero risk.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$0</div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full MV3 Protection</li>
+                <li>✓ Active Desktop Watchdog</li>
+                <li>✓ Instant Auto-Activation</li>
+                <li>✓ Hardware ID Bound</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('trial', 0, '3-Day Free Trial')"
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 block cursor-pointer">
+              Claim Free Trial
+            </button>
+          </div>
+
+          <!-- 2. 7-Day Pass -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <div class="inline-block bg-amber-950/80 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-800 uppercase tracking-wide mb-3">
+                Event Sprint
+              </div>
+              <h3 class="text-lg font-bold mb-1">7-Day Pass</h3>
+              <p class="text-slate-400 text-xs mb-4">Ideal for high-volatility news weeks (NFP / CPI).</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$7 <span class="text-xs font-normal text-slate-400">/ 7 days</span></div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full MV3 Protection</li>
+                <li>✓ Desktop Process Watchdog</li>
+                <li>✓ Self-Service HWID Reset</li>
+                <li>✓ Auto-Stacking Support</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('pro_weekly', 7, '7-Day Pass')"
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 block cursor-pointer">
+              Pay $7 with Crypto
+            </button>
+          </div>
+
+          <!-- 3. 1-Month Pass -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <div class="inline-block bg-slate-700 text-sky-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide mb-3">
+                Flexible Monthly
+              </div>
+              <h3 class="text-lg font-bold mb-1">1-Month Pass</h3>
+              <p class="text-slate-400 text-xs mb-4">Full discipline for active monthly traders.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$19 <span class="text-xs font-normal text-slate-400">/ mo</span></div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full MV3 Protection</li>
+                <li>✓ Desktop Process Watchdog</li>
                 <li>✓ 1 License Key (1 Active PC)</li>
                 <li>✓ Self-Service HWID Reset</li>
               </ul>
             </div>
             <button 
               onclick="openCheckoutModal('pro_monthly', 19, '1-Month Pass')"
-              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
-              Pay $19 with USDT / Crypto
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 block cursor-pointer">
+              Pay $19 with Crypto
             </button>
           </div>
 
-          <!-- Annual Pass (Featured) -->
-          <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-8 rounded-2xl border-2 border-sky-500 shadow-2xl flex flex-col justify-between relative">
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Most Popular
+          <!-- 4. 1-Year Pass (Featured) -->
+          <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-2xl border-2 border-sky-500 shadow-2xl flex flex-col justify-between relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wide shadow-md">
+              Best Value<br>(Save 56%)
             </div>
             <div>
-              <h3 class="text-xl font-bold mb-2 text-sky-400">1-Year Pass</h3>
-              <p class="text-slate-400 text-sm mb-6">Long-term consistency & maximum savings.</p>
-              <div class="text-4xl font-extrabold mb-6">$99 <span class="text-sm font-normal text-slate-400">/ yr</span></div>
-              <ul class="space-y-3 text-sm text-slate-300 mb-8">
-                <li>✓ Everything in Monthly</li>
+              <div class="inline-block text-sky-400 text-[10px] font-bold uppercase tracking-wide mb-3">
+                &nbsp;
+              </div>
+              <h3 class="text-lg font-bold mb-1 text-sky-400">1-Year Pass</h3>
+              <p class="text-slate-400 text-xs mb-4">Long-term consistency & maximum savings.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$99 <span class="text-xs font-normal text-slate-400">/ yr</span></div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Everything in Monthly ($8.25/mo)</li>
                 <li>✓ Priority Auto-Updates</li>
                 <li>✓ Advanced Risk HUD Customization</li>
                 <li>✓ 2 Free HWID Resets / Month</li>
@@ -156,30 +209,11 @@ import '../styles/global.css';
             </div>
             <button 
               onclick="openCheckoutModal('pro_annual', 99, '1-Year Pass')"
-              class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
-              Pay $99 with USDT / Crypto
+              class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 block cursor-pointer shadow-lg">
+              Pay $99 with Crypto
             </button>
           </div>
 
-          <!-- Lifetime Freedom -->
-          <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col justify-between">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Lifetime Freedom</h3>
-              <p class="text-slate-400 text-sm mb-6">Pay once, protected for life.</p>
-              <div class="text-4xl font-extrabold mb-6">$199 <span class="text-sm font-normal text-slate-400 font-bold">LIFETIME</span></div>
-              <ul class="space-y-3 text-sm text-slate-300 mb-8">
-                <li>✓ Permanent License & Updates</li>
-                <li>✓ All Future Features & Brokers</li>
-                <li>✓ VIP Support</li>
-                <li>✓ Unlimited Self-Service HWID Resets</li>
-              </ul>
-            </div>
-            <button 
-              onclick="openCheckoutModal('lifetime', 199, 'Lifetime Freedom')"
-              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg transition duration-150 block cursor-pointer">
-              Pay $199 with USDT / Crypto
-            </button>
-          </div>
         </div>
       </div>
     </section>
@@ -225,7 +259,6 @@ import '../styles/global.css';
             <p class="text-slate-400 text-sm">Once your USDT / USDC transaction gets confirmed on the blockchain, the License Key will instantly render on the checkout success screen AND be registered under your email address.</p>
           </div>
 
-          <!-- 新增：自動順延 / 續費 FAQ 說明 -->
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
             <h3 class="font-bold text-lg mb-2">Q: What happens if I renew or buy another pass using the same email?</h3>
             <p class="text-slate-400 text-sm">TradeGuard supports automatic license stacking! If you use the same email address at checkout, your new subscription days will be automatically added to your existing License Key without needing to re-enter a new key in TradeGuard.exe.</p>
@@ -266,7 +299,7 @@ import '../styles/global.css';
 
         <!-- Modal Title -->
         <div>
-          <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Instant Checkout</div>
+          <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Instant Activation</div>
           <h3 class="text-xl font-bold text-white">Enter Email for License Delivery</h3>
         </div>
 
@@ -295,9 +328,8 @@ import '../styles/global.css';
             <p id="modal-error" class="text-red-400 text-xs mt-2 hidden"></p>
           </div>
 
-          <!-- 優化：提示續費請使用同一 Email -->
           <p class="text-xs text-slate-400 leading-relaxed">
-            🔒 License & HWID recovery details will be sent here. <strong>Existing user?</strong> Use the same email to automatically stack subscription time!
+            🔒 License & HWID details will be sent here. <strong>Existing user?</strong> Use the same email to automatically stack subscription time!
           </p>
 
           <button 
@@ -311,7 +343,7 @@ import '../styles/global.css';
 
         <!-- Security Footer -->
         <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-4 flex justify-center items-center gap-2">
-          <span>💳 Powered by NOWPayments</span>
+          <span id="modal-footer-gateway">💳 Powered by NOWPayments</span>
           <span>•</span>
           <span>Instant Auto-Key</span>
         </div>
@@ -331,6 +363,9 @@ import '../styles/global.css';
 
         const planNameEl = document.getElementById('modal-plan-name');
         const planPriceEl = document.getElementById('modal-plan-price');
+        const submitBtn = document.getElementById('modal-submit-btn');
+        const gatewayEl = document.getElementById('modal-footer-gateway');
+
         if (planNameEl) planNameEl.innerText = planName;
         if (planPriceEl) planPriceEl.innerText = `$${amount}`;
 
@@ -340,10 +375,15 @@ import '../styles/global.css';
           errorEl.innerText = '';
         }
 
-        const submitBtn = document.getElementById('modal-submit-btn');
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+          if (amount === 0) {
+            submitBtn.innerHTML = `<span>Claim 3-Day Free Trial</span> <span class="text-lg">🎉</span>`;
+            if (gatewayEl) gatewayEl.innerText = `🎁 Zero Risk Trial`;
+          } else {
+            submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+            if (gatewayEl) gatewayEl.innerText = `💳 Powered by NOWPayments`;
+          }
         }
 
         const modal = document.getElementById('checkout-modal');
@@ -390,7 +430,7 @@ import '../styles/global.css';
 
         if (errorEl) errorEl.classList.add('hidden');
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="animate-pulse">Generating Invoice...</span>`;
+        submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
 
         try {
           // 正式上線時請切換為正式 API 網域: "https://api.gettradeguard.app/api/checkout"
@@ -409,14 +449,20 @@ import '../styles/global.css';
 
           if (data.success && data.invoice_url) {
             window.location.href = data.invoice_url;
+          } else if (data.success && data.license_key) {
+            // 免費試用 (Trial) 直接開啟包含 Key 的畫面或跳轉
+            alert(`🎉 Trial Activated Successfully!\nYour Key: ${data.license_key}\nSent to: ${emailTrimmed}`);
+            closeCheckoutModal();
           } else {
-            const errMsg = data.message || (data.error && (data.error.message || JSON.stringify(data.error))) || "Failed to generate invoice.";
+            const errMsg = data.message || (data.error && (data.error.message || JSON.stringify(data.error))) || "Failed to process request.";
             if (errorEl) {
               errorEl.innerText = "Checkout Error: " + errMsg;
               errorEl.classList.remove('hidden');
             }
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+            submitBtn.innerHTML = currentAmount === 0 
+              ? `<span>Claim 3-Day Free Trial</span> <span class="text-lg">🎉</span>`
+              : `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
           }
         } catch (err) {
           if (errorEl) {
@@ -424,7 +470,9 @@ import '../styles/global.css';
             errorEl.classList.remove('hidden');
           }
           submitBtn.disabled = false;
-          submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
+          submitBtn.innerHTML = currentAmount === 0 
+            ? `<span>Claim 3-Day Free Trial</span> <span class="text-lg">🎉</span>`
+            : `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
         }
       }
 
