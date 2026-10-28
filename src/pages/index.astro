@@ -266,7 +266,7 @@ import '../styles/global.css';
 
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
             <h3 class="font-bold text-lg mb-2">Q: What happens if I renew or buy another pass using the same email?</h3>
-            <p class="text-slate-400 text-sm">You can choose at checkout! You can select <strong>"Extend Existing Key"</strong> to automatically stack subscription time onto your active key, OR select <strong>"Buy for Another PC"</strong> to issue a brand new License Key under the same email.</p>
+            <p class="text-slate-400 text-sm">Every payment generates a new independent License Key! You can activate it in TradeGuard.exe to automatically extend your existing subscription time, or use it on another PC.</p>
           </div>
 
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
@@ -294,7 +294,7 @@ import '../styles/global.css';
 
     <!-- 7. Tailwind Dark Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-5">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-6">
         <!-- Close Button (X) -->
         <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -323,7 +323,6 @@ import '../styles/global.css';
             <label for="modal-email-input" class="block text-xs font-semibold text-slate-300 mb-1.5">
               Your Email Address <span class="text-red-400">*</span>
             </label>
-            <!-- 移除內聯 onkeydown，改由 JS addEventListener 綁定 -->
             <input 
               type="email" 
               id="modal-email-input" 
@@ -331,29 +330,6 @@ import '../styles/global.css';
               class="w-full bg-slate-950 border border-slate-700 focus:border-sky-500 text-white rounded-lg px-4 py-3 text-sm outline-none transition placeholder:text-slate-600"
             />
             <p id="modal-error" class="text-red-400 text-xs mt-2 hidden"></p>
-          </div>
-
-          <!-- 方案用途選擇 (續約/疊加 vs 購買新 PC Key) -->
-          <div id="modal-intent-box" class="space-y-2 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-            <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              License Purpose:
-            </label>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <label class="flex items-start gap-2 p-2.5 rounded-lg bg-slate-900 border border-slate-700 cursor-pointer hover:border-sky-500 transition">
-                <input type="radio" name="checkout-intent" value="stack" checked class="mt-0.5 accent-sky-500" />
-                <div>
-                  <div class="font-bold text-slate-200">🔄 Extend Current PC</div>
-                  <div class="text-[10px] text-slate-400 leading-tight">Add time to active key</div>
-                </div>
-              </label>
-              <label class="flex items-start gap-2 p-2.5 rounded-lg bg-slate-900 border border-slate-700 cursor-pointer hover:border-sky-500 transition">
-                <input type="radio" name="checkout-intent" value="new" class="mt-0.5 accent-sky-500" />
-                <div>
-                  <div class="font-bold text-slate-200">💻 Buy for Another PC</div>
-                  <div class="text-[10px] text-slate-400 leading-tight">Issue a new License Key</div>
-                </div>
-              </label>
-            </div>
           </div>
 
           <!-- 精選低手續費幣種提示框 -->
@@ -380,7 +356,7 @@ import '../styles/global.css';
         </div>
 
         <!-- Security Footer -->
-        <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-3 flex justify-center items-center gap-2">
+        <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-4 flex justify-center items-center gap-2">
           <span id="modal-footer-gateway">💳 Powered by NOWPayments</span>
           <span>•</span>
           <span>Instant Auto-Key</span>
@@ -466,7 +442,6 @@ import '../styles/global.css';
         const submitBtn = document.getElementById('modal-submit-btn');
         const gatewayEl = document.getElementById('modal-footer-gateway');
         const tipBoxEl = document.getElementById('crypto-tip-box');
-        const intentBoxEl = document.getElementById('modal-intent-box');
         const subNoteEl = document.getElementById('modal-sub-note');
 
         if (planNameEl) planNameEl.innerText = planName;
@@ -483,18 +458,16 @@ import '../styles/global.css';
           if (amount === 0) {
             submitBtn.innerHTML = `<span>Claim 3-Day Free Trial</span> <span class="text-lg">🎉</span>`;
             if (gatewayEl) gatewayEl.innerText = `🎁 Zero Risk Trial`;
-            if (tipBoxEl) tipBoxEl.classList.add('hidden'); // 免費試用隱藏加密貨幣提示
-            if (intentBoxEl) intentBoxEl.classList.add('hidden'); // 免費試用隱藏用途選擇
+            if (tipBoxEl) tipBoxEl.classList.add('hidden');
             if (subNoteEl) {
               subNoteEl.innerHTML = `🔒 Your 3-Day Free Trial License Key will be sent to this email address. Limit 1 free trial per PC and email.`;
             }
           } else {
             submitBtn.innerHTML = `<span>Proceed to Crypto Payment</span> <span class="text-lg">🚀</span>`;
             if (gatewayEl) gatewayEl.innerText = `💳 Powered by NOWPayments`;
-            if (tipBoxEl) tipBoxEl.classList.remove('hidden'); // 付費方案顯示加密貨幣提示
-            if (intentBoxEl) intentBoxEl.classList.remove('hidden'); // 付費方案顯示用途選擇
+            if (tipBoxEl) tipBoxEl.classList.remove('hidden');
             if (subNoteEl) {
-              subNoteEl.innerHTML = `🔒 License & HWID details will be delivered instantly to this email address.`;
+              subNoteEl.innerHTML = `🔒 Your License Key will be delivered instantly to this email address.`;
             }
           }
         }
@@ -572,9 +545,6 @@ import '../styles/global.css';
           return;
         }
 
-        // 讀取使用者選擇的 License 用途 (stack: 續約 / new: 買新 PC Key)
-        const selectedIntent = document.querySelector('input[name="checkout-intent"]:checked')?.value || 'stack';
-
         if (errorEl) errorEl.classList.add('hidden');
         submitBtn.disabled = true;
         submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
@@ -588,8 +558,7 @@ import '../styles/global.css';
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               tier: currentTier,
-              email: emailTrimmed,
-              intent: selectedIntent
+              email: emailTrimmed
             })
           });
 
@@ -687,7 +656,7 @@ import '../styles/global.css';
       window.addEventListener('DOMContentLoaded', () => {
         checkPaymentSuccessOnLoad();
 
-        // 綁定 Enter 鍵事件（完全消除 'event' is deprecated 警告）
+        // 綁定 Enter 鍵事件
         const emailInput = document.getElementById('modal-email-input');
         emailInput?.addEventListener('keydown', (e) => {
           if (e.key === 'Enter') {
