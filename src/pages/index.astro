@@ -287,7 +287,7 @@ import '../styles/global.css';
       </p>
     </footer>
 
-    <!-- 7. Tailwind Dark Modal -->
+    <!-- 7. Tailwind Dark Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-6">
         <!-- Close Button (X) -->
@@ -350,6 +350,68 @@ import '../styles/global.css';
       </div>
     </div>
 
+    <!-- 8.【全新新增】付款成功 / 即時顯示 Key Modal (#payment-success-modal) -->
+    <div id="payment-success-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-lg w-full p-8 shadow-2xl relative space-y-6 text-center">
+        <!-- Close Button (X) -->
+        <button onclick="closeSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <!-- Header Icon & Badge -->
+        <div class="flex flex-col items-center">
+          <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-3 border border-emerald-500/30">
+            🎉
+          </div>
+          <div class="inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide">
+            Payment Confirmed
+          </div>
+          <h3 class="text-2xl font-extrabold text-white mt-2">Your TradeGuard License Key</h3>
+          <p class="text-slate-400 text-xs mt-1">Copy your license key below to activate TradeGuard.exe immediately.</p>
+        </div>
+
+        <!-- Dynamic Key Output Box -->
+        <div id="key-container" class="bg-slate-950 p-5 rounded-xl border border-sky-500/30 space-y-3">
+          <div id="key-loading-state" class="flex flex-col items-center py-4 space-y-2">
+            <div class="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-xs text-sky-400 animate-pulse">Verifying blockchain transaction & issuing key...</p>
+          </div>
+
+          <div id="key-display-state" class="hidden space-y-3">
+            <div class="text-xs text-slate-400 font-medium">LICENSE KEY:</div>
+            <div id="success-rendered-key" class="text-sky-300 font-mono font-bold text-lg tracking-wider break-all bg-slate-900 py-3 px-4 rounded-lg border border-slate-800 select-all">
+              TG-PRO-XXXX-XXXX-XXXX
+            </div>
+            
+            <button 
+              id="copy-key-btn" 
+              onclick="copySuccessKey()"
+              class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold py-3 rounded-lg shadow-lg transition duration-150 flex items-center justify-center gap-2 cursor-pointer">
+              <span>📋 Copy License Key</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Instructions & Safeguard Note -->
+        <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/80 text-left text-xs space-y-2 text-slate-300">
+          <div class="font-bold text-sky-400 flex items-center gap-1.5">
+            <span>💡</span> How to Activate:
+          </div>
+          <ol class="list-decimal list-inside space-y-1 text-slate-400">
+            <li>Open <strong class="text-slate-200">TradeGuard.exe</strong> on your Windows PC.</li>
+            <li>Paste your key into the License field and click <strong class="text-slate-200">Activate</strong>.</li>
+            <li>A copy of this key has also been emailed to your mailbox.</li>
+          </ol>
+        </div>
+
+        <button onclick="closeSuccessModal()" class="w-full text-slate-400 hover:text-white text-xs underline cursor-pointer">
+          Close Window
+        </button>
+      </div>
+    </div>
+
     <!-- Client-side Checkout & Modal Logic -->
     <script is:inline>
       let currentTier = '';
@@ -400,6 +462,37 @@ import '../styles/global.css';
         if (modal) modal.classList.add('hidden');
       }
 
+      function closeSuccessModal() {
+        const modal = document.getElementById('payment-success-modal');
+        if (modal) modal.classList.add('hidden');
+        // 清除網址列中的 query 參數，避免重整重複彈窗
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+      }
+
+      async function copySuccessKey() {
+        const keyEl = document.getElementById('success-rendered-key');
+        const btnEl = document.getElementById('copy-key-btn');
+        if (!keyEl) return;
+
+        const keyText = keyEl.innerText.trim();
+        try {
+          await navigator.clipboard.writeText(keyText);
+          if (btnEl) {
+            btnEl.innerHTML = `<span>✓ Key Copied to Clipboard!</span>`;
+            btnEl.classList.remove('bg-sky-500', 'hover:bg-sky-600');
+            btnEl.classList.add('bg-emerald-600');
+            setTimeout(() => {
+              btnEl.innerHTML = `<span>📋 Copy License Key</span>`;
+              btnEl.classList.remove('bg-emerald-600');
+              btnEl.classList.add('bg-sky-500', 'hover:bg-sky-600');
+            }, 3000);
+          }
+        } catch (err) {
+          alert("Key: " + keyText);
+        }
+      }
+
       async function submitCheckout() {
         const inputEl = document.getElementById('modal-email-input');
         const errorEl = document.getElementById('modal-error');
@@ -433,7 +526,7 @@ import '../styles/global.css';
         submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
 
         try {
-          // 正式上線時請切換為正式 API 網域: "https://api.gettradeguard.app/api/checkout"
+          // 正式上線網域: "https://api.gettradeguard.app/api/checkout"
           const API_ENDPOINT = "https://test.gettradeguard.app/api/checkout";
 
           const response = await fetch(API_ENDPOINT, {
@@ -450,9 +543,9 @@ import '../styles/global.css';
           if (data.success && data.invoice_url) {
             window.location.href = data.invoice_url;
           } else if (data.success && data.license_key) {
-            // 免費試用 (Trial) 直接開啟包含 Key 的畫面或跳轉
-            alert(`🎉 Trial Activated Successfully!\nYour Key: ${data.license_key}\nSent to: ${emailTrimmed}`);
+            // 免費試用 (Trial) 直接開啟專屬 Success Modal 顯示 Key
             closeCheckoutModal();
+            showSuccessKeyModal(data.license_key);
           } else {
             const errMsg = data.message || (data.error && (data.error.message || JSON.stringify(data.error))) || "Failed to process request.";
             if (errorEl) {
@@ -476,16 +569,90 @@ import '../styles/global.css';
         }
       }
 
+      // 【全新】顯現 Key 的專屬 Modal 呼叫函式
+      function showSuccessKeyModal(licenseKey) {
+        const modal = document.getElementById('payment-success-modal');
+        const loadingEl = document.getElementById('key-loading-state');
+        const displayEl = document.getElementById('key-display-state');
+        const keyEl = document.getElementById('success-rendered-key');
+
+        if (keyEl) keyEl.innerText = licenseKey;
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (displayEl) displayEl.classList.remove('hidden');
+        if (modal) modal.classList.remove('hidden');
+      }
+
+      // 【全新】監聽 URL Query：當從支付網關返回且包含 billing=success 時執行輪詢
+      async function checkPaymentSuccessOnLoad() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const billingStatus = urlParams.get('billing');
+        const orderId = urlParams.get('order_id') || urlParams.get('order');
+
+        if (billingStatus === 'success') {
+          const modal = document.getElementById('payment-success-modal');
+          const loadingEl = document.getElementById('key-loading-state');
+          const displayEl = document.getElementById('key-display-state');
+          const keyEl = document.getElementById('success-rendered-key');
+
+          if (modal) modal.classList.remove('hidden');
+          if (loadingEl) loadingEl.classList.remove('hidden');
+          if (displayEl) displayEl.classList.add('hidden');
+
+          // 開始輪詢後端，等待區塊鏈交易與 Webhook 完成發碼
+          let pollAttempts = 0;
+          const maxAttempts = 12; // 輪詢最長 36 秒
+
+          const pollInterval = setInterval(async () => {
+            pollAttempts++;
+            try {
+              const API_STATUS_ENDPOINT = `https://test.gettradeguard.app/api/order-status?order_id=${encodeURIComponent(orderId || '')}`;
+              const res = await fetch(API_STATUS_ENDPOINT);
+              const resData = await res.json();
+
+              if (resData.success && resData.license_key) {
+                clearInterval(pollInterval);
+                if (keyEl) keyEl.innerText = resData.license_key;
+                if (loadingEl) loadingEl.classList.add('hidden');
+                if (displayEl) displayEl.classList.remove('hidden');
+              }
+            } catch (err) {
+              console.warn("Polling error:", err);
+            }
+
+            if (pollAttempts >= maxAttempts) {
+              clearInterval(pollInterval);
+              if (loadingEl) {
+                loadingEl.innerHTML = `
+                  <p class="text-xs text-amber-400">Transaction is still confirming on the blockchain.</p>
+                  <p class="text-[11px] text-slate-400">Please check your email or retrieve your key via User Portal in a few minutes.</p>
+                `;
+              }
+            }
+          }, 3000);
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', checkPaymentSuccessOnLoad);
+
       window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeCheckoutModal();
+        if (e.key === 'Escape') {
+          closeCheckoutModal();
+          closeSuccessModal();
+        }
       });
 
       document.getElementById('checkout-modal')?.addEventListener('click', (e) => {
         if (e.target.id === 'checkout-modal') closeCheckoutModal();
       });
 
+      document.getElementById('payment-success-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'payment-success-modal') closeSuccessModal();
+      });
+
       window.openCheckoutModal = openCheckoutModal;
       window.closeCheckoutModal = closeCheckoutModal;
+      window.closeSuccessModal = closeSuccessModal;
+      window.copySuccessKey = copySuccessKey;
       window.submitCheckout = submitCheckout;
     </script>
 
