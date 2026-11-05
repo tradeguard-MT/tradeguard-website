@@ -2,7 +2,7 @@
 // src/pages/index.astro
 import '../styles/global.css';
 ---
-<html lang="en">
+<html lang="en" class="scroll-smooth scroll-pt-20">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,22 +10,25 @@ import '../styles/global.css';
   </head>
   <body class="bg-slate-900 text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white">
     
-    <!-- 1. Navigation Menu -->
-    <nav class="flex justify-between items-center p-6 border-b border-slate-800 max-w-6xl mx-auto">
-      <div class="text-xl font-bold text-sky-400 flex items-center gap-2">
-        <span>🛡️</span> TradeGuard <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
+    <!-- 1. Navigation Menu (Sticky Header with Backdrop Blur) -->
+    <nav class="sticky top-0 z-40 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+      <div class="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+        <div class="text-xl font-bold text-sky-400 flex items-center gap-2">
+          <span>🛡️</span> TradeGuard <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
+        </div>
+        <div class="hidden md:flex space-x-6 text-sm">
+          <a href="#who-is-it-for" class="hover:text-sky-400 transition">Who It's For</a>
+          <a href="#how-it-works" class="hover:text-sky-400 transition">How It Works</a>
+          <a href="#features" class="hover:text-sky-400 transition">Dual-Engine</a>
+          <a href="#download" class="hover:text-sky-400 transition">Download</a>
+          <a href="#pricing" class="hover:text-sky-400 transition">Pricing</a>
+          <a href="#portal" class="hover:text-sky-400 transition">Key Lookup</a>
+          <a href="#faq" class="hover:text-sky-400 transition">FAQ</a>
+        </div>
+        <a href="#pricing" class="bg-sky-500 hover:bg-sky-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition">
+          Get License
+        </a>
       </div>
-      <div class="hidden md:flex space-x-6 text-sm">
-        <a href="#features" class="hover:text-sky-400 transition">Features</a>
-        <a href="#architecture" class="hover:text-sky-400 transition">Dual-Engine</a>
-        <a href="#download" class="hover:text-sky-400 transition">Download</a>
-        <a href="#pricing" class="hover:text-sky-400 transition">Pricing</a>
-        <a href="#portal" class="hover:text-sky-400 transition">Key Lookup</a>
-        <a href="#faq" class="hover:text-sky-400 transition">FAQ</a>
-      </div>
-      <a href="#pricing" class="bg-sky-500 hover:bg-sky-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition">
-        Get License
-      </a>
     </nav>
 
     <!-- 2. Hero Section -->
@@ -37,7 +40,7 @@ import '../styles/global.css';
         Eliminate Emotional Trading.<br/><span class="text-sky-400">Hardened Discipline to Stop Overtrading.</span>
       </h1>
       <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-        TradeGuard combines a lightweight Chrome Manifest V3 Extension with a Windows Enforcement Agent to strictly control your trading risks and stop tilt-trading in real time on Pocket Option & Quotex.
+        TradeGuard combines a lightweight Chrome Manifest V3 Extension with a Windows Enforcement Agent to strictly control your trading risks and stop tilt-trading in real time.
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <a href="#download" class="bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
@@ -56,6 +59,193 @@ import '../styles/global.css';
       </div>
     </section>
 
+    <!-- 2.5 Who It's For Section -->
+    <section id="who-is-it-for" class="relative py-24 border-t border-slate-800 overflow-hidden bg-slate-950">
+      
+      <!-- 1. K-Line Candlestick Background Layer -->
+      <div 
+        class="absolute inset-0 z-0 bg-cover bg-center pointer-events-none"
+        style="background-image: url('/screenshots/kline-bg.webp'); opacity: 0.5;"
+      ></div>
+      
+      <!-- 2. Smooth Dark Gradient Overlay -->
+      <div class="absolute inset-0 z-0 bg-gradient-to-b from-slate-950/70 via-slate-900/30 to-slate-950/80 pointer-events-none"></div>
+
+      <!-- 3. Forefront Content Wrapper -->
+      <div class="relative z-10 max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-3">
+            🎯 Target Traders
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Designed for Traders Fighting Emotional Discipline</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
+            If any of these sound familiar, TradeGuard was built specifically to protect your capital.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-red-950/80 text-red-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-red-800/80 mb-4">
+              🚨 Stop Revenge Trading
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Revenge Trader</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You experience a loss and instantly size up or overtrade to "get it back," burning through weeks of profits in minutes.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-amber-950/80 text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-amber-800/80 mb-4">
+              🛑 Enforce Hard Stop-Loss
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Plan Breaker</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You set strict daily stop-loss rules on paper, but manually ignore or bypass them mid-session during emotional tilt.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-emerald-950/80 text-emerald-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-emerald-800/80 mb-4">
+              🎯 Lock In Daily Profits
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Overtrader</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You hit your profit target for the day, but FOMO keeps you trading until all your hard-earned gains turn into losses.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-sky-950/80 text-sky-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-sky-800/80 mb-4">
+              🛡️ 100% Automated Guard
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Consistency Seeker</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You want an un-bypassable system layer to force 100% compliance with your risk strategy across supported broker interfaces.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.6 How It Works Section (帶有截圖框架卡片) -->
+    <section id="how-it-works" class="py-20 bg-slate-900 border-t border-slate-800">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-3">
+            ⚡ 60-Second Setup • Hardened Enforcement
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Automated Protection in 3 Simple Steps</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
+            Simple to configure, effortless to run, but strictly hardened against impulsive bypass.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          
+          <!-- Step 1 Card -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-xl">
+            <!-- Window Mockup Header -->
+            <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500">Step 1 • Desktop Agent</span>
+            </div>
+            <!-- Image Container -->
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60">
+              <img 
+                src="/screenshots/step1-gui.png" 
+                alt="TradeGuard GUI Configuration Screenshot" 
+                class="rounded-lg border border-slate-800 w-full h-44 object-cover object-top bg-slate-900 text-xs text-slate-600 flex items-center justify-center"
+                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🖥️</span><span class=\'text-xs text-sky-400 font-bold\'>TradeGuard GUI Dashboard</span><span class=\'text-[10px] text-slate-500 mt-1\'>Set SL / TP & Lock Duration</span></div>';"
+              />
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="text-xs font-bold text-sky-400 mb-1">01. FAST CONFIGURATION</div>
+                <h3 class="text-lg font-bold text-white mb-2">Set Your Risk Limits</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                  Launch <code class="text-slate-200">TradeGuard.exe</code> on Windows and configure your Daily Stop-Loss, Take-Profit target, or manual lock duration in seconds.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 Card -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-xl">
+            <!-- Window Mockup Header -->
+            <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500">Step 2 • Browser HUD</span>
+            </div>
+            <!-- Image Container -->
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60">
+              <img 
+                src="/screenshots/step2-hud.png" 
+                alt="Browser HUD Overlay Screenshot" 
+                class="rounded-lg border border-slate-800 w-full h-44 object-cover object-top bg-slate-900 text-xs text-slate-600 flex items-center justify-center"
+                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🌐</span><span class=\'text-xs text-sky-400 font-bold\'>Real-Time Health Bar (HP) HUD</span><span class=\'text-[10px] text-slate-500 mt-1\'>Taps Trade Packets on Browser</span></div>';"
+              />
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="text-xs font-bold text-sky-400 mb-1">02. SEAMLESS MONITORING</div>
+                <h3 class="text-lg font-bold text-white mb-2">Trade as Usual with Live HUD</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                  Open your preferred browser (Chrome, Edge, Brave, or Firefox) and trade. Our Extension sensor taps trade execution packets and overlays a live Health Bar HUD on your screen.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 Card -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-xl">
+            <!-- Window Mockup Header -->
+            <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500">Step 3 • Lockout Shield</span>
+            </div>
+            <!-- Image Container -->
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60">
+              <img 
+                src="/screenshots/step3-lock.png" 
+                alt="Enforced Lockout Screen Screenshot" 
+                class="rounded-lg border border-slate-800 w-full h-44 object-cover object-top bg-slate-900 text-xs text-slate-600 flex items-center justify-center"
+                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🔒</span><span class=\'text-xs text-red-400 font-bold\'>Hardened System Lockout</span><span class=\'text-[10px] text-slate-500 mt-1\'>No Overrides Until Timer Expires</span></div>';"
+              />
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="text-xs font-bold text-red-400 mb-1">03. HARDENED LOCKOUT</div>
+                <h3 class="text-lg font-bold text-white mb-2">Instant Enforced Lockout</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                  The moment a risk limit is hit, TradeGuard’s Windows Enforcer immediately locks access to the trading interface. Zero impulsive overrides—protecting your capital until countdown expires.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- 3. Dual-Engine Architecture & Features Section -->
     <section id="features" class="py-16 bg-slate-800/40 border-t border-slate-800">
       <div id="architecture" class="max-w-5xl mx-auto px-4">
@@ -67,7 +257,7 @@ import '../styles/global.css';
           <div class="bg-slate-800 p-8 rounded-xl border border-slate-700">
             <div class="text-sky-400 text-sm font-bold uppercase tracking-wider mb-2">Frontend Sensor</div>
             <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>🌐</span> Chrome Extension (MV3)
+              <span>🌐</span> Browser Extension (MV3)
             </h3>
             <ul class="space-y-3 text-slate-300 text-sm">
               <li class="flex items-start gap-2">
@@ -80,7 +270,7 @@ import '../styles/global.css';
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-sky-400">✓</span>
-                <span><strong>Live HUD Overlay:</strong> Displays real-time Health Bar (HP) widgets and account metrics right on Pocket Option & Quotex.</span>
+                <span><strong>Live HUD Overlay:</strong> Displays real-time Health Bar (HP) widgets and account metrics right on your chart screen.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-sky-400">✓</span>
@@ -198,7 +388,7 @@ import '../styles/global.css';
               <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
-                <li>✓ Pocket Option & Quotex Support</li>
+                <li>✓ Supported Broker Integration</li>
               </ul>
             </div>
             <button 
@@ -350,7 +540,7 @@ import '../styles/global.css';
         
         <div class="space-y-6">
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: Do I need to manually install the Chrome Extension?</h3>
+            <h3 class="font-bold text-lg mb-2">Q: Do I need to manually install the Extension?</h3>
             <p class="text-slate-400 text-sm">No manual installation is required! When you run the TradeGuard Windows installer, it automatically registers the browser extension policies for Chrome, Edge, Brave, and Firefox. The next time you open your browser, the extension will be automatically loaded and protected against manual removal.</p>
           </div>
 
@@ -383,7 +573,7 @@ import '../styles/global.css';
 
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
             <h3 class="font-bold text-lg mb-2">Q: What system requirements and platforms are supported?</h3>
-            <p class="text-slate-400 text-sm">TradeGuard requires Windows 10/11 (64-bit) and Google Chrome or Chromium-based browsers. It currently features dedicated support for Pocket Option & Quotex.</p>
+            <p class="text-slate-400 text-sm">TradeGuard requires Windows 10/11 (64-bit) and Google Chrome or Chromium/Gecko-based browsers (Chrome, Edge, Brave, Firefox).</p>
           </div>
 
           <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
@@ -403,7 +593,7 @@ import '../styles/global.css';
         <a href="/terms" class="text-slate-400 hover:text-sky-400 transition underline">Terms of Service</a>
       </p>
       <p class="max-w-2xl mx-auto text-slate-600 text-[11px] px-4">
-        Disclaimer: TradeGuard is an independent risk management utility and is not affiliated with Pocket Option, Quotex, or any other trading broker.
+        Disclaimer: TradeGuard is an independent risk management utility and is not affiliated with any third-party broker platform.
       </p>
     </footer>
 
