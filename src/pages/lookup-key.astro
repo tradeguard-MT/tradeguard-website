@@ -1,0 +1,183 @@
+---
+// src/pages/portal/lookup-key.astro
+import '../../styles/global.css';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retrieve License Key via TxHash - TradeGuard</title>
+  </head>
+  <body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between selection:bg-sky-500 selection:text-white">
+    
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-6 border-b border-slate-800 max-w-6xl mx-auto w-full">
+      <a href="/" class="text-xl font-bold text-sky-400 flex items-center gap-2">
+        <span>🛡️</span> TradeGuard
+      </a>
+      <a href="/" class="text-xs text-slate-400 hover:text-sky-400 transition">
+        ← Back to Home
+      </a>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-2xl mx-auto px-4 py-16 w-full flex-1 flex flex-col justify-center">
+      <div class="text-center mb-8">
+        <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-3">
+          🔍 Key Retrieval Portal
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Retrieve Key via TxHash</h1>
+        <p class="text-slate-400 text-sm max-w-lg mx-auto">
+          Enter your Blockchain Transaction Hash (TxHash) or Order ID to query your license key instantly.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/80 p-6 md:p-8 rounded-2xl border border-slate-700 shadow-2xl space-y-4">
+        <div>
+          <label for="standalone-tx-input" class="block text-xs font-semibold text-slate-300 mb-2">
+            Blockchain TxHash or Order ID <span class="text-sky-400">*</span>
+          </label>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input 
+              type="text" 
+              id="standalone-tx-input" 
+              placeholder="e.g. 0x7a8b... or Order ID" 
+              class="flex-1 bg-slate-950 border border-slate-700 focus:border-sky-500 text-white rounded-xl px-4 py-3 text-sm outline-none transition placeholder:text-slate-600 font-mono"
+            />
+            <button 
+              id="standalone-lookup-btn" 
+              onclick="lookupKeyStandalone()"
+              class="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition duration-150 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap">
+              <span>Search Key</span>
+              <span>🔍</span>
+            </button>
+          </div>
+        </div>
+
+        <p id="standalone-lookup-error" class="text-red-400 text-xs hidden leading-relaxed bg-red-950/40 p-3 rounded-lg border border-red-800/60"></p>
+
+        <div id="standalone-lookup-result" class="hidden bg-slate-950 p-5 rounded-xl border border-emerald-500/40 space-y-3">
+          <div class="flex justify-between items-center text-xs">
+            <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+              <span>✓</span> License Key Found
+            </span>
+            <span id="standalone-key-tier" class="text-slate-400 font-mono bg-slate-800 px-2.5 py-0.5 rounded text-[11px]"></span>
+          </div>
+          
+          <div id="standalone-rendered-key" class="text-sky-300 font-mono font-bold text-lg md:text-xl tracking-wider break-all bg-slate-900 py-3 px-4 rounded-lg border border-slate-800 select-all text-center">
+            TG-PRO-XXXX-XXXX-XXXX
+          </div>
+
+          <button 
+            id="standalone-copy-btn" 
+            onclick="copyStandaloneKey()"
+            class="w-full bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold py-2.5 rounded-lg shadow-md transition duration-150 flex items-center justify-center gap-2 text-sm cursor-pointer">
+            <span>📋 Copy Key to Clipboard</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-xs text-slate-500 border-t border-slate-800">
+      <p>© 2026 TradeGuard Project. All rights reserved.</p>
+    </footer>
+
+    <script is:inline>
+      async function lookupKeyStandalone() {
+        const inputEl = document.getElementById('standalone-tx-input');
+        const errorEl = document.getElementById('standalone-lookup-error');
+        const resultEl = document.getElementById('standalone-lookup-result');
+        const keyRenderEl = document.getElementById('standalone-rendered-key');
+        const tierRenderEl = document.getElementById('standalone-key-tier');
+        const btnEl = document.getElementById('standalone-lookup-btn');
+
+        if (!inputEl || !btnEl) return;
+
+        const txValue = inputEl.value.trim();
+        if (!txValue) {
+          if (errorEl) {
+            errorEl.innerText = "Please enter a valid TxHash or Order ID.";
+            errorEl.classList.remove('hidden');
+          }
+          if (resultEl) resultEl.classList.add('hidden');
+          inputEl.focus();
+          return;
+        }
+
+        if (errorEl) errorEl.classList.add('hidden');
+        if (resultEl) resultEl.classList.add('hidden');
+
+        btnEl.disabled = true;
+        btnEl.innerHTML = `<span class="animate-pulse">Searching...</span>`;
+
+        try {
+          const API_ENDPOINT = "https://api.gettradeguard.app/api/lookup-key";
+          const res = await fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: txValue })
+          });
+
+          const data = await res.json();
+
+          if (data.success && data.license_key) {
+            if (keyRenderEl) keyRenderEl.innerText = data.license_key;
+            if (tierRenderEl) tierRenderEl.innerText = (data.tier || 'PRO').toUpperCase();
+            if (resultEl) resultEl.classList.remove('hidden');
+          } else {
+            const errMsg = data.message || "No license key found for this TxHash or Order ID. Please ensure the transaction is confirmed on the blockchain.";
+            if (errorEl) {
+              errorEl.innerText = errMsg;
+              errorEl.classList.remove('hidden');
+            }
+          }
+        } catch (err) {
+          if (errorEl) {
+            errorEl.innerText = "Network connection error: " + err.message;
+            errorEl.classList.remove('hidden');
+          }
+        } finally {
+          btnEl.disabled = false;
+          btnEl.innerHTML = `<span>Search Key</span> <span>🔍</span>`;
+        }
+      }
+
+      async function copyStandaloneKey() {
+        const keyEl = document.getElementById('standalone-rendered-key');
+        const btnEl = document.getElementById('standalone-copy-btn');
+        if (!keyEl) return;
+
+        const keyText = keyEl.innerText.trim();
+        try {
+          await navigator.clipboard.writeText(keyText);
+          if (btnEl) {
+            btnEl.innerHTML = `<span>✓ Key Copied!</span>`;
+            btnEl.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+            btnEl.classList.add('bg-sky-600');
+            setTimeout(() => {
+              btnEl.innerHTML = `<span>📋 Copy Key to Clipboard</span>`;
+              btnEl.classList.remove('bg-sky-600');
+              btnEl.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+            }, 3000);
+          }
+        } catch (err) {
+          alert("Key: " + keyText);
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const txInput = document.getElementById('standalone-tx-input');
+        txInput?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            lookupKeyStandalone();
+          }
+        });
+      });
+
+      window.lookupKeyStandalone = lookupKeyStandalone;
+      window.copyStandaloneKey = copyStandaloneKey;
+    </script>
+  </body>
+</html>

@@ -20,7 +20,7 @@ import '../styles/global.css';
         <a href="#architecture" class="hover:text-sky-400 transition">Dual-Engine</a>
         <a href="#download" class="hover:text-sky-400 transition">Download</a>
         <a href="#pricing" class="hover:text-sky-400 transition">Pricing</a>
-        <a href="#portal" class="hover:text-sky-400 transition">User Portal</a>
+        <a href="#portal" class="hover:text-sky-400 transition">Key Lookup</a>
         <a href="#faq" class="hover:text-sky-400 transition">FAQ</a>
       </div>
       <a href="#pricing" class="bg-sky-500 hover:bg-sky-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition">
@@ -147,7 +147,7 @@ import '../styles/global.css';
             </a>
           </div>
 
-          <!-- Quick Setup Steps (修正為全自動安裝說明) -->
+          <!-- Quick Setup Steps -->
           <div class="mt-6 pt-6 border-t border-slate-700/80 grid sm:grid-cols-3 gap-4 text-xs text-slate-400 text-left">
             <div>
               <span class="text-sky-400 font-bold block mb-0.5">1. Download & Run</span>
@@ -166,7 +166,7 @@ import '../styles/global.css';
       </div>
     </section>
 
-    <!-- 5. Pricing Section (4-Tier Matrix: Trial / 7-Day / 1-Month / 1-Year) -->
+    <!-- 5. Pricing Section -->
     <section id="pricing" class="py-20 border-t border-slate-800">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-10">
@@ -243,7 +243,6 @@ import '../styles/global.css';
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
                 <li>✓ Same-Tier Time Stacking</li>
-                <li>✓ 1 Free HWID Reset</li>
               </ul>
             </div>
             <button 
@@ -269,7 +268,6 @@ import '../styles/global.css';
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
                 <li>✓ Same-Tier Time Stacking</li>
-                <li>✓ 18 Free HWID Resets</li>
                 <li>✓ Priority Feature Updates</li>
               </ul>
             </div>
@@ -286,35 +284,66 @@ import '../styles/global.css';
 
     <!-- 6. User Self-Service Portal Section -->
     <section id="portal" class="py-16 bg-slate-800/50 border-t border-b border-slate-800">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Buyer Self-Service Portal</h2>
-        <p class="text-slate-400 mb-10">Lost your key? Switched to a new PC? Manage your license instantly with zero waiting for support.</p>
-        
-        <div class="grid md:grid-cols-2 gap-6 text-left">
-          <!-- Reset HWID -->
-          <div class="bg-slate-900 p-6 rounded-xl border border-slate-700">
-            <div class="text-xl mb-2">💻</div>
-            <h3 class="text-lg font-bold mb-2">Reset PC Binding (HWID)</h3>
-            <p class="text-slate-400 text-xs mb-4">Upgraded your PC or reinstalled Windows? Unbind your old computer Hardware ID instantly.</p>
-            <a href="/portal/reset-hwid" class="text-sky-400 text-sm font-bold hover:underline inline-block">
-              Open HWID Reset Portal →
-            </a>
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-3">
+          🔍 Instant Key Retrieval
+        </div>
+        <h2 class="text-3xl font-bold mb-3">Retrieve Key via TxHash</h2>
+        <p class="text-slate-400 text-sm mb-8">
+          Lost your license key? Enter your Blockchain Transaction Hash (TxHash) or NOWPayments Order ID to retrieve it immediately.
+        </p>
+
+        <!-- Dynamic Key Lookup Box -->
+        <div class="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700 shadow-xl text-left space-y-4">
+          <div>
+            <label for="portal-tx-input" class="block text-xs font-semibold text-slate-300 mb-2">
+              Blockchain TxHash or Order ID <span class="text-sky-400">*</span>
+            </label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input 
+                type="text" 
+                id="portal-tx-input" 
+                placeholder="e.g. 0x7a8b... or Order ID (e.g. TG-1729...)" 
+                class="flex-1 bg-slate-950 border border-slate-700 focus:border-sky-500 text-white rounded-xl px-4 py-3 text-sm outline-none transition placeholder:text-slate-600 font-mono"
+              />
+              <button 
+                id="portal-lookup-btn" 
+                onclick="lookupKeyByTx()"
+                class="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition duration-150 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap">
+                <span>Search Key</span>
+                <span>🔍</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Retrieve Key -->
-          <div class="bg-slate-900 p-6 rounded-xl border border-slate-700">
-            <div class="text-xl mb-2">🔍</div>
-            <h3 class="text-lg font-bold mb-2">Retrieve Key via TxHash</h3>
-            <p class="text-slate-400 text-xs mb-4">Query your license key using your Blockchain Order ID or TxHash.</p>
-            <a href="/portal/lookup-key" class="text-sky-400 text-sm font-bold hover:underline inline-block">
-              Lookup Key by TxHash →
-            </a>
+          <!-- Error Message Display -->
+          <p id="portal-lookup-error" class="text-red-400 text-xs hidden leading-relaxed bg-red-950/40 p-3 rounded-lg border border-red-800/60"></p>
+
+          <!-- Success Display Box -->
+          <div id="portal-lookup-result" class="hidden bg-slate-950 p-5 rounded-xl border border-emerald-500/40 space-y-3">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+                <span>✓</span> Key Found
+              </span>
+              <span id="portal-key-tier" class="text-slate-400 font-mono bg-slate-800 px-2.5 py-0.5 rounded text-[11px]"></span>
+            </div>
+            
+            <div id="portal-rendered-key" class="text-sky-300 font-mono font-bold text-lg md:text-xl tracking-wider break-all bg-slate-900 py-3 px-4 rounded-lg border border-slate-800 select-all text-center">
+              TG-PRO-XXXX-XXXX-XXXX
+            </div>
+
+            <button 
+              id="portal-copy-btn" 
+              onclick="copyPortalKey()"
+              class="w-full bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold py-2.5 rounded-lg shadow-md transition duration-150 flex items-center justify-center gap-2 text-sm cursor-pointer">
+              <span>📋 Copy Key to Clipboard</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 7. FAQ Section (新增一題關於自動安裝 Extension 的說明) -->
+    <!-- 7. FAQ Section -->
     <section id="faq" class="py-16">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
@@ -372,8 +401,6 @@ import '../styles/global.css';
         <a href="/privacy" class="text-slate-400 hover:text-sky-400 transition underline">Privacy Policy</a>
         <span>•</span>
         <a href="/terms" class="text-slate-400 hover:text-sky-400 transition underline">Terms of Service</a>
-        <span>•</span>
-        <a href="/refund" class="text-slate-400 hover:text-sky-400 transition underline">Refund Policy</a>
       </p>
       <p class="max-w-2xl mx-auto text-slate-600 text-[11px] px-4">
         Disclaimer: TradeGuard is an independent risk management utility and is not affiliated with Pocket Option, Quotex, or any other trading broker.
@@ -383,20 +410,17 @@ import '../styles/global.css';
     <!-- 8. Tailwind Dark Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-6">
-        <!-- Close Button (X) -->
         <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
 
-        <!-- Modal Title -->
         <div>
           <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Instant Activation</div>
           <h3 class="text-xl font-bold text-white">Enter Email for License Delivery</h3>
         </div>
 
-        <!-- Plan Order Summary Box -->
         <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
           <div>
             <div id="modal-plan-name" class="font-bold text-white">1-Month Pass</div>
@@ -405,7 +429,6 @@ import '../styles/global.css';
           <div id="modal-plan-price" class="text-xl font-extrabold text-sky-400">$19</div>
         </div>
 
-        <!-- Input Form Section -->
         <div class="space-y-4">
           <div>
             <label for="modal-email-input" class="block text-xs font-semibold text-slate-300 mb-1.5">
@@ -420,7 +443,6 @@ import '../styles/global.css';
             <p id="modal-error" class="text-red-400 text-xs mt-2 hidden"></p>
           </div>
 
-          <!-- 精選低手續費幣種提示框 -->
           <div id="crypto-tip-box" class="bg-sky-950/60 border border-sky-800/80 rounded-xl p-3 text-xs text-sky-300 flex items-start gap-2.5">
             <span class="text-base leading-none">💡</span>
             <div class="leading-relaxed">
@@ -429,7 +451,6 @@ import '../styles/global.css';
             </div>
           </div>
 
-          <!-- 動態提示說明 -->
           <p id="modal-sub-note" class="text-xs text-slate-400 leading-relaxed">
             🔒 Your License Key will be sent to this email address.
           </p>
@@ -443,7 +464,6 @@ import '../styles/global.css';
           </button>
         </div>
 
-        <!-- Security Footer -->
         <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-4 flex justify-center items-center gap-2">
           <span id="modal-footer-gateway">💳 Powered by NOWPayments</span>
           <span>•</span>
@@ -452,17 +472,15 @@ import '../styles/global.css';
       </div>
     </div>
 
-    <!-- 9. 付款成功 / 即時顯示 Key Modal (#payment-success-modal) -->
+    <!-- 9. 付款成功 / 即時顯示 Key Modal -->
     <div id="payment-success-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-lg w-full p-8 shadow-2xl relative space-y-6 text-center">
-        <!-- Close Button (X) -->
         <button onclick="closeSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
 
-        <!-- Header Icon & Badge -->
         <div class="flex flex-col items-center">
           <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-3 border border-emerald-500/30">
             🎉
@@ -474,7 +492,6 @@ import '../styles/global.css';
           <p class="text-slate-400 text-xs mt-1">Copy your license key below to activate TradeGuard.exe immediately.</p>
         </div>
 
-        <!-- Dynamic Key Output Box -->
         <div id="key-container" class="bg-slate-950 p-5 rounded-xl border border-sky-500/30 space-y-3">
           <div id="key-loading-state" class="flex flex-col items-center py-4 space-y-2">
             <div class="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
@@ -496,7 +513,6 @@ import '../styles/global.css';
           </div>
         </div>
 
-        <!-- Instructions & Safeguard Note -->
         <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/80 text-left text-xs space-y-2 text-slate-300">
           <div class="font-bold text-sky-400 flex items-center gap-1.5">
             <span>💡</span> How to Activate:
@@ -514,12 +530,97 @@ import '../styles/global.css';
       </div>
     </div>
 
-    <!-- Client-side Checkout & Modal Logic -->
+    <!-- Client-side Checkout & TxHash Lookup Logic -->
     <script is:inline>
       let currentTier = '';
       let currentAmount = 0;
       let currentPlanName = '';
 
+      // --- 1. TxHash 序號查詢邏輯 ---
+      async function lookupKeyByTx() {
+        const inputEl = document.getElementById('portal-tx-input');
+        const errorEl = document.getElementById('portal-lookup-error');
+        const resultEl = document.getElementById('portal-lookup-result');
+        const keyRenderEl = document.getElementById('portal-rendered-key');
+        const tierRenderEl = document.getElementById('portal-key-tier');
+        const btnEl = document.getElementById('portal-lookup-btn');
+
+        if (!inputEl || !btnEl) return;
+
+        const txValue = inputEl.value.trim();
+        if (!txValue) {
+          if (errorEl) {
+            errorEl.innerText = "Please enter a valid TxHash or Order ID.";
+            errorEl.classList.remove('hidden');
+          }
+          if (resultEl) resultEl.classList.add('hidden');
+          inputEl.focus();
+          return;
+        }
+
+        if (errorEl) errorEl.classList.add('hidden');
+        if (resultEl) resultEl.classList.add('hidden');
+
+        btnEl.disabled = true;
+        btnEl.innerHTML = `<span class="animate-pulse">Searching...</span>`;
+
+        try {
+          const API_ENDPOINT = "https://api.gettradeguard.app/api/lookup-key";
+          
+          const res = await fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: txValue })
+          });
+
+          const data = await res.json();
+
+          if (data.success && data.license_key) {
+            if (keyRenderEl) keyRenderEl.innerText = data.license_key;
+            if (tierRenderEl) tierRenderEl.innerText = (data.tier || 'PRO').toUpperCase();
+            if (resultEl) resultEl.classList.remove('hidden');
+          } else {
+            const errMsg = data.message || "No license key found for this TxHash or Order ID. Please make sure the transaction is confirmed on the blockchain.";
+            if (errorEl) {
+              errorEl.innerText = errMsg;
+              errorEl.classList.remove('hidden');
+            }
+          }
+        } catch (err) {
+          if (errorEl) {
+            errorEl.innerText = "Network connection error: " + err.message;
+            errorEl.classList.remove('hidden');
+          }
+        } finally {
+          btnEl.disabled = false;
+          btnEl.innerHTML = `<span>Search Key</span> <span>🔍</span>`;
+        }
+      }
+
+      async function copyPortalKey() {
+        const keyEl = document.getElementById('portal-rendered-key');
+        const btnEl = document.getElementById('portal-copy-btn');
+        if (!keyEl) return;
+
+        const keyText = keyEl.innerText.trim();
+        try {
+          await navigator.clipboard.writeText(keyText);
+          if (btnEl) {
+            btnEl.innerHTML = `<span>✓ Key Copied to Clipboard!</span>`;
+            btnEl.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+            btnEl.classList.add('bg-sky-600');
+            setTimeout(() => {
+              btnEl.innerHTML = `<span>📋 Copy Key to Clipboard</span>`;
+              btnEl.classList.remove('bg-sky-600');
+              btnEl.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+            }, 3000);
+          }
+        } catch (err) {
+          alert("Key: " + keyText);
+        }
+      }
+
+      // --- 2. 結帳 modal 與相關邏輯 ---
       function openCheckoutModal(tier, amount, planName) {
         currentTier = tier;
         currentAmount = amount;
@@ -637,8 +738,7 @@ import '../styles/global.css';
         submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
 
         try {
-          // 正式上線網域: "https://api.gettradeguard.app/api/checkout"
-          const API_ENDPOINT = "https://test.gettradeguard.app/api/checkout";
+          const API_ENDPOINT = "https://api.gettradeguard.app/api/checkout";
 
           const response = await fetch(API_ENDPOINT, {
             method: "POST",
@@ -712,7 +812,6 @@ import '../styles/global.css';
           const pollInterval = setInterval(async () => {
             pollAttempts++;
             try {
-              // 正式上線訂單狀態 API 端點
               const API_STATUS_ENDPOINT = `https://api.gettradeguard.app/api/order-status?order_id=${encodeURIComponent(orderId || '')}`;
               const res = await fetch(API_STATUS_ENDPOINT);
               const resData = await res.json();
@@ -750,6 +849,14 @@ import '../styles/global.css';
             submitCheckout();
           }
         });
+
+        const txInput = document.getElementById('portal-tx-input');
+        txInput?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            lookupKeyByTx();
+          }
+        });
       });
 
       window.addEventListener('keydown', (e) => {
@@ -772,6 +879,8 @@ import '../styles/global.css';
       window.closeSuccessModal = closeSuccessModal;
       window.copySuccessKey = copySuccessKey;
       window.submitCheckout = submitCheckout;
+      window.lookupKeyByTx = lookupKeyByTx;
+      window.copyPortalKey = copyPortalKey;
     </script>
 
   </body>
