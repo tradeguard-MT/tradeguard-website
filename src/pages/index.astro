@@ -272,7 +272,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             <ul class="space-y-3 text-slate-300 text-sm">
               <li class="flex items-start gap-2">
                 <span class="text-red-400">✓</span>
-                <span><strong>Local IPC Server:</strong> Communicates via encrypted 127.0.0.1 WebSocket.</span>
+                <span><strong>Local IPC Server:</strong> Local WebSocket communication over the loopback interface (127.0.0.1).</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-red-400">✓</span>
@@ -673,6 +673,9 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         document.getElementById('modal-plan-name').innerText = planName;
         document.getElementById('modal-plan-price').innerText = `$${amount}`;
 
+        // [P2 修正] 每次開啟結帳 Modal 時，強制清除先前的 Session Token，避免狀態殘留
+        sessionStorage.removeItem('tg_checkout_session');
+
         // 清空並重置 Email 與 OTP 輸入狀態
         const emailInput = document.getElementById('modal-email-input');
         emailInput.value = '';
@@ -965,11 +968,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
 
           let pollAttempts = 0;
           const maxAttempts = 12;
+          let isPolling = true;
 
-          const pollInterval = setInterval(async () => {
+          // [P2 修正] 使用遞迴 setTimeout 取代 setInterval，確保非同步請求不會互相重疊
+          const pollOrderStatus = async () => {
+            if (!isPolling) return;
             pollAttempts++;
 
-            // 動態更新輪詢等待狀態
             loadingEl.innerHTML = `
               <div class="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
               <p class="text-xs text-sky-400 animate-pulse">Confirming payment... (Attempt ${pollAttempts}/${maxAttempts})</p>
@@ -981,34 +986,39 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               });
               const resData = await res.json();
 
-              if (resData.success) {
-                if (resData.payment_status === "completed") {
-                  clearInterval(pollInterval);
-                  if (resData.license_key) {
-                    keyEl.innerText = resData.license_key;
-                    loadingEl.classList.add('hidden');
-                    displayEl.classList.remove('hidden');
-                  } else {
-                    loadingEl.innerHTML = `
-                      <div class="text-emerald-400 font-bold mb-2 text-lg">✓ Payment Completed</div>
-                      <p class="text-sm text-slate-300">Your license key has been securely delivered to your email.</p>
-                      <p class="text-[11px] text-slate-500 mt-3 border-t border-slate-800 pt-2">For security reasons, keys are only displayed within the original verified session.</p>
-                    `;
-                  }
+              if (resData.success && resData.payment_status === "completed") {
+                isPolling = false; // 停止輪詢
+                if (resData.license_key) {
+                  keyEl.innerText = resData.license_key;
+                  loadingEl.classList.add('hidden');
+                  displayEl.classList.remove('hidden');
+                } else {
+                  loadingEl.innerHTML = `
+                    <div class="text-emerald-400 font-bold mb-2 text-lg">✓ Payment Completed</div>
+                    <p class="text-sm text-slate-300">Your license key has been securely delivered to your email.</p>
+                    <p class="text-[11px] text-slate-500 mt-3 border-t border-slate-800 pt-2">For security reasons, keys are only displayed within the original verified session.</p>
+                  `;
                 }
+                return; // 結束執行
               }
             } catch (err) {
               console.warn("Polling error:", err);
             }
 
             if (pollAttempts >= maxAttempts) {
-              clearInterval(pollInterval);
+              isPolling = false;
               loadingEl.innerHTML = `
                 <p class="text-xs text-amber-400">Transaction is still confirming on the blockchain.</p>
                 <p class="text-[11px] text-slate-400 mt-1">Please check your email inbox for your license key in a few minutes.</p>
               `;
+            } else {
+              // 請求結束後，等待 3 秒再發起下一次
+              setTimeout(pollOrderStatus, 3000);
             }
-          }, 3000);
+          };
+
+          // 啟動第一次輪詢
+          pollOrderStatus();
         }
       }
 
