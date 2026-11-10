@@ -656,7 +656,22 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
 
     <!-- ==================== 12. Client-Side JavaScript Logic ==================== -->
     <script is:inline>
-      const API_BASE = document.querySelector('meta[name="api-base"]').content;
+      // 在 inline <script> 區塊中：
+      const getApiBaseUrl = () => {
+        // 1. 如果有明確設定 Meta 標籤且非預設正式網址，優先使用
+        const metaApi = document.querySelector('meta[name="api-base"]')?.content;
+        const hostname = window.location.hostname;
+
+        // 3. Cloudflare Pages 預覽環境 (*.pages.dev 或包含 dev 關鍵字)
+        if (hostname.endsWith('.pages.dev') || hostname.includes('dev')) {
+          return 'https://test.gettradeguard.app'; // 你的 Dev Worker 網址
+        }
+
+        // 4. 正式環境預設值
+        return metaApi || 'https://api.gettradeguard.app';
+      };
+
+      const API_BASE = getApiBaseUrl();
       let currentTier = '';
       let currentAmount = 0;
       let currentPlanName = '';
