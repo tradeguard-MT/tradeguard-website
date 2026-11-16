@@ -14,6 +14,15 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
     <title>TradeGuard - Automated Risk Enforcement for Binary Options Traders</title>
     <!-- [安全修正] 載入 Cloudflare Turnstile 驗證腳本 -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+      /* 隱藏原生 <summary> 預設三角形箭頭，改用自訂 + 旋轉動畫 */
+      details.faq-item > summary {
+        list-style: none;
+      }
+      details.faq-item > summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
   </head>
   <body class="bg-slate-900 text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white">
 
@@ -154,12 +163,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               </div>
               <span class="text-[11px] font-mono text-slate-500">Step 1 • Desktop Agent</span>
             </div>
-            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60">
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60 relative group">
               <img 
                 src="/screenshots/step1-gui.webp" 
-                alt="TradeGuard GUI" 
-                class="rounded-lg border border-slate-800 w-full h-44 object-cover object-top bg-slate-900" 
-                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🖥️</span><span class=\'text-xs text-sky-400 font-bold\'>TradeGuard GUI Dashboard</span></div>';"
+                alt="TradeGuard GUI Dashboard" 
+                onclick="openImageLightbox(this.src, this.alt)"
+                class="rounded-lg border border-slate-800 group-hover:border-sky-500/60 transition w-full h-44 object-cover object-top bg-slate-900 cursor-zoom-in" 
+                onerror="this.onerror=null; this.onclick=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🖥️</span><span class=\'text-xs text-sky-400 font-bold\'>TradeGuard GUI Dashboard</span></div>';"
               />
             </div>
             <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
@@ -183,12 +193,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               </div>
               <span class="text-[11px] font-mono text-slate-500">Step 2 • Browser HUD</span>
             </div>
-            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60">
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60 relative group">
               <img 
                 src="/screenshots/step2-hud.webp" 
-                alt="Browser HUD" 
-                class="rounded-lg border border-slate-800 w-full h-44 object-cover object-top bg-slate-900" 
-                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🌐</span><span class=\'text-xs text-sky-400 font-bold\'>Real-Time Health Bar (HP) HUD</span></div>';"
+                alt="Real-Time Health Bar (HP) HUD" 
+                onclick="openImageLightbox(this.src, this.alt)"
+                class="rounded-lg border border-slate-800 group-hover:border-sky-500/60 transition w-full h-44 object-cover object-top bg-slate-900 cursor-zoom-in" 
+                onerror="this.onerror=null; this.onclick=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🌐</span><span class=\'text-xs text-sky-400 font-bold\'>Real-Time Health Bar (HP) HUD</span></div>';"
               />
             </div>
             <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
@@ -212,12 +223,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               </div>
               <span class="text-[11px] font-mono text-slate-500">Step 3 • Lockout Shield</span>
             </div>
-            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60">
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60 relative group">
               <img 
                 src="/screenshots/step3-lock.webp" 
-                alt="Enforced Lockout" 
-                class="rounded-lg border border-slate-800 w-full h-44 object-cover object-top bg-slate-900" 
-                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🔒</span><span class=\'text-xs text-red-400 font-bold\'>Hardened System Lockout</span></div>';"
+                alt="Hardened System Lockout" 
+                onclick="openImageLightbox(this.src, this.alt)"
+                class="rounded-lg border border-slate-800 group-hover:border-sky-500/60 transition w-full h-44 object-cover object-top bg-slate-900 cursor-zoom-in" 
+                onerror="this.onerror=null; this.onclick=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🔒</span><span class=\'text-xs text-red-400 font-bold\'>Hardened System Lockout</span></div>';"
               />
             </div>
             <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
@@ -379,7 +391,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
-                <li>✓ Same-Tier Time Stacking</li>
+                <li>✓ Same & Higher-Tier Time Stacking</li>
               </ul>
             </div>
             <button 
@@ -402,7 +414,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
-                <li>✓ Same-Tier Time Stacking</li>
+                <li>✓ Same & Higher-Tier Time Stacking</li>
               </ul>
             </div>
             <button 
@@ -419,14 +431,14 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               Best Value (Save 56%)
             </div>
             <div>
-              <div class="inline-block text-sky-400 text-[10px] font-bold uppercase tracking-wide mb-3">&nbsp;</div>
+              <div class="inline-block text-sky-400 text-[10px] font-bold uppercase tracking-wide mb-3"> </div>
               <h3 class="text-lg font-bold mb-1 text-sky-400">1-Year Pass</h3>
               <p class="text-slate-400 text-xs mb-4">Long-term consistency & maximum savings.</p>
               <div class="text-3xl font-extrabold mb-6 text-white">$99 <span class="text-xs font-normal text-slate-400">/ yr</span></div>
               <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
-                <li>✓ Same-Tier Time Stacking</li>
+                <li>✓ Same & Higher-Tier Time Stacking</li>
                 <li>✓ Priority Feature Updates</li>
               </ul>
             </div>
@@ -438,56 +450,134 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </button>
           </div>
         </div>
+
+        <!-- 推薦付款幣種說明（由原 OTP Modal 移至此處） -->
+        <p class="text-center text-xs md:text-sm text-slate-400 mt-8">
+          💡 <strong class="text-slate-200">Recommended payment options:</strong> <span class="text-sky-400 font-semibold">USDT (BEP-20), LTC, XRP, or TRX</span> — typically offering lower network fees.
+        </p>
       </div>
     </section>
 
-    <!-- ==================== 8. FAQ Section ==================== -->
-    <section id="faq" class="py-16">
+    <!-- ==================== 8. FAQ Section (Accordion) ==================== -->
+    <section id="faq" class="py-16 border-t border-slate-800">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
         
-        <div class="space-y-6">
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: Do I need to manually install the Extension?</h3>
-            <p class="text-slate-400 text-sm">No manual installation is required! When you run the TradeGuard Windows installer, it automatically registers the browser extension policies for Chrome, Edge, Brave, and Firefox. The next time you open your browser, the extension will be automatically loaded and protected against manual removal.</p>
-          </div>
+        <div id="faq-accordion" class="space-y-3">
+          <!-- 1 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>How do I receive my License Key after payment?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              Once your cryptocurrency transaction is confirmed, your key will immediately display on the checkout success screen and be emailed to your inbox.
+            </div>
+          </details>
 
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: Is TradeGuard an auto-recurring subscription?</h3>
-            <p class="text-slate-400 text-sm">No. All licenses are one-time payments for specific durations (7 days, 1 month, 1 year). There are no hidden auto-renewals or unexpected charges.</p>
-          </div>
+          <!-- 2 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Why do I need to provide my email address?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>Your email is used to verify your identity with a one-time verification code, securely deliver your License Key, and help you retrieve your license information when needed.</p>
+              <p>Email verification is required for both free trials and paid licenses. You can find more details about how your information is handled in our <a href="/privacy" class="text-sky-400 hover:underline">Privacy Policy</a>.</p>
+            </div>
+          </details>
 
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: How do I receive my License Key after payment?</h3>
-            <p class="text-slate-400 text-sm">Once your cryptocurrency transaction is confirmed, your key will immediately display on the checkout success screen and be emailed to your inbox.</p>
-          </div>
-
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2 text-sky-400">Q: When does my license duration start counting down?</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
+          <!-- 3 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>When does my license duration start counting down?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
               Your duration <strong>ONLY begins when you enter and activate your key inside TradeGuard.exe on your PC</strong>. Buying a key in advance or keeping it in your email will never waste your time. You can purchase today and activate it whenever you are ready to trade!
-            </p>
-          </div>
+            </div>
+          </details>
 
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: Which crypto network or currency do you recommend?</h3>
-            <p class="text-slate-400 text-sm">We recommend choosing low-fee networks like <strong class="text-sky-400">USDT (BEP-20), LTC, XRP, or TRX</strong> at checkout to avoid high blockchain network fees, especially for short-term passes.</p>
-          </div>
+          <!-- 4 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>What happens if I renew or upgrade my plan early?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>When you activate a new license key of the <strong class="text-slate-200">same or a higher tier</strong> on the same PC, your remaining active license time is added to the new plan's duration. No remaining time is lost.</p>
+              <p>For example, if you have 10 days remaining on your 1-Month Pass and activate a 1-Year Pass, your new expiration date will be approximately 1 year and 10 days from activation.</p>
+              <p>Downgrading to a lower tier is not supported while a higher-tier license is active.</p>
+            </div>
+          </details>
 
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: What happens if I renew my plan early?</h3>
-            <p class="text-slate-400 text-sm">If you purchase and activate a new license key of the same tier before your current one expires, the new duration will automatically stack onto your remaining time.</p>
-          </div>
+          <!-- 5 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Is TradeGuard an auto-recurring subscription?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              No. All licenses are one-time payments for specific durations (7 days, 1 month, 1 year). There are no hidden auto-renewals or unexpected charges.
+            </div>
+          </details>
 
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: What system requirements and platforms are supported?</h3>
-            <p class="text-slate-400 text-sm">TradeGuard requires Windows 10/11 (64-bit) and Chromium or Gecko-based browsers (Chrome, Edge, Brave, Firefox) for supported binary options brokers like Pocket Option and Quotex.</p>
-          </div>
+          <!-- 6 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Can I uninstall TradeGuard?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>Yes. You can uninstall TradeGuard normally when no active lock period is in effect.</p>
+              <p>During an active lock period, uninstallation is restricted to preserve your risk-control commitment. If you need to remove TradeGuard in an emergency, an authorized Rescue Code can be used through the recovery process.</p>
+              <p>The uninstaller is designed to remove TradeGuard's Windows service, scheduled tasks, and browser protection policies.</p>
+            </div>
+          </details>
 
-          <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h3 class="font-bold text-lg mb-2">Q: Will this slow down my PC or conflict with my VPN?</h3>
-            <p class="text-slate-400 text-sm">No. TradeGuard communicates strictly via local 127.0.0.1 IPC without operating system-wide proxy drivers or CA certificates, leaving your network and VPN untouched.</p>
-          </div>
+          <!-- 7 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Do I need to manually install the Extension?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              No manual installation is required! When you run the TradeGuard Windows installer, it automatically registers the browser extension policies for Chrome, Edge, Brave, and Firefox. The next time you open your browser, the extension will be automatically loaded and protected against manual removal.
+            </div>
+          </details>
+
+          <!-- 8 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>What system requirements and platforms are supported?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              TradeGuard requires Windows 10/11 (64-bit) and Chromium or Gecko-based browsers (Chrome, Edge, Brave, Firefox) for supported binary options brokers like Pocket Option and Quotex.
+            </div>
+          </details>
+
+          <!-- 9 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Which crypto network or currency do you recommend?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              We recommend choosing low-fee networks like <strong class="text-sky-400">USDT (BEP-20), LTC, XRP, or TRX</strong> at checkout to avoid high blockchain network fees, especially for short-term passes.
+            </div>
+          </details>
+
+          <!-- 10 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Will this slow down my PC or conflict with my VPN?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              No. TradeGuard communicates strictly via local 127.0.0.1 IPC without operating system-wide proxy drivers or CA certificates, leaving your network and VPN untouched.
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -574,14 +664,6 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               <p id="modal-otp-error" class="text-red-400 text-xs mt-2 hidden"></p>
             </div>
 
-            <div id="crypto-tip-box" class="bg-sky-950/60 border border-sky-800/80 rounded-xl p-3 text-xs text-sky-300 flex items-start gap-2.5">
-              <span class="text-base leading-none">💡</span>
-              <div class="leading-relaxed">
-                <strong class="font-bold text-sky-200">Recommended Currencies:</strong><br />
-                We recommend selecting <span class="text-white font-semibold underline decoration-sky-400">USDT (BEP-20), LTC, XRP, or TRX</span> at payment for lower network fees.
-              </div>
-            </div>
-
             <button 
               id="modal-submit-btn" 
               onclick="verifyOtpAndCheckout()" 
@@ -601,7 +683,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
       </div>
     </div>
 
-    <!-- ==================== 11. Payment Success Modal ==================== -->
+    <!-- ==================== 11. Payment / Trial Success Modal ==================== -->
     <div id="payment-success-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-lg w-full p-8 shadow-2xl relative space-y-6 text-center">
         <button onclick="closeSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
@@ -614,7 +696,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
           <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-3 border border-emerald-500/30">
             🎉
           </div>
-          <div class="inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide">
+          <div id="success-status-label" class="inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide">
             Payment Confirmed
           </div>
           <h3 class="text-2xl font-extrabold text-white mt-2">Your TradeGuard License Key</h3>
@@ -657,7 +739,25 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
       </div>
     </div>
 
-    <!-- ==================== 12. Client-Side JavaScript Logic ==================== -->
+    <!-- ==================== 12. Image Lightbox Modal (Step 1~3 原圖檢視) ==================== -->
+    <div id="image-lightbox-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" role="dialog" aria-modal="true" aria-label="Screenshot Preview">
+      <div class="relative max-w-5xl w-full flex flex-col items-center">
+        <button onclick="closeImageLightbox()" class="self-end mb-2 bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white rounded-full p-2 border border-slate-700 transition cursor-pointer" aria-label="Close image preview">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <img 
+          id="lightbox-image" 
+          src="" 
+          alt="" 
+          class="max-h-[82vh] max-w-full w-auto h-auto object-contain rounded-xl border border-slate-700 shadow-2xl bg-slate-900" 
+        />
+        <p id="lightbox-caption" class="text-xs text-slate-300 mt-3 text-center"></p>
+      </div>
+    </div>
+
+    <!-- ==================== 13. Client-Side JavaScript Logic ==================== -->
     <script is:inline>
       // 在 inline <script> 區塊中：
       const getApiBaseUrl = () => {
@@ -679,6 +779,48 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
       let currentAmount = 0;
       let currentPlanName = '';
       let resendTimer = null;
+
+      // ------------------------------------------------------------------------
+      // Step 1~3 原圖 Lightbox 控制
+      // ------------------------------------------------------------------------
+      function openImageLightbox(src, caption) {
+        if (!src) return;
+        const modal = document.getElementById('image-lightbox-modal');
+        const imgEl = document.getElementById('lightbox-image');
+        const captionEl = document.getElementById('lightbox-caption');
+        if (!modal || !imgEl) return;
+
+        imgEl.src = src;
+        imgEl.alt = caption || 'Screenshot Preview';
+        if (captionEl) captionEl.innerText = caption || '';
+        modal.classList.remove('hidden');
+      }
+
+      function closeImageLightbox() {
+        const modal = document.getElementById('image-lightbox-modal');
+        const imgEl = document.getElementById('lightbox-image');
+        if (modal) modal.classList.add('hidden');
+        if (imgEl) imgEl.src = '';
+      }
+
+      // ------------------------------------------------------------------------
+      // Success Modal 狀態標籤控制 (Trial / Confirming / Paid)
+      // ------------------------------------------------------------------------
+      function setSuccessStatusLabel(mode) {
+        const labelEl = document.getElementById('success-status-label');
+        if (!labelEl) return;
+
+        if (mode === 'trial') {
+          labelEl.innerText = 'Free Trial Confirmed';
+          labelEl.className = 'inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide';
+        } else if (mode === 'confirming') {
+          labelEl.innerText = 'Confirming Payment...';
+          labelEl.className = 'inline-block bg-sky-950/80 text-sky-400 text-xs font-bold px-3 py-1 rounded-full border border-sky-800 uppercase tracking-wide animate-pulse';
+        } else {
+          labelEl.innerText = 'Payment Confirmed';
+          labelEl.className = 'inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide';
+        }
+      }
 
       // ------------------------------------------------------------------------
       // Modal 開啟與控制邏輯
@@ -724,11 +866,9 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         if (amount === 0) {
           submitBtn.innerHTML = `<span>Verify & Claim Free Trial</span> <span class="text-lg">🎉</span>`;
           document.getElementById('modal-footer-gateway').innerText = `🎁 Zero Risk Trial`;
-          document.getElementById('crypto-tip-box').classList.add('hidden');
         } else {
           submitBtn.innerHTML = `<span>Verify & Proceed to Payment</span> <span class="text-lg">🚀</span>`;
           document.getElementById('modal-footer-gateway').innerText = `💳 Powered by NOWPayments`;
-          document.getElementById('crypto-tip-box').classList.remove('hidden');
         }
 
         document.getElementById('checkout-modal').classList.remove('hidden');
@@ -910,8 +1050,9 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
           if (checkoutData.success && checkoutData.invoice_url) {
             window.location.href = checkoutData.invoice_url;
           } else if (checkoutData.success && checkoutData.license_key) {
+            const isTrial = currentTier === 'trial' || currentAmount === 0;
             closeCheckoutModal();
-            showSuccessKeyModal(checkoutData.license_key);
+            showSuccessKeyModal(checkoutData.license_key, isTrial);
           } else {
             const errMsg = checkoutData.message 
               || (typeof checkoutData.error === 'string' ? checkoutData.error : checkoutData.error?.message || checkoutData.error?.error)
@@ -936,12 +1077,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
           : `<span>Verify & Proceed to Payment</span> <span class="text-lg">🚀</span>`;
       }
 
-      function showSuccessKeyModal(licenseKey) {
+      function showSuccessKeyModal(licenseKey, isTrial = false) {
         const modal = document.getElementById('payment-success-modal');
         const loadingEl = document.getElementById('key-loading-state');
         const displayEl = document.getElementById('key-display-state');
         const keyEl = document.getElementById('success-rendered-key');
 
+        setSuccessStatusLabel(isTrial ? 'trial' : 'paid');
         if (keyEl) keyEl.innerText = licenseKey;
         if (loadingEl) loadingEl.classList.add('hidden');
         if (displayEl) displayEl.classList.remove('hidden');
@@ -977,6 +1119,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         const orderId = urlParams.get('order_id') || urlParams.get('order');
 
         if (billingStatus === 'success') {
+          setSuccessStatusLabel('confirming');
           document.getElementById('payment-success-modal').classList.remove('hidden');
           const loadingEl = document.getElementById('key-loading-state');
           const displayEl = document.getElementById('key-display-state');
@@ -1006,6 +1149,8 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
 
               if (resData.success && resData.payment_status === "completed") {
                 isPolling = false; // 停止輪詢
+                const isTrial = resData.tier === 'trial';
+                setSuccessStatusLabel(isTrial ? 'trial' : 'paid');
                 if (resData.license_key) {
                   keyEl.innerText = resData.license_key;
                   loadingEl.classList.add('hidden');
@@ -1046,6 +1191,20 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
       window.addEventListener('DOMContentLoaded', () => {
         checkPaymentSuccessOnLoad();
 
+        // FAQ Accordion：一次只展開一個答案
+        const faqItems = document.querySelectorAll('#faq-accordion details.faq-item');
+        faqItems.forEach((item) => {
+          item.addEventListener('toggle', () => {
+            if (item.open) {
+              faqItems.forEach((other) => {
+                if (other !== item && other.open) {
+                  other.open = false;
+                }
+              });
+            }
+          });
+        });
+
         document.getElementById('modal-email-input')?.addEventListener('keydown', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
@@ -1065,6 +1224,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         if (e.key === 'Escape') {
           closeCheckoutModal();
           closeSuccessModal();
+          closeImageLightbox();
         }
       });
 
@@ -1080,10 +1240,18 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         }
       });
 
+      document.getElementById('image-lightbox-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'image-lightbox-modal' || e.target.parentElement?.id === 'image-lightbox-modal') {
+          closeImageLightbox();
+        }
+      });
+
       // 匯出至全域 window 物件以供 inline onclick 呼叫
       window.openCheckoutModal = openCheckoutModal;
       window.closeCheckoutModal = closeCheckoutModal;
       window.closeSuccessModal = closeSuccessModal;
+      window.openImageLightbox = openImageLightbox;
+      window.closeImageLightbox = closeImageLightbox;
       window.copySuccessKey = copySuccessKey;
       window.sendOtpCode = sendOtpCode;
       window.verifyOtpAndCheckout = verifyOtpAndCheckout;
