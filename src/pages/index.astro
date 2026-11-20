@@ -326,7 +326,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
           <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="text-left">
               <div class="text-lg font-bold text-white flex items-center gap-2">
-                <span>💻</span> TradeGuard_Setup_v1.1.0.exe
+                <span>💻</span> TradeGuard_Setup_v1.1.0_x64.exe
               </div>
               <div class="text-xs text-slate-400 mt-1 space-y-0.5">
                 <p>Version: <span class="text-sky-400 font-semibold">1.1.0 (Stable)</span></p>
@@ -334,7 +334,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               </div>
             </div>
             <a 
-              href="https://dl.gettradeguard.app/TradeGuard_Setup_v1.1.0.exe" 
+              href="https://dl.gettradeguard.app/TradeGuard_Setup_v1.1.0_x64.exe" 
               class="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition duration-150 flex items-center gap-2 whitespace-nowrap" 
               target="_blank" 
               rel="noopener noreferrer"
@@ -584,7 +584,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
             </summary>
             <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
-              TradeGuard is designed to run with minimal system overhead. It communicates locally through 127.0.0.1 and does not require a system-wide proxy or custom CA certificate. However, compatibility may vary with certain VPNs, firewall configurations, or security software.
+              TradeGuard is designed to run with minimal system overhead. It uses local browser communication, Windows Firewall rules, and a local Proxy Auto-Configuration (PAC) service to help enforce trading lockouts. During an active lockout, TradeGuard may temporarily adjust your Windows system proxy settings and restore them when the restriction ends. No custom CA certificate or HTTPS traffic decryption is required. Compatibility may vary with VPNs, corporate proxy policies, and security software.
             </div>
           </details>
         </div>
@@ -683,6 +683,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </button>
           </div>
         </div>
+
+        <p class="text-[11px] text-slate-400 text-center leading-relaxed">
+          By proceeding, you agree to our
+          <a href="/terms" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Terms of Service</a>
+          and
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Privacy Policy</a>.
+        </p>
 
         <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-4 flex justify-center items-center gap-2">
           <span id="modal-footer-gateway">💳 Powered by NOWPayments</span>

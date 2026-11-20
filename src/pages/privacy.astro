@@ -28,7 +28,7 @@ import '../styles/global.css';
     <main class="max-w-4xl mx-auto px-4 py-16">
       <header class="mb-12 border-b border-slate-800 pb-8">
         <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Privacy Policy</h1>
-        <p class="text-slate-400 text-sm">Last Updated: November 19, 2026</p>
+        <p class="text-slate-400 text-sm">Last Updated: November 20, 2026</p>
         <p class="text-slate-400 text-sm mt-3">
           This Privacy Policy explains how TradeGuard (“we,” “us,” or “our”) handles information across
           our website (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs font-mono">gettradeguard.app</code>),
@@ -72,37 +72,37 @@ import '../styles/global.css';
                 <tr>
                   <td class="py-3 px-4 font-semibold text-white">Email Address</td>
                   <td class="py-3 px-4 text-slate-300">One-time password (OTP) verification, license key delivery, and license lookup or support.</td>
-                  <td class="py-3 px-4 text-slate-400">Remote servers &amp; email delivery provider</td>
+                  <td class="py-3 px-4 text-slate-400">Remote servers & email delivery provider</td>
                 </tr>
                 <tr>
-                  <td class="py-3 px-4 font-semibold text-white">License Key &amp; Plan Status</td>
+                  <td class="py-3 px-4 font-semibold text-white">License Key & Plan Status</td>
                   <td class="py-3 px-4 text-slate-300">License activation, validity checks, tier entitlements, and duration stacking on renewal.</td>
-                  <td class="py-3 px-4 text-slate-400">Local device &amp; remote license API</td>
+                  <td class="py-3 px-4 text-slate-400">Local device & remote license API</td>
                 </tr>
                 <tr>
                   <td class="py-3 px-4 font-semibold text-white">Device Identifier (HWID)</td>
                   <td class="py-3 px-4 text-slate-300">Binding an active license to an authorized Windows PC and preventing duplicate trial claims or abuse.</td>
-                  <td class="py-3 px-4 text-slate-400">Generated locally &amp; verified remotely</td>
+                  <td class="py-3 px-4 text-slate-400">Generated locally & verified remotely</td>
                 </tr>
                 <tr>
-                  <td class="py-3 px-4 font-semibold text-white">Order &amp; Payment Metadata</td>
+                  <td class="py-3 px-4 font-semibold text-white">Order & Payment Metadata</td>
                   <td class="py-3 px-4 text-slate-300">Confirming cryptocurrency payment completion, issuing keys, and resolving billing inquiries.</td>
-                  <td class="py-3 px-4 text-slate-400">Remote servers &amp; payment processor</td>
+                  <td class="py-3 px-4 text-slate-400">Remote servers & payment processor</td>
                 </tr>
                 <tr>
-                  <td class="py-3 px-4 font-semibold text-white">Trading Monitoring &amp; Risk Settings</td>
+                  <td class="py-3 px-4 font-semibold text-white">Trading Monitoring & Risk Settings</td>
                   <td class="py-3 px-4 text-slate-300">Evaluating configured stop-loss, take-profit, or manual lockout conditions in real time.</td>
                   <td class="py-3 px-4 text-slate-400">Primarily local on your PC</td>
                 </tr>
                 <tr>
-                  <td class="py-3 px-4 font-semibold text-white">IP Address &amp; Technical Information</td>
+                  <td class="py-3 px-4 font-semibold text-white">IP Address & Technical Information</td>
                   <td class="py-3 px-4 text-slate-300">API routing, rate limiting, abuse prevention, software update checks, service diagnostics, and troubleshooting.</td>
-                  <td class="py-3 px-4 text-slate-400">Remote servers &amp; infrastructure providers</td>
+                  <td class="py-3 px-4 text-slate-400">Remote servers & infrastructure providers</td>
                 </tr>
                 <tr>
                   <td class="py-3 px-4 font-semibold text-white">Support Communications</td>
                   <td class="py-3 px-4 text-slate-300">Responding to technical questions, troubleshooting requests, and account or order inquiries.</td>
-                  <td class="py-3 px-4 text-slate-400">Email service &amp; support inbox</td>
+                  <td class="py-3 px-4 text-slate-400">Email service & support inbox</td>
                 </tr>
               </tbody>
             </table>
@@ -140,6 +140,17 @@ import '../styles/global.css';
             </li>
           </ul>
 
+          <div class="pt-2 space-y-2">
+            <h3 class="text-base font-bold text-sky-300">Local Network Protection</h3>
+            <p class="text-xs md:text-sm text-slate-300">
+              During an active trading lockout, TradeGuard may use Windows Firewall rules and a local Proxy
+              Auto-Configuration (PAC) service to restrict connections to supported trading platforms. The
+              PAC service operates locally on your device and may temporarily modify Windows proxy settings.
+              These controls are intended for local risk enforcement and do not require TradeGuard to decrypt
+              HTTPS traffic or collect the content of your general web browsing sessions.
+            </p>
+          </div>
+
           <div class="pt-2 space-y-3">
             <h3 class="text-base font-bold text-sky-300">Manifest V3 Extension Permissions</h3>
             <p class="text-xs md:text-sm text-slate-400">
@@ -156,7 +167,7 @@ import '../styles/global.css';
                 <p class="text-slate-400">Used to maintain periodic local heartbeat checks between the browser extension and the desktop agent.</p>
               </div>
               <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1 md:col-span-2">
-                <div class="font-bold text-sky-400">Host Permissions &amp; WebSockets</div>
+                <div class="font-bold text-sky-400">Host Permissions & WebSockets</div>
                 <p class="text-slate-400">Used on supported broker domains to inspect trade execution events in local browser memory so TradeGuard can update your risk status HUD and trigger local lockouts when your rules are reached.</p>
               </div>
             </div>
