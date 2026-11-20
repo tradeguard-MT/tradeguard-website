@@ -6,6 +6,7 @@ import '../styles/global.css';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TradeGuard Privacy Policy explaining local trading data processing, licensing and device identifiers, third-party service providers, retention, and user privacy rights." />
     <title>Privacy Policy - TradeGuard</title>
   </head>
   <body class="bg-slate-900 text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white">
@@ -17,88 +18,287 @@ import '../styles/global.css';
         <span>TradeGuard</span>
         <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
       </a>
-      <div class="flex space-x-6 text-sm">
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
         <a href="/" class="hover:text-sky-400 transition">Home</a>
         <a href="/terms" class="hover:text-sky-400 transition">Terms of Service</a>
       </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 py-16 space-y-10">
-      <div class="mb-12 border-b border-slate-800 pb-8">
+    <main class="max-w-4xl mx-auto px-4 py-16">
+      <header class="mb-12 border-b border-slate-800 pb-8">
         <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Privacy Policy</h1>
-        <p class="text-slate-400 text-sm">Last Updated: October 15, 2026</p>
+        <p class="text-slate-400 text-sm">Last Updated: November 19, 2026</p>
+        <p class="text-slate-400 text-sm mt-3">
+          This Privacy Policy explains how TradeGuard (“we,” “us,” or “our”) handles information across
+          our website (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs font-mono">gettradeguard.app</code>),
+          Windows desktop application, TradeGuard Browser Extension, and license and support services.
+        </p>
+      </header>
+
+      <div class="space-y-12 text-slate-300 text-sm md:text-base leading-relaxed">
+        <!-- 1. Our Privacy Commitment and Scope -->
+        <section class="bg-slate-800/60 p-6 rounded-xl border border-slate-700 space-y-3">
+          <h2 class="text-xl font-bold text-sky-400">1. Our Privacy Commitment and Scope</h2>
+          <p>
+            TradeGuard is designed to process trading activity and risk-control information locally whenever
+            possible. <strong class="text-white">We do not sell personal information or use your trading activity for advertising.</strong>
+          </p>
+          <p>
+            However, certain information is processed through our servers and trusted service providers to
+            support email verification, license activation, payment processing, software updates, security,
+            and customer support. This Privacy Policy applies to all components of TradeGuard and explains
+            what information we process, why we process it, and how it is protected.
+          </p>
+        </section>
+
+        <!-- 2. Information We Collect and Process -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">2.</span> Information We Collect and Process</h2>
+          <p>
+            Depending on how you interact with TradeGuard, we may collect and process the following categories
+            of information:
+          </p>
+          <div class="overflow-x-auto rounded-xl border border-slate-700">
+            <table class="w-full text-left border-collapse text-xs md:text-sm">
+              <thead>
+                <tr class="bg-slate-800 text-slate-200 border-b border-slate-700">
+                  <th class="py-3 px-4 font-bold">Data Category</th>
+                  <th class="py-3 px-4 font-bold">Purpose</th>
+                  <th class="py-3 px-4 font-bold">Processing Location</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 bg-slate-900/60">
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">Email Address</td>
+                  <td class="py-3 px-4 text-slate-300">One-time password (OTP) verification, license key delivery, and license lookup or support.</td>
+                  <td class="py-3 px-4 text-slate-400">Remote servers &amp; email delivery provider</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">License Key &amp; Plan Status</td>
+                  <td class="py-3 px-4 text-slate-300">License activation, validity checks, tier entitlements, and duration stacking on renewal.</td>
+                  <td class="py-3 px-4 text-slate-400">Local device &amp; remote license API</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">Device Identifier (HWID)</td>
+                  <td class="py-3 px-4 text-slate-300">Binding an active license to an authorized Windows PC and preventing duplicate trial claims or abuse.</td>
+                  <td class="py-3 px-4 text-slate-400">Generated locally &amp; verified remotely</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">Order &amp; Payment Metadata</td>
+                  <td class="py-3 px-4 text-slate-300">Confirming cryptocurrency payment completion, issuing keys, and resolving billing inquiries.</td>
+                  <td class="py-3 px-4 text-slate-400">Remote servers &amp; payment processor</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">Trading Monitoring &amp; Risk Settings</td>
+                  <td class="py-3 px-4 text-slate-300">Evaluating configured stop-loss, take-profit, or manual lockout conditions in real time.</td>
+                  <td class="py-3 px-4 text-slate-400">Primarily local on your PC</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">IP Address &amp; Technical Information</td>
+                  <td class="py-3 px-4 text-slate-300">API routing, rate limiting, abuse prevention, software update checks, service diagnostics, and troubleshooting.</td>
+                  <td class="py-3 px-4 text-slate-400">Remote servers &amp; infrastructure providers</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-semibold text-white">Support Communications</td>
+                  <td class="py-3 px-4 text-slate-300">Responding to technical questions, troubleshooting requests, and account or order inquiries.</td>
+                  <td class="py-3 px-4 text-slate-400">Email service &amp; support inbox</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-400">
+            Software version information and technical diagnostics may be processed when necessary for
+            update checks, troubleshooting, or support. Local application logs remain on your device and are
+            not automatically uploaded to our servers. You may voluntarily provide relevant log files when
+            requesting technical support. TradeGuard does not require your broker account password, government
+            ID, or cryptocurrency wallet private keys.
+          </p>
+        </section>
+
+        <!-- 3. Local Trading Data and Browser Extension -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">3.</span> Local Trading Data and Browser Extension</h2>
+          <p>
+            Trading activity monitoring, risk evaluations, and lockout decisions are designed to operate
+            locally through the TradeGuard Browser Extension and the TradeGuard Windows desktop application:
+          </p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>
+              The TradeGuard Browser Extension communicates locally with the desktop agent over an isolated
+              WebSocket loopback interface (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs font-mono">127.0.0.1:18090</code>)
+              to display real-time status overlays and enforce configured lockouts.
+            </li>
+            <li>
+              TradeGuard does not require your broker account password to perform these functions, and we do
+              not intentionally upload your broker credentials, general browsing history, or individual trade
+              details to our licensing servers.
+            </li>
+            <li>
+              Separate network requests are used for license verification, email OTP checks, software update
+              checks, network time verification, and other essential service operations.
+            </li>
+          </ul>
+
+          <div class="pt-2 space-y-3">
+            <h3 class="text-base font-bold text-sky-300">Manifest V3 Extension Permissions</h3>
+            <p class="text-xs md:text-sm text-slate-400">
+              To operate its local sensor and risk-enforcement controls, the TradeGuard Browser Extension
+              requests minimal Manifest V3 permissions:
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1">
+                <div class="font-bold text-sky-400">chrome.storage</div>
+                <p class="text-slate-400">Used to store local extension state, display preferences, and active lockout timers within your browser's local storage.</p>
+              </div>
+              <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1">
+                <div class="font-bold text-sky-400">chrome.alarms</div>
+                <p class="text-slate-400">Used to maintain periodic local heartbeat checks between the browser extension and the desktop agent.</p>
+              </div>
+              <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1 md:col-span-2">
+                <div class="font-bold text-sky-400">Host Permissions &amp; WebSockets</div>
+                <p class="text-slate-400">Used on supported broker domains to inspect trade execution events in local browser memory so TradeGuard can update your risk status HUD and trigger local lockouts when your rules are reached.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. How We Use Your Information -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">4.</span> How We Use Your Information</h2>
+          <p>We process the information described above strictly for legitimate operational purposes, including:</p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>Verifying email ownership via OTP before issuing free trials or paid license orders.</li>
+            <li>Generating, delivering, activating, validating, and extending TradeGuard licenses.</li>
+            <li>Enforcing single-PC license binding and preventing trial abuse, fraud, or unauthorized sharing.</li>
+            <li>Delivering software update checks and maintaining service reliability and security.</li>
+            <li>Investigating technical issues, responding to support requests, and fulfilling legal obligations.</li>
+          </ul>
+        </section>
+
+        <!-- 5. Third-Party Service Providers and Cross-Border Processing -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">5.</span> Third-Party Service Providers</h2>
+          <p>
+            We use third-party service providers to operate essential parts of TradeGuard, including
+            infrastructure hosting, email delivery, payment processing, and security verification:
+          </p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>
+              <strong class="text-white">Cloudflare:</strong> Provides website hosting, serverless API
+              execution, database storage, network security, and Turnstile anti-abuse verification.
+            </li>
+            <li>
+              <strong class="text-white">Resend:</strong> Delivers transactional emails, including email
+              verification codes (OTP) and license key delivery messages.
+            </li>
+            <li>
+              <strong class="text-white">NOWPayments:</strong> Processes cryptocurrency checkout invoices
+              and reports payment confirmation status for paid orders.
+            </li>
+          </ul>
+          <p>
+            These providers may process information necessary to deliver their services, subject to their
+            respective terms and privacy policies. We do not sell your personal information to third
+            parties. Because our infrastructure and service providers operate globally, your information
+            may be processed in countries other than your country of residence.
+          </p>
+        </section>
+
+        <!-- 6. Website Cookies and Security Technologies -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">6.</span> Website Cookies and Security Technologies</h2>
+          <p>
+            Our website may use browser <code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs font-mono">sessionStorage</code>,
+            cookies, and similar technical mechanisms strictly necessary for checkout session continuity,
+            security verification, and core site functionality.
+          </p>
+          <p>
+            During email verification, <strong class="text-white">Cloudflare Turnstile</strong> may evaluate
+            browser and network signals to distinguish human users from automated bots. We do not use
+            third-party advertising cookies or behavioral ad-tracking pixels on our website.
+          </p>
+        </section>
+
+        <!-- 7. Data Security -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">7.</span> Data Security</h2>
+          <p>
+            We implement reasonable administrative and technical safeguards to protect information against
+            unauthorized access, alteration, or disclosure. These measures include encrypted HTTPS/TLS
+            connections for API and website traffic, short-lived OTP verification codes, scoped checkout
+            session tokens, and restricted access to backend databases.
+          </p>
+          <p>
+            However, no method of electronic transmission or storage is completely immune from risk, and we
+            cannot guarantee absolute security. Please safeguard your License Key and verified email account.
+          </p>
+        </section>
+
+        <!-- 8. Data Retention and Deletion -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">8.</span> Data Retention and Deletion</h2>
+          <p>
+            We retain personal information only for as long as reasonably necessary to provide our services,
+            maintain license and transaction records, resolve support requests, prevent abuse, and comply
+            with applicable legal, tax, or accounting obligations.
+          </p>
+          <p>
+            Retention periods may vary depending on the type of record—for example, temporary OTP codes are
+            short-lived, whereas license activation and order records are kept while a license remains active
+            and for a reasonable recordkeeping period thereafter. You may contact us to request the deletion
+            of eligible personal information, subject to applicable legal, security, and recordkeeping
+            requirements.
+          </p>
+        </section>
+
+        <!-- 9. Your Privacy Rights and Eligibility -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">9.</span> Your Privacy Rights and Eligibility</h2>
+          <p>
+            Depending on applicable law in your jurisdiction, you may have the right to request access to,
+            correction of, or deletion of personal information we hold about you, or to object to or restrict
+            certain processing activities.
+          </p>
+          <p>
+            To submit a privacy-related request, please email
+            <a href="mailto:support@gettradeguard.app" class="text-sky-400 underline hover:text-sky-300">support@gettradeguard.app</a>
+            from your verified email address or include your order reference so we can verify your identity
+            before acting on the request.
+          </p>
+          <p>
+            <strong class="text-white">Age Eligibility:</strong> TradeGuard is intended strictly for adults
+            who have reached the age of majority and are legally capable of entering into a binding agreement
+            under the laws of their jurisdiction, as set out in our
+            <a href="/terms" class="text-sky-400 underline hover:text-sky-300">Terms of Service</a>. We do not
+            permit minors to register for or use TradeGuard, and we do not knowingly collect personal
+            information from minors.
+          </p>
+        </section>
+
+        <!-- 10. Contact Us and Policy Updates -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-white"><span class="text-sky-400">10.</span> Contact Us and Policy Updates</h2>
+          <p>
+            We may update this Privacy Policy from time to time to reflect changes in our Software, service
+            providers, or applicable legal requirements. When we make updates, we will revise the “Last
+            Updated” date at the top of this page.
+          </p>
+          <p>
+            If you have any questions about this Privacy Policy or how TradeGuard handles your information,
+            please contact us at:
+          </p>
+          <p class="text-sky-400 font-semibold">
+            ✉️ <a href="mailto:support@gettradeguard.app" class="hover:underline">support@gettradeguard.app</a>
+          </p>
+        </section>
       </div>
-
-      <section class="bg-slate-800/60 p-6 rounded-xl border border-slate-700 space-y-3">
-        <h2 class="text-xl font-bold text-sky-400">1. Core Commitment: Zero Remote Data Collection</h2>
-        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-          TradeGuard Assistant ("the Extension") is designed with a privacy-first, zero-knowledge architecture. 
-          <strong>We do not collect, store, transmit, process, or sell any personal data, browsing history, credentials, or trading metrics to any remote servers or third parties.</strong>
-        </p>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-xl font-bold text-white">2. Local IPC Communication Only</h2>
-        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-          The Extension functions solely as a local sensor for the TradeGuard desktop application:
-        </p>
-        <ul class="list-disc pl-5 text-slate-300 text-sm md:text-base space-y-2">
-          <li>
-            All real-time risk evaluations and discipline lockout calculations occur entirely on your local machine.
-          </li>
-          <li>
-            Data exchange occurs exclusively via an isolated local WebSocket loopback connection (<code class="bg-slate-800 text-sky-300 px-1.5 py-0.5 rounded text-xs font-mono">127.0.0.1:18090</code>) between the Extension and the local TradeGuard Desktop Application.
-          </li>
-          <li>
-            No web requests, external telemetry, passwords, or session tokens are ever transmitted outside your personal device environment.
-          </li>
-        </ul>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-xl font-bold text-white">3. Explanation of Extension Permissions</h2>
-        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-          To enforce strict trading discipline, the Extension requests only the minimal necessary Manifest V3 permissions:
-        </p>
-        <div class="grid md:grid-cols-2 gap-4 pt-2">
-          <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1">
-            <div class="font-bold text-sky-400">chrome.storage</div>
-            <p class="text-slate-400">Used strictly to persist local state, UI configuration preferences, and active lockout timers within your local browser storage.</p>
-          </div>
-          <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1">
-            <div class="font-bold text-sky-400">chrome.alarms</div>
-            <p class="text-slate-400">Used to maintain background connection keep-alive heartbeat timers with the local desktop agent.</p>
-          </div>
-          <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-xs md:text-sm space-y-1 md:col-span-2">
-            <div class="font-bold text-sky-400">Host Permissions & WebSockets</div>
-            <p class="text-slate-400">Used solely to intercept local trading execution packets on supported broker platforms in real-time memory to trigger HUD overlays and discipline rules.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-xl font-bold text-white">4. Data Sharing and Sale</h2>
-        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-          Because TradeGuard does not collect any user data, we do not share, sell, transfer, or use user data for advertising, credit evaluation, or analytics under any circumstances.
-        </p>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-xl font-bold text-white">5. Contact Us</h2>
-        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-          If you have any questions regarding this Privacy Policy or TradeGuard's local security model, please contact us at:
-        </p>
-        <p class="text-sky-400 font-semibold text-sm md:text-base">
-          ✉️ <a href="mailto:support@gettradeguard.app" class="hover:underline">support@gettradeguard.app</a>
-        </p>
-      </section>
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 text-center text-xs text-slate-500 border-t border-slate-800 space-y-3">
-      <p>© 2026 TradeGuard Project. Dedicated risk enforcement for smart traders.</p>
-      <p class="space-x-4">
+    <footer class="py-8 px-4 text-center text-xs text-slate-500 border-t border-slate-800 space-y-3">
+      <p>© 2026 TradeGuard Project. Dedicated risk enforcement for disciplined trading.</p>
+      <p class="flex flex-wrap justify-center gap-x-4 gap-y-2">
         <a href="/privacy" class="text-sky-400 transition underline">Privacy Policy</a>
         <span>•</span>
         <a href="/terms" class="text-slate-400 hover:text-sky-400 transition underline">Terms of Service</a>
