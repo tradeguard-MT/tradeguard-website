@@ -333,15 +333,16 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
                 <p>OS Support: Windows 10 / 11 (64-bit)</p>
               </div>
             </div>
-            <a 
-              href="https://dl.gettradeguard.app/TradeGuard_Setup_v1.1.0_x64.exe" 
-              class="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition duration-150 flex items-center gap-2 whitespace-nowrap" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onclick="openDownloadNotice()"
+              class="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition duration-150 flex items-center gap-2 whitespace-nowrap cursor-pointer"
+              aria-haspopup="dialog"
+              aria-controls="download-notice-modal"
             >
               <span>Download Installer</span>
               <span class="text-lg">⬇️</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -604,6 +605,56 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
       </p>
     </footer>
 
+    <!-- Download notice: disclosed system changes, false-positive explanation, and installation steps -->
+    <div id="download-notice-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="download-notice-title" aria-describedby="download-notice-description">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl" tabindex="-1" id="download-notice-panel">
+        <div class="flex justify-between items-start gap-3 mb-4">
+          <div>
+            <p class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Before You Download</p>
+            <h2 id="download-notice-title" class="text-xl font-extrabold text-white">Security Notice & Installation Guide</h2>
+          </div>
+          <button type="button" onclick="closeDownloadNotice()" aria-label="Close download information" class="text-slate-400 hover:text-white text-xl p-1 cursor-pointer">✕</button>
+        </div>
+
+        <div id="download-notice-description" class="text-sm text-slate-300 leading-relaxed space-y-4">
+          <p>
+            <strong class="text-white">TradeGuard contains no malware, spyware, or malicious code.</strong> However, because it is a newly released, unsigned utility designed to enforce strict self-lockouts, browser and Windows security filters may flag the installer.
+          </p>
+
+          <!-- 1. 說明為何會觸發告警 -->
+          <div class="rounded-lg border border-slate-700 bg-slate-800/70 p-3.5 space-y-2 text-xs md:text-sm">
+            <p class="font-bold text-sky-300">Why Security Warnings May Appear:</p>
+            <ul class="list-disc pl-5 space-y-1 text-slate-300">
+              <li><strong class="text-white">Anti-Bypass Architecture:</strong> Installs a background Watchdog service, deploys browser extension Group Policies, and applies local Firewall/PAC rules during active lockouts—behaviors that automated scanners often flag as heuristic false positives.</li>
+              <li><strong class="text-white">New & Unsigned Installer:</strong> Lacks a commercial code-signing certificate and high download volume, triggering Google Safe Browsing and Microsoft Defender SmartScreen ("Unknown publisher") warnings.</li>
+            </ul>
+          </div>
+
+          <!-- 2. 說明如何執行下載與安裝 -->
+          <div class="rounded-lg border border-amber-700/60 bg-amber-950/25 p-3.5 space-y-2 text-xs md:text-sm">
+            <p class="font-bold text-amber-300">How to Download & Install (If You Choose to Proceed):</p>
+            <ol class="list-decimal pl-5 space-y-1.5 text-slate-300">
+              <li><strong class="text-white">Browser Download Warning:</strong> If Chrome or Edge blocks the file, open your Downloads tab (<code class="bg-slate-900 px-1.5 py-0.5 rounded text-sky-300 font-mono">Ctrl + J</code>), click the <strong class="text-white">⋮</strong> menu next to <code class="text-slate-200">TradeGuard_Setup_v1.1.0_x64.exe</code>, and select <strong class="text-white">Keep</strong> → <strong class="text-white">Keep anyway</strong>.</li>
+              <li><strong class="text-white">Windows SmartScreen:</strong> When launching the installer, if "Windows protected your PC" appears, click <strong class="text-white">More info</strong> and then click <strong class="text-white">Run anyway</strong>.</li>
+            </ol>
+            <p class="text-[11px] text-slate-400 pt-1">
+              Note: You do not need to disable your antivirus software. Always verify that the download originates from <code class="text-sky-400">dl.gettradeguard.app</code>.
+            </p>
+          </div>
+        </div>
+
+        <label for="download-notice-confirm" class="mt-5 flex items-start gap-3 cursor-pointer text-sm text-slate-200">
+          <input id="download-notice-confirm" type="checkbox" onchange="updateDownloadNoticeConfirmation()" class="mt-1 h-4 w-4 accent-sky-500 shrink-0" />
+          <span>I understand why these security warnings appear, acknowledge the system-level risk controls, and wish to download the official installer.</span>
+        </label>
+
+        <div class="flex flex-col sm:flex-row gap-3 mt-6">
+          <button type="button" onclick="closeDownloadNotice()" class="flex-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white py-3 font-semibold cursor-pointer">Cancel</button>
+          <a id="download-notice-proceed" href="https://dl.gettradeguard.app/TradeGuard_Setup_v1.1.0_x64.exe" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1" onclick="return confirmDownloadNotice(event)" class="flex-1 rounded-lg bg-sky-500 text-center text-white py-3 px-4 font-semibold opacity-40 pointer-events-none cursor-not-allowed">Proceed to Download</a>
+        </div>
+      </div>
+    </div>
+
     <!-- ==================== 10. Checkout Modal (OTP Verified + Turnstile) ==================== -->
     <div id="checkout-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-6">
@@ -817,6 +868,50 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         const imgEl = document.getElementById('lightbox-image');
         if (modal) modal.classList.add('hidden');
         if (imgEl) imgEl.src = '';
+      }
+
+      // Download notice: explicit acknowledgement; does not override browser security checks.
+      let downloadNoticeReturnFocus = null;
+
+      function openDownloadNotice() {
+        const modal = document.getElementById('download-notice-modal');
+        const checkbox = document.getElementById('download-notice-confirm');
+        if (!modal || !checkbox) return;
+        downloadNoticeReturnFocus = document.activeElement;
+        checkbox.checked = false;
+        updateDownloadNoticeConfirmation();
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('download-notice-panel')?.focus();
+      }
+
+      function closeDownloadNotice() {
+        const modal = document.getElementById('download-notice-modal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        downloadNoticeReturnFocus?.focus?.();
+      }
+
+      function updateDownloadNoticeConfirmation() {
+        const acknowledged = document.getElementById('download-notice-confirm')?.checked === true;
+        const proceed = document.getElementById('download-notice-proceed');
+        if (!proceed) return;
+        proceed.setAttribute('aria-disabled', acknowledged ? 'false' : 'true');
+        proceed.tabIndex = acknowledged ? 0 : -1;
+        proceed.classList.toggle('opacity-40', !acknowledged);
+        proceed.classList.toggle('pointer-events-none', !acknowledged);
+        proceed.classList.toggle('cursor-not-allowed', !acknowledged);
+        proceed.classList.toggle('hover:bg-sky-600', acknowledged);
+      }
+
+      function confirmDownloadNotice(event) {
+        if (document.getElementById('download-notice-confirm')?.checked !== true) {
+          event.preventDefault();
+          return false;
+        }
+        closeDownloadNotice();
+        return true;
       }
 
       // ------------------------------------------------------------------------
@@ -1241,6 +1336,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
           closeCheckoutModal();
           closeSuccessModal();
           closeImageLightbox();
+          closeDownloadNotice();
         }
       });
 
@@ -1262,7 +1358,15 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         }
       });
 
+      document.getElementById('download-notice-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'download-notice-modal') closeDownloadNotice();
+      });
+
       // 匯出至全域 window 物件以供 inline onclick 呼叫
+      window.openDownloadNotice = openDownloadNotice;
+      window.closeDownloadNotice = closeDownloadNotice;
+      window.updateDownloadNoticeConfirmation = updateDownloadNoticeConfirmation;
+      window.confirmDownloadNotice = confirmDownloadNotice;
       window.openCheckoutModal = openCheckoutModal;
       window.closeCheckoutModal = closeCheckoutModal;
       window.closeSuccessModal = closeSuccessModal;
