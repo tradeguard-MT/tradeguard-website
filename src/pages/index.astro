@@ -1,18 +1,1380 @@
 ---
+// src/pages/index.astro
 import '../styles/global.css';
+
+// [安全修正] 透過環境變數動態決定 API 網址，開發與上線自動切換
+const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.app";
 ---
-<html lang="en">
+
+<html lang="en" class="scroll-smooth scroll-pt-20">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>TradeGuard - Under Maintenance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="api-base" content={apiBase} />
+    <title>TradeGuard - Automated Risk Discipline for Binary Options Traders</title>
+    <!-- [安全修正] 載入 Cloudflare Turnstile 驗證腳本 -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+      /* 隱藏原生 <summary> 預設三角形箭頭，改用自訂 + 旋轉動畫 */
+      details.faq-item > summary {
+        list-style: none;
+      }
+      details.faq-item > summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
   </head>
-  <body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center font-sans">
-    <div class="text-center p-8 border border-slate-800 bg-slate-800/40 rounded-2xl max-w-md">
-      <div class="text-4xl mb-4">🛡️</div>
-      <h1 class="text-2xl font-bold text-white mb-2">TradeGuard Under Maintenance</h1>
-      <p class="text-slate-400 text-sm mb-6">We are currently upgrading our infrastructure for the official launch.</p>
-      <a href="/privacy" class="text-sky-400 hover:underline text-xs">Privacy Policy</a>
+  <body class="bg-slate-900 text-slate-100 min-h-screen font-sans selection:bg-sky-500 selection:text-white">
+
+    <!-- ==================== 1. Navigation Menu ==================== -->
+    <nav class="sticky top-0 z-40 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+      <div class="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+        <a href="#" class="text-xl font-bold text-sky-400 flex items-center gap-2 hover:opacity-90 transition cursor-pointer" aria-label="TradeGuard Home">
+          <img src="/48-new.png" alt="" width="28" height="28" class="w-7 h-7 object-contain shrink-0" />
+          <span>TradeGuard</span>
+          <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
+        </a>
+        <div class="hidden md:flex space-x-6 text-sm">
+          <a href="#who-is-it-for" class="hover:text-sky-400 transition">Who It's For</a>
+          <a href="#how-it-works" class="hover:text-sky-400 transition">How It Works</a>
+          <a href="#features" class="hover:text-sky-400 transition">Dual-Engine</a>
+          <a href="#download" class="hover:text-sky-400 transition">Download</a>
+          <a href="#pricing" class="hover:text-sky-400 transition">Pricing</a>
+          <a href="#faq" class="hover:text-sky-400 transition">FAQ</a>
+        </div>
+        <a href="#pricing" class="bg-sky-500 hover:bg-sky-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition">
+          Get License
+        </a>
+      </div>
+    </nav>
+
+    <!-- ==================== 2. Hero Section ==================== -->
+    <section class="py-20 text-center max-w-4xl mx-auto px-4">
+      <div class="inline-block bg-slate-800 text-sky-400 text-xs px-3 py-1 rounded-full border border-slate-700 mb-6">
+        🎯 Automated Risk Discipline for Binary Options Traders
+      </div>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+        Take Control of Emotional Trading.<br />
+        <span class="text-sky-400">Automated Discipline for Binary Options Traders.</span>
+      </h1>
+      <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
+        TradeGuard combines a browser extension with a Windows enforcement agent to restrict access to supported binary options trading platforms, including Pocket Option and Quotex, when your configured risk limits are reached.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#download" class="bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+          <span>⬇️ Download App</span>
+        </a>
+        <a href="#pricing" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition">
+          🔒 Enforce Your Trading Rules
+        </a>
+      </div>
+      <div class="flex flex-wrap justify-center items-center gap-6 mt-12 text-xs text-slate-500">
+        <span>📈 Pocket Option & Quotex Support</span>
+        <span>⚡ MV3 WebSocket Interceptor</span>
+        <span>🛡️ Automated Policy Deployment</span>
+        <span>🐕 Active Process Watchdog</span>
+      </div>
+    </section>
+
+    <!-- ==================== 3. Who It's For Section ==================== -->
+    <section id="who-is-it-for" class="relative py-24 border-t border-slate-800 overflow-hidden bg-slate-950">
+      <div 
+        class="absolute inset-0 z-0 bg-cover bg-center pointer-events-none" 
+        style="background-image: url('/screenshots/kline-bg.webp'); opacity: 0.5;"
+      ></div>
+      <div class="absolute inset-0 z-0 bg-gradient-to-b from-slate-950/70 via-slate-900/30 to-slate-950/80 pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-3">
+            🎯 Target Traders
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Built for Binary Options Traders Seeking Better Discipline</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
+            If any of these sound familiar, TradeGuard was built specifically to protect your binary options trading capital.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-red-950/80 text-red-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-red-800/80 mb-4">
+              🚨 Stop Revenge Trading
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Revenge Trader</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You experience a loss and instantly size up or overtrade to "get it back," burning through weeks of profits in minutes.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-amber-950/80 text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-amber-800/80 mb-4">
+              🛑 Enforce Hard Stop-Loss
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Plan Breaker</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You set strict daily stop-loss rules on paper, but manually ignore or bypass them mid-session during emotional tilt.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-emerald-950/80 text-emerald-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-emerald-800/80 mb-4">
+              🎯 Lock In Daily Profits
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Overtrader</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You hit your profit target for the day, but FOMO keeps you trading until all your hard-earned gains turn into losses.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-sky-500/50 transition duration-200 shadow-xl">
+            <div class="inline-block bg-sky-950/80 text-sky-400 text-[11px] font-bold px-2.5 py-1 rounded-md border border-sky-800/80 mb-4">
+              🛡️ Automated Discipline Guard
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">The Consistency Seeker</h3>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              You want an additional layer of protection designed to help you follow your trading rules and resist impulsive decisions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. How It Works Section ==================== -->
+    <section id="how-it-works" class="py-20 bg-slate-900 border-t border-slate-800">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-3">
+            ⚡ Simple Setup • Automated Discipline
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Automated Protection in 3 Simple Steps</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
+            Simple to configure, effortless to run, and built to reinforce your trading rules during emotional moments.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1 Card -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-xl">
+            <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500">Step 1 • Desktop Agent</span>
+            </div>
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60 relative group">
+              <img 
+                src="/screenshots/step1-gui.webp" 
+                alt="TradeGuard GUI Dashboard" 
+                onclick="openImageLightbox(this.src, this.alt)"
+                class="rounded-lg border border-slate-800 group-hover:border-sky-500/60 transition w-full h-44 object-cover object-top bg-slate-900 cursor-zoom-in" 
+                onerror="this.onerror=null; this.onclick=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🖥️</span><span class=\'text-xs text-sky-400 font-bold\'>TradeGuard GUI Dashboard</span></div>';"
+              />
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="text-xs font-bold text-sky-400 mb-1">01. FAST CONFIGURATION</div>
+                <h3 class="text-lg font-bold text-white mb-2">Set Your Risk Limits</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                  Launch <code class="text-slate-200">TradeGuard.exe</code> on Windows and configure your Daily Stop-Loss, Take-Profit target, or manual lock duration in seconds.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 Card -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-xl">
+            <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500">Step 2 • Browser HUD</span>
+            </div>
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60 relative group">
+              <img 
+                src="/screenshots/step2-hud.webp" 
+                alt="Real-Time Health Bar (HP) HUD" 
+                onclick="openImageLightbox(this.src, this.alt)"
+                class="rounded-lg border border-slate-800 group-hover:border-sky-500/60 transition w-full h-44 object-cover object-top bg-slate-900 cursor-zoom-in" 
+                onerror="this.onerror=null; this.onclick=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🌐</span><span class=\'text-xs text-sky-400 font-bold\'>Real-Time Health Bar (HP) HUD</span></div>';"
+              />
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="text-xs font-bold text-sky-400 mb-1">02. SEAMLESS MONITORING</div>
+                <h3 class="text-lg font-bold text-white mb-2">Trade as Usual with Live HUD</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                  Open your preferred browser (Chrome, Edge, Brave, or Firefox) and trade. Our Extension sensor monitors trade execution packets and overlays a live Health Bar HUD on your screen.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 Card -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden flex flex-col shadow-xl">
+            <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-500">Step 3 • Lockout Shield</span>
+            </div>
+            <div class="bg-slate-950/60 p-2 border-b border-slate-800/60 relative group">
+              <img 
+                src="/screenshots/step3-lock.webp" 
+                alt="Automated Platform Lockout" 
+                onclick="openImageLightbox(this.src, this.alt)"
+                class="rounded-lg border border-slate-800 group-hover:border-sky-500/60 transition w-full h-44 object-cover object-top bg-slate-900 cursor-zoom-in" 
+                onerror="this.onerror=null; this.onclick=null; this.parentElement.innerHTML='<div class=\'h-44 bg-slate-900/80 rounded-lg flex flex-col items-center justify-center p-4 text-center\'><span class=\'text-3xl mb-1\'>🔒</span><span class=\'text-xs text-red-400 font-bold\'>Automated Platform Lockout</span></div>';"
+              />
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="text-xs font-bold text-red-400 mb-1">03. ENFORCED LOCKOUT</div>
+                <h3 class="text-lg font-bold text-white mb-2">Instant Enforced Lockout</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                  When a configured risk limit is reached, TradeGuard activates its browser and Windows protection layers to restrict further access to supported trading platforms until the lock period expires.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. Dual-Engine Architecture ==================== -->
+    <section id="features" class="py-16 bg-slate-800/40 border-t border-slate-800">
+      <div id="architecture" class="max-w-5xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Dual-Engine Anti-Tilt Architecture</h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">Operating at both the browser DOM layer and Windows system level to enforce real-time discipline.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-slate-800 p-8 rounded-xl border border-slate-700">
+            <div class="text-sky-400 text-sm font-bold uppercase tracking-wider mb-2">Frontend Sensor</div>
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🌐</span> Browser Extension (MV3)
+            </h3>
+            <ul class="space-y-3 text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Automated Policy Deployment:</strong> Installed automatically via Windows Policy.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Real-Time Trade Monitoring:</strong> Monitors supported trading activity to track risk limits and trigger protective actions.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Live HUD Overlay:</strong> Displays real-time Health Bar (HP) widgets on your chart.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400">✓</span>
+                <span><strong>Policy-Managed Guard:</strong> Enforced via Group Policy to resist bypass.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-800 p-8 rounded-xl border border-slate-700">
+            <div class="text-red-400 text-sm font-bold uppercase tracking-wider mb-2">Backend Enforcer</div>
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🖥️</span> Windows Desktop Agent
+            </h3>
+            <ul class="space-y-3 text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span><strong>Local IPC Server:</strong> Local WebSocket communication over the loopback interface (127.0.0.1).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span><strong>Resilient Watchdog:</strong> Active process monitor designed to resist impulsive termination.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span><strong>Enforced Lockout Countdown:</strong> Automated lockouts trigger immediately upon reaching limits.</span>
+              </li>   
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">✓</span>
+                <span>
+                  <strong>Network-Level Enforcement:</strong>
+                  Applies system-level network restrictions to limit
+                  access to supported trading platforms during
+                  active lock periods.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 6. Download Section ==================== -->
+    <section id="download" class="py-16 bg-slate-900 border-t border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-4">
+          ⬇️ Official Download
+        </div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Get TradeGuard for Windows</h2>
+        <p class="text-slate-400 mb-8 max-w-xl mx-auto text-sm md:text-base">
+          Download the latest installation package. Single-installer setup automatically configures desktop enforcer & browser extensions.
+        </p>
+
+        <div class="bg-slate-800/80 p-8 rounded-2xl border border-slate-700 max-w-2xl mx-auto shadow-xl">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+              <div class="text-lg font-bold text-white flex items-center gap-2">
+                <span>💻</span> TradeGuard_Setup_v1.1.0_x64.exe
+              </div>
+              <div class="text-xs text-slate-400 mt-1 space-y-0.5">
+                <p>Version: <span class="text-sky-400 font-semibold">1.1.0 (Stable)</span></p>
+                <p>OS Support: Windows 10 / 11 (64-bit)</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onclick="openDownloadNotice()"
+              class="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition duration-150 flex items-center gap-2 whitespace-nowrap cursor-pointer"
+              aria-haspopup="dialog"
+              aria-controls="download-notice-modal"
+            >
+              <span>Download Installer</span>
+              <span class="text-lg">⬇️</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. Pricing Section ==================== -->
+    <section id="pricing" class="py-20 border-t border-slate-800">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Protect Your Binary Trading Capital</h2>
+          <p class="text-slate-400">One emotional trade can cost hundreds. Invest in automated discipline.</p>
+        </div>
+
+        <div class="bg-slate-800/90 border border-sky-500/40 rounded-xl p-4 mb-12 max-w-4xl mx-auto text-center text-xs md:text-sm text-sky-200 flex flex-wrap justify-center items-center gap-4 md:gap-8 shadow-lg">
+          <span class="flex items-center gap-1.5 font-semibold text-white">
+            <strong class="text-sky-400 text-base">⏳</strong> Starts Only Upon Activation <span class="text-slate-400 text-xs">(Zero Wasted Time)</span>
+          </span>
+          <span class="flex items-center gap-1.5"><strong class="text-sky-400">✓</strong> One-Time Payment</span>
+          <span class="flex items-center gap-1.5"><strong class="text-sky-400">✓</strong> No Auto-Recurring Billing</span>
+          <span class="flex items-center gap-1.5"><strong class="text-sky-400">✓</strong> Duration Stacks on Renewal</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- 3-Day Free Trial -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <div class="inline-block bg-slate-700 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide mb-3">
+                1 Free per PC
+              </div>
+              <h3 class="text-lg font-bold mb-1">3-Day Free Trial</h3>
+              <p class="text-slate-400 text-xs mb-4">Try TradeGuard's risk-control features free for 3 days.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$0</div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full Dual-Engine Protection</li>
+                <li>✓ Automated TP & SL Risk Control</li>
+                <li>✓ Pocket Option & Quotex Support</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('trial', 0, '3-Day Free Trial')" 
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 cursor-pointer"
+            >
+              Claim Free Trial
+            </button>
+          </div>
+
+          <!-- 7-Day Pass -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <div class="inline-block bg-amber-950/80 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-800 uppercase tracking-wide mb-3">
+                Event Sprint
+              </div>
+              <h3 class="text-lg font-bold mb-1">7-Day Pass</h3>
+              <p class="text-slate-400 text-xs mb-4">Ideal for high-volatility news weeks (NFP / CPI).</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$7 <span class="text-xs font-normal text-slate-400">/ 7 days</span></div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full Dual-Engine Protection</li>
+                <li>✓ Automated TP & SL Risk Control</li>
+                <li>✓ Same & Higher-Tier Time Stacking</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('pro_weekly', 7, '7-Day Pass')" 
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 cursor-pointer"
+            >
+              Pay $7 with Crypto
+            </button>
+          </div>
+
+          <!-- 1-Month Pass -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <div class="inline-block bg-slate-700 text-sky-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide mb-3">
+                Flexible Monthly
+              </div>
+              <h3 class="text-lg font-bold mb-1">1-Month Pass</h3>
+              <p class="text-slate-400 text-xs mb-4">Full discipline for active monthly traders.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$19 <span class="text-xs font-normal text-slate-400">/ 1 month</span></div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full Dual-Engine Protection</li>
+                <li>✓ Automated TP & SL Risk Control</li>
+                <li>✓ Same & Higher-Tier Time Stacking</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('pro_monthly', 19, '1-Month Pass')" 
+              class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 cursor-pointer"
+            >
+              Pay $19 with Crypto
+            </button>
+          </div>
+
+          <!-- 1-Year Pass -->
+          <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-2xl border-2 border-sky-500 shadow-2xl flex flex-col justify-between relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wide shadow-md">
+              Best Value<br />(Save 56%)
+            </div>
+            <div>
+              <div class="inline-block text-sky-400 text-[10px] font-bold uppercase tracking-wide mb-3"> </div>
+              <h3 class="text-lg font-bold mb-1 text-sky-400">1-Year Pass</h3>
+              <p class="text-slate-400 text-xs mb-4">A full year of trading discipline at our best value.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$99 <span class="text-xs font-normal text-slate-400">/ 1 year</span></div>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li>✓ Full Dual-Engine Protection</li>
+                <li>✓ Automated TP & SL Risk Control</li>
+                <li>✓ Same & Higher-Tier Time Stacking</li>
+                <li>✓ Early Access to New Features</li>
+              </ul>
+            </div>
+            <button 
+              onclick="openCheckoutModal('pro_annual', 99, '1-Year Pass')" 
+              class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 cursor-pointer shadow-lg"
+            >
+              Pay $99 with Crypto
+            </button>
+          </div>
+        </div>
+
+        <!-- 推薦付款幣種說明（由原 OTP Modal 移至此處） -->
+        <p class="text-center text-xs md:text-sm text-slate-400 mt-8">
+          💡 <strong class="text-slate-200">Recommended payment options:</strong> <span class="text-sky-400 font-semibold">USDT (BEP-20), LTC, XRP, or TRX</span> — typically offering lower network fees.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 8. FAQ Section (Accordion) ==================== -->
+    <section id="faq" class="py-16 border-t border-slate-800">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+        
+        <div id="faq-accordion" class="space-y-3">
+          <!-- 1 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>How do I receive my License Key after payment?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              After your payment is confirmed, your License Key will be issued and sent to your verified email address. You may also be able to view it on the checkout success screen.
+            </div>
+          </details>
+
+          <!-- 2 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Why do I need to provide my email address?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>Your email is used to verify your identity with a one-time verification code, securely deliver your License Key, and help you retrieve your license information when needed.</p>
+              <p>Email verification is required for both free trials and paid licenses. You can find more details about how your information is handled in our <a href="/privacy" class="text-sky-400 hover:underline">Privacy Policy</a>.</p>
+            </div>
+          </details>
+
+          <!-- 3 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>When does my license duration start counting down?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              Your duration <strong>ONLY begins when you enter and activate your key inside TradeGuard.exe on your PC</strong>. Buying a key in advance or keeping it in your email will never waste your time. You can purchase today and activate it whenever you are ready to trade!
+            </div>
+          </details>
+
+          <!-- 4 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>What happens if I renew or upgrade my plan early?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>When you activate a new license key of the <strong class="text-slate-200">same or a higher tier</strong> on the same PC, your remaining active license time is added to the new plan's duration. No remaining time is lost.</p>
+              <p>For example, if you have 10 days remaining on your 1-Month Pass and activate a 1-Year Pass, your new expiration date will be approximately 1 year and 10 days from activation.</p>
+              <p>Downgrading to a lower tier is not supported while a higher-tier license is active.</p>
+            </div>
+          </details>
+
+          <!-- 5 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Is TradeGuard an auto-recurring subscription?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              No. All licenses are one-time payments for specific durations (7 days, 1 month, 1 year). There are no hidden auto-renewals or unexpected charges.
+            </div>
+          </details>
+
+          <!-- 6 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Can I uninstall TradeGuard?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>Yes. You can uninstall TradeGuard normally when no active lock period is in effect.</p>
+              <p>During an active lock period, uninstallation is restricted to help maintain your risk-control commitment. Normal uninstallation becomes available again once the lock period ends.</p>
+              <p>If you encounter a technical issue or exceptional situation requiring assistance, please contact our support team by email.</p>
+            </div>
+          </details>
+
+          <!-- 7 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Do I need to manually install the Extension?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              No manual installation is required! When you run the TradeGuard Windows installer, it automatically registers the browser extension policies for Chrome, Edge, Brave, and Firefox. The next time you open your browser, the extension will be automatically loaded and protected against manual removal.
+            </div>
+          </details>
+
+          <!-- 8 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>What system requirements and platforms are supported?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              TradeGuard requires Windows 10/11 (64-bit) and Chromium or Gecko-based browsers (Chrome, Edge, Brave, Firefox) for supported binary options brokers like Pocket Option and Quotex.
+            </div>
+          </details>
+
+          <!-- 9 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Which crypto network or currency do you recommend?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              We recommend choosing low-fee networks like <strong class="text-sky-400">USDT (BEP-20), LTC, XRP, or TRX</strong> at checkout to avoid high blockchain network fees, especially for short-term passes.
+            </div>
+          </details>
+
+          <!-- 10 -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Will this slow down my PC or conflict with my VPN?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60">
+              TradeGuard is designed to run quietly in the background without noticeably slowing down your PC. It should work well with most standard internet connections. If you use a VPN or a company-managed network, some protection features may work differently due to your network settings. We recommend testing TradeGuard with the free trial to make sure everything works smoothly on your PC.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 9. Footer ==================== -->
+    <footer class="py-8 text-center text-xs text-slate-500 border-t border-slate-800 space-y-3">
+      <p>© 2026 TradeGuard Project. Dedicated risk enforcement for binary options traders.</p>
+      <p class="space-x-4">
+        <a href="/privacy" class="text-slate-400 hover:text-sky-400 transition underline">Privacy Policy</a>
+        <span>•</span>
+        <a href="/terms" class="text-slate-400 hover:text-sky-400 transition underline">Terms of Service</a>
+      </p>
+      <p class="max-w-2xl mx-auto text-slate-600 text-[11px] px-4 leading-relaxed">
+        Disclaimer: TradeGuard is an independent risk management utility and is not affiliated with Pocket Option, Quotex, or any third-party broker platform. TradeGuard is a trading discipline and risk management tool. It does not provide investment advice, execute trades, guarantee profits, or eliminate the risk of financial loss.
+      </p>
+    </footer>
+
+    <!-- Download notice: disclosed system changes, false-positive explanation, and installation steps -->
+    <div id="download-notice-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="download-notice-title" aria-describedby="download-notice-description">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl" tabindex="-1" id="download-notice-panel">
+        <div class="flex justify-between items-start gap-3 mb-4">
+          <div>
+            <p class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Before You Download</p>
+            <h2 id="download-notice-title" class="text-xl font-extrabold text-white">Security Notice & Installation Guide</h2>
+          </div>
+          <button type="button" onclick="closeDownloadNotice()" aria-label="Close download information" class="text-slate-400 hover:text-white text-xl p-1 cursor-pointer">✕</button>
+        </div>
+
+        <div id="download-notice-description" class="text-sm text-slate-300 leading-relaxed space-y-4">
+          <p>
+            <strong class="text-white">TradeGuard contains no malware, spyware, or malicious code.</strong> However, because it is a newly released, unsigned utility designed to enforce strict self-lockouts, browser and Windows security filters may flag the installer.
+          </p>
+
+          <!-- 1. 說明為何會觸發告警 -->
+          <div class="rounded-lg border border-slate-700 bg-slate-800/70 p-3.5 space-y-2 text-xs md:text-sm">
+            <p class="font-bold text-sky-300">Why Security Warnings May Appear:</p>
+            <ul class="list-disc pl-5 space-y-1 text-slate-300">
+              <li><strong class="text-white">Anti-Bypass Architecture:</strong> Installs a background Watchdog service, deploys browser extension Group Policies, and applies local Firewall/PAC rules during active lockouts—behaviors that automated scanners often flag as heuristic false positives.</li>
+              <li><strong class="text-white">New & Unsigned Installer:</strong> Lacks a commercial code-signing certificate and high download volume, triggering Google Safe Browsing and Microsoft Defender SmartScreen ("Unknown publisher") warnings.</li>
+            </ul>
+          </div>
+
+          <!-- 2. 說明如何執行下載與安裝 -->
+          <div class="rounded-lg border border-amber-700/60 bg-amber-950/25 p-3.5 space-y-2 text-xs md:text-sm">
+            <p class="font-bold text-amber-300">How to Download & Install (If You Choose to Proceed):</p>
+            <ol class="list-decimal pl-5 space-y-1.5 text-slate-300">
+              <li><strong class="text-white">Browser Download Warning:</strong> If Chrome or Edge blocks the file, open your Downloads tab (<code class="bg-slate-900 px-1.5 py-0.5 rounded text-sky-300 font-mono">Ctrl + J</code>), click the <strong class="text-white">⋮</strong> menu next to <code class="text-slate-200">TradeGuard_Setup_v1.1.0_x64.exe</code>, and select <strong class="text-white">Keep</strong> → <strong class="text-white">Keep anyway</strong>.</li>
+              <li><strong class="text-white">Windows SmartScreen:</strong> When launching the installer, if "Windows protected your PC" appears, click <strong class="text-white">More info</strong> and then click <strong class="text-white">Run anyway</strong>.</li>
+            </ol>
+            <p class="text-[11px] text-slate-400 pt-1">
+              Note: You do not need to disable your antivirus software. Always verify that the download originates from <code class="text-sky-400">dl.gettradeguard.app</code>.
+            </p>
+          </div>
+        </div>
+
+        <label for="download-notice-confirm" class="mt-5 flex items-start gap-3 cursor-pointer text-sm text-slate-200">
+          <input id="download-notice-confirm" type="checkbox" onchange="updateDownloadNoticeConfirmation()" class="mt-1 h-4 w-4 accent-sky-500 shrink-0" />
+          <span>I understand why these security warnings appear, acknowledge the system-level risk controls, and wish to download the official installer.</span>
+        </label>
+
+        <div class="flex flex-col sm:flex-row gap-3 mt-6">
+          <button type="button" onclick="closeDownloadNotice()" class="flex-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white py-3 font-semibold cursor-pointer">Cancel</button>
+          <a id="download-notice-proceed" href="https://dl.gettradeguard.app/TradeGuard_Setup_v1.1.0_x64.exe" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1" onclick="return confirmDownloadNotice(event)" class="flex-1 rounded-lg bg-sky-500 text-center text-white py-3 px-4 font-semibold opacity-40 pointer-events-none cursor-not-allowed">Proceed to Download</a>
+        </div>
+      </div>
     </div>
+
+    <!-- ==================== 10. Checkout Modal (OTP Verified + Turnstile) ==================== -->
+    <div id="checkout-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-6">
+        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div>
+          <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Secure Delivery</div>
+          <h3 class="text-xl font-bold text-white">Verify Email for License Key</h3>
+        </div>
+
+        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+          <div>
+            <div id="modal-plan-name" class="font-bold text-white">1-Month Pass</div>
+            <div class="text-xs text-slate-400">TradeGuard PRO License (One-Time)</div>
+          </div>
+          <div id="modal-plan-price" class="text-xl font-extrabold text-sky-400">$19</div>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Step 1: Email Input & Turnstile Widget -->
+          <div id="checkout-email-step">
+            <label for="modal-email-input" class="block text-xs font-semibold text-slate-300 mb-1.5">
+              Your Email Address <span class="text-red-400">*</span>
+            </label>
+            <div class="flex flex-col gap-3">
+              <div class="flex flex-col sm:flex-row gap-3">
+                <input 
+                  type="email" 
+                  id="modal-email-input" 
+                  placeholder="trader@example.com" 
+                  class="flex-1 bg-slate-950 border border-slate-700 focus:border-sky-500 text-white rounded-lg px-4 py-3 text-sm outline-none transition placeholder:text-slate-600" 
+                />
+                <button 
+                  id="btn-send-otp" 
+                  onclick="sendOtpCode()" 
+                  class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-4 py-3 rounded-lg transition text-sm whitespace-nowrap cursor-pointer disabled:opacity-50"
+                >
+                  Send Code
+                </button>
+              </div>
+
+              <!-- [安全防護] Cloudflare Turnstile 驗證區塊 -->
+              <div class="cf-turnstile flex justify-center mt-2" data-sitekey="0x4AAAAAAF4ty6Zo_Mg5AVBS" data-theme="dark"></div>
+
+              <p id="modal-email-error" class="text-red-400 text-xs hidden"></p>
+              <p id="modal-email-success" class="text-emerald-400 text-xs hidden">Verification code sent! Please check your inbox.</p>
+            </div>
+          </div>
+
+          <!-- Step 2: OTP Input (Hidden initially) -->
+          <div id="checkout-otp-step" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-4">
+            <div>
+              <label for="modal-otp-input" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                Enter 6-Digit Verification Code <span class="text-red-400">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="modal-otp-input" 
+                placeholder="123456" 
+                maxlength="6" 
+                class="w-full bg-slate-950 border border-slate-700 focus:border-sky-500 text-white rounded-lg px-4 py-3 text-sm outline-none transition font-mono tracking-widest text-center text-lg" 
+              />
+              <p id="modal-otp-error" class="text-red-400 text-xs mt-2 hidden"></p>
+            </div>
+
+            <button 
+              id="modal-submit-btn" 
+              onclick="verifyOtpAndCheckout()" 
+              class="w-full bg-sky-500 hover:bg-sky-600 active:scale-98 text-white font-bold py-3.5 rounded-lg shadow-lg transition duration-150 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            >
+              <span>Verify & Proceed to Payment</span>
+              <span class="text-lg">🚀</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-slate-400 text-center leading-relaxed">
+          By proceeding, you agree to our
+          <a href="/terms" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Terms of Service</a>
+          and
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Privacy Policy</a>.
+        </p>
+
+        <div class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-4 flex justify-center items-center gap-2">
+          <span id="modal-footer-gateway">💳 Powered by NOWPayments</span>
+          <span>•</span>
+          <span>Secure Auto-Delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 11. Payment / Trial Success Modal ==================== -->
+    <div id="payment-success-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-lg w-full p-8 shadow-2xl relative space-y-6 text-center">
+        <button onclick="closeSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition p-1 cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div class="flex flex-col items-center">
+          <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-3 border border-emerald-500/30">
+            🎉
+          </div>
+          <div id="success-status-label" class="inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide">
+            Payment Confirmed
+          </div>
+          <h3 class="text-2xl font-extrabold text-white mt-2">Your TradeGuard License Key</h3>
+          <p class="text-slate-400 text-xs mt-1">Copy your license key below to activate TradeGuard.exe immediately.</p>
+        </div>
+
+        <div id="key-container" class="bg-slate-950 p-5 rounded-xl border border-sky-500/30 space-y-3">
+          <div id="key-loading-state" class="flex flex-col items-center py-4 space-y-2">
+            <div class="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-xs text-sky-400 animate-pulse">Verifying secure session & issuing key...</p>
+          </div>
+
+          <div id="key-display-state" class="hidden space-y-3">
+            <div class="text-xs text-slate-400 font-medium">LICENSE KEY:</div>
+            <div id="success-rendered-key" class="text-sky-300 font-mono font-bold text-lg tracking-wider break-all bg-slate-900 py-3 px-4 rounded-lg border border-slate-800 select-all">
+              TG-PRO-XXXX-XXXX-XXXX
+            </div>
+            
+            <button id="copy-key-btn" onclick="copySuccessKey()" class="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold py-3 rounded-lg shadow-lg transition duration-150 flex items-center justify-center gap-2 cursor-pointer">
+              <span>📋 Copy License Key</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/80 text-left text-xs space-y-2 text-slate-300">
+          <div class="font-bold text-sky-400 flex items-center gap-1.5">
+            <span>💡</span> How to Activate:
+          </div>
+          <ol class="list-decimal list-outside pl-4 space-y-1.5 text-slate-400">
+            <li>Launch <strong class="text-slate-200">TradeGuard.exe</strong> on your Windows PC.</li>
+            <li>Click the <strong class="text-slate-200">License</strong> button to open <strong class="text-slate-200">TradeGuard License Center</strong>, then paste your key into the <strong class="text-slate-200">License Key</strong> field.</li>
+            <li>Click <strong class="text-slate-200">Activate License</strong> to activate your key or extend an eligible existing license.</li>
+            <li>A permanent copy of this key has also been sent to your verified email.</li>
+          </ol>
+        </div>
+
+        <button onclick="closeSuccessModal()" class="w-full text-slate-400 hover:text-white text-xs underline cursor-pointer">
+          Close Window
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== 12. Image Lightbox Modal (Step 1~3 原圖檢視) ==================== -->
+    <div id="image-lightbox-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" role="dialog" aria-modal="true" aria-label="Screenshot Preview">
+      <div class="relative max-w-5xl w-full flex flex-col items-center">
+        <button onclick="closeImageLightbox()" class="self-end mb-2 bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white rounded-full p-2 border border-slate-700 transition cursor-pointer" aria-label="Close image preview">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <img 
+          id="lightbox-image" 
+          src="" 
+          alt="" 
+          class="max-h-[82vh] max-w-full w-auto h-auto object-contain rounded-xl border border-slate-700 shadow-2xl bg-slate-900" 
+        />
+        <p id="lightbox-caption" class="text-xs text-slate-300 mt-3 text-center"></p>
+      </div>
+    </div>
+
+    <!-- ==================== 13. Client-Side JavaScript Logic ==================== -->
+    <script is:inline>
+      // 在 inline <script> 區塊中：
+      const getApiBaseUrl = () => {
+        // 1. 如果有明確設定 Meta 標籤且非預設正式網址，優先使用
+        const metaApi = document.querySelector('meta[name="api-base"]')?.content;
+        const hostname = window.location.hostname;
+
+        // 3. Cloudflare Pages 預覽環境 (*.pages.dev 或包含 dev 關鍵字)
+        if (hostname.endsWith('.pages.dev') || hostname.includes('dev')) {
+          return 'https://test.gettradeguard.app'; // 你的 Dev Worker 網址
+        }
+
+        // 4. 正式環境預設值
+        return metaApi || 'https://api.gettradeguard.app';
+      };
+
+      const API_BASE = getApiBaseUrl();
+      let currentTier = '';
+      let currentAmount = 0;
+      let currentPlanName = '';
+      let resendTimer = null;
+
+      // ------------------------------------------------------------------------
+      // Step 1~3 原圖 Lightbox 控制
+      // ------------------------------------------------------------------------
+      function openImageLightbox(src, caption) {
+        if (!src) return;
+        const modal = document.getElementById('image-lightbox-modal');
+        const imgEl = document.getElementById('lightbox-image');
+        const captionEl = document.getElementById('lightbox-caption');
+        if (!modal || !imgEl) return;
+
+        imgEl.src = src;
+        imgEl.alt = caption || 'Screenshot Preview';
+        if (captionEl) captionEl.innerText = caption || '';
+        modal.classList.remove('hidden');
+      }
+
+      function closeImageLightbox() {
+        const modal = document.getElementById('image-lightbox-modal');
+        const imgEl = document.getElementById('lightbox-image');
+        if (modal) modal.classList.add('hidden');
+        if (imgEl) imgEl.src = '';
+      }
+
+      // Download notice: explicit acknowledgement; does not override browser security checks.
+      let downloadNoticeReturnFocus = null;
+
+      function openDownloadNotice() {
+        const modal = document.getElementById('download-notice-modal');
+        const checkbox = document.getElementById('download-notice-confirm');
+        if (!modal || !checkbox) return;
+        downloadNoticeReturnFocus = document.activeElement;
+        checkbox.checked = false;
+        updateDownloadNoticeConfirmation();
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('download-notice-panel')?.focus();
+      }
+
+      function closeDownloadNotice() {
+        const modal = document.getElementById('download-notice-modal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        downloadNoticeReturnFocus?.focus?.();
+      }
+
+      function updateDownloadNoticeConfirmation() {
+        const acknowledged = document.getElementById('download-notice-confirm')?.checked === true;
+        const proceed = document.getElementById('download-notice-proceed');
+        if (!proceed) return;
+        proceed.setAttribute('aria-disabled', acknowledged ? 'false' : 'true');
+        proceed.tabIndex = acknowledged ? 0 : -1;
+        proceed.classList.toggle('opacity-40', !acknowledged);
+        proceed.classList.toggle('pointer-events-none', !acknowledged);
+        proceed.classList.toggle('cursor-not-allowed', !acknowledged);
+        proceed.classList.toggle('hover:bg-sky-600', acknowledged);
+      }
+
+      function confirmDownloadNotice(event) {
+        if (document.getElementById('download-notice-confirm')?.checked !== true) {
+          event.preventDefault();
+          return false;
+        }
+        closeDownloadNotice();
+        return true;
+      }
+
+      // ------------------------------------------------------------------------
+      // Success Modal 狀態標籤控制 (Trial / Confirming / Paid)
+      // ------------------------------------------------------------------------
+      function setSuccessStatusLabel(mode) {
+        const labelEl = document.getElementById('success-status-label');
+        if (!labelEl) return;
+
+        if (mode === 'trial') {
+          labelEl.innerText = 'Free Trial Confirmed';
+          labelEl.className = 'inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide';
+        } else if (mode === 'confirming') {
+          labelEl.innerText = 'Confirming Payment...';
+          labelEl.className = 'inline-block bg-sky-950/80 text-sky-400 text-xs font-bold px-3 py-1 rounded-full border border-sky-800 uppercase tracking-wide animate-pulse';
+        } else {
+          labelEl.innerText = 'Payment Confirmed';
+          labelEl.className = 'inline-block bg-emerald-950/80 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800 uppercase tracking-wide';
+        }
+      }
+
+      // ------------------------------------------------------------------------
+      // Modal 開啟與控制邏輯
+      // ------------------------------------------------------------------------
+      function openCheckoutModal(tier, amount, planName) {
+        currentTier = tier;
+        currentAmount = amount;
+        currentPlanName = planName;
+
+        document.getElementById('modal-plan-name').innerText = planName;
+        document.getElementById('modal-plan-price').innerText = `$${amount}`;
+
+        // [P2 修正] 每次開啟結帳 Modal 時，強制清除先前的 Session Token，避免狀態殘留
+        sessionStorage.removeItem('tg_checkout_session');
+
+        // 清空並重置 Email 與 OTP 輸入狀態
+        const emailInput = document.getElementById('modal-email-input');
+        emailInput.value = '';
+        emailInput.disabled = false;
+
+        document.getElementById('modal-otp-input').value = '';
+        document.getElementById('checkout-otp-step').classList.add('hidden');
+
+        // 隱藏錯誤與成功提示
+        document.getElementById('modal-email-error').classList.add('hidden');
+        document.getElementById('modal-email-success').classList.add('hidden');
+        document.getElementById('modal-otp-error').classList.add('hidden');
+
+        // 清除倒數定時器與重置發送按鈕
+        clearInterval(resendTimer);
+        const btnSend = document.getElementById('btn-send-otp');
+        btnSend.disabled = false;
+        btnSend.innerText = "Send Code";
+
+        // 重置 Turnstile 人機驗證狀態
+        if (window.turnstile) {
+          turnstile.reset();
+        }
+
+        const submitBtn = document.getElementById('modal-submit-btn');
+        submitBtn.disabled = false;
+
+        if (amount === 0) {
+          submitBtn.innerHTML = `<span>Verify & Claim Free Trial</span> <span class="text-lg">🎉</span>`;
+          document.getElementById('modal-footer-gateway').innerText = `🎁 Free 3-Day Trial`;
+        } else {
+          submitBtn.innerHTML = `<span>Verify & Proceed to Payment</span> <span class="text-lg">🚀</span>`;
+          document.getElementById('modal-footer-gateway').innerText = `💳 Powered by NOWPayments`;
+        }
+
+        document.getElementById('checkout-modal').classList.remove('hidden');
+        setTimeout(() => emailInput.focus(), 50);
+      }
+
+      function closeCheckoutModal() {
+        document.getElementById('checkout-modal').classList.add('hidden');
+      }
+
+      function closeSuccessModal() {
+        document.getElementById('payment-success-modal').classList.add('hidden');
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+      }
+
+      // [體驗修正] 綁定 Email 輸入監聽，切換 Email 時自動作廢舊有的 Session Token
+      document.getElementById('modal-email-input')?.addEventListener('input', () => {
+        sessionStorage.removeItem('tg_checkout_session');
+      });
+
+      // ------------------------------------------------------------------------
+      // OTP 冷卻倒數計時器
+      // ------------------------------------------------------------------------
+      function startResendCountdown(seconds) {
+        const btn = document.getElementById('btn-send-otp');
+        let timeLeft = seconds;
+        btn.disabled = true;
+
+        clearInterval(resendTimer);
+        resendTimer = setInterval(() => {
+          if (timeLeft <= 0) {
+            clearInterval(resendTimer);
+            btn.innerText = "Resend Code";
+            btn.disabled = false;
+            // 重新計時結束後重置 Turnstile
+            if (window.turnstile) {
+              turnstile.reset();
+            }
+          } else {
+            btn.innerText = `Resend in ${timeLeft}s`;
+            timeLeft--;
+          }
+        }, 1000);
+      }
+
+      // ------------------------------------------------------------------------
+      // 發送 OTP 驗證碼 (整合 Turnstile 驗證)
+      // ------------------------------------------------------------------------
+      async function sendOtpCode() {
+        const emailInput = document.getElementById('modal-email-input');
+        const errorEl = document.getElementById('modal-email-error');
+        const successEl = document.getElementById('modal-email-success');
+        const btn = document.getElementById('btn-send-otp');
+        const otpStep = document.getElementById('checkout-otp-step');
+
+        const email = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // 讀取 Turnstile 回傳的 Token
+        const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
+
+        errorEl.classList.add('hidden');
+        successEl.classList.add('hidden');
+
+        if (!email || !emailRegex.test(email)) {
+          errorEl.innerText = "Please enter a valid email address.";
+          errorEl.classList.remove('hidden');
+          return;
+        }
+
+        if (!turnstileToken) {
+          errorEl.innerText = "Please complete the security check box above.";
+          errorEl.classList.remove('hidden');
+          return;
+        }
+
+        // 發送新驗證碼時清除舊的 Session Token
+        sessionStorage.removeItem('tg_checkout_session');
+
+        btn.disabled = true;
+        btn.innerHTML = `<span class="animate-pulse">Sending...</span>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/email/send-code`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, turnstileToken })
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            successEl.classList.remove('hidden');
+            otpStep.classList.remove('hidden');
+            document.getElementById('modal-otp-input').focus();
+            startResendCountdown(60); // 啟動 60 秒倒數
+          } else {
+            errorEl.innerText = data.message || "Failed to send verification code.";
+            errorEl.classList.remove('hidden');
+            btn.disabled = false;
+            btn.innerText = "Send Code";
+            if (window.turnstile) {
+              turnstile.reset();
+            }
+          }
+        } catch (err) {
+          errorEl.innerText = "Network connection error.";
+          errorEl.classList.remove('hidden');
+          btn.disabled = false;
+          btn.innerText = "Send Code";
+          if (window.turnstile) {
+            turnstile.reset();
+          }
+        }
+      }
+
+      // ------------------------------------------------------------------------
+      // 驗證 OTP 並發起結帳 / 試用請求
+      // ------------------------------------------------------------------------
+      async function verifyOtpAndCheckout() {
+        const email = document.getElementById('modal-email-input').value.trim();
+        const code = document.getElementById('modal-otp-input').value.trim();
+        const errorEl = document.getElementById('modal-otp-error');
+        const submitBtn = document.getElementById('modal-submit-btn');
+
+        errorEl.classList.add('hidden');
+        submitBtn.disabled = true;
+
+        try {
+          let sessionToken = sessionStorage.getItem('tg_checkout_session');
+
+          // 1. 若尚未驗證取得 Session Token，則先進行 OTP 驗證
+          if (!sessionToken) {
+            if (!code || code.length < 6) {
+              errorEl.innerText = "Please enter the complete 6-digit code.";
+              errorEl.classList.remove('hidden');
+              resetSubmitBtn();
+              return;
+            }
+
+            submitBtn.innerHTML = `<span class="animate-pulse">Verifying...</span>`;
+
+            const verifyRes = await fetch(`${API_BASE}/api/email/verify-code`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, code })
+            });
+            const verifyData = await verifyRes.json();
+
+            if (!verifyData.success || !verifyData.token) {
+              errorEl.innerText = verifyData.message || "Invalid verification code.";
+              errorEl.classList.remove('hidden');
+              resetSubmitBtn();
+              return;
+            }
+
+            sessionToken = verifyData.token;
+            sessionStorage.setItem('tg_checkout_session', sessionToken);
+          }
+
+          // 2. 攜帶 Session Token 建立結帳訂單
+          submitBtn.innerHTML = `<span class="animate-pulse">Creating Order...</span>`;
+
+          const checkoutRes = await fetch(`${API_BASE}/api/checkout`, {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${sessionToken}` 
+            },
+            body: JSON.stringify({ tier: currentTier })
+          });
+          const checkoutData = await checkoutRes.json();
+
+          // Session 權限失效時作廢快取
+          if (checkoutRes.status === 401) {
+            sessionStorage.removeItem('tg_checkout_session');
+          }
+
+          if (checkoutData.success && checkoutData.invoice_url) {
+            window.location.href = checkoutData.invoice_url;
+          } else if (checkoutData.success && checkoutData.license_key) {
+            const isTrial = currentTier === 'trial' || currentAmount === 0;
+            closeCheckoutModal();
+            showSuccessKeyModal(checkoutData.license_key, isTrial);
+          } else {
+            const errMsg = checkoutData.message 
+              || (typeof checkoutData.error === 'string' ? checkoutData.error : checkoutData.error?.message || checkoutData.error?.error)
+              || "Failed to process request.";
+
+            errorEl.innerText = "Checkout Error: " + errMsg;
+            errorEl.classList.remove('hidden');
+            resetSubmitBtn();
+          }
+        } catch (err) {
+          errorEl.innerText = "Network error: " + err.message;
+          errorEl.classList.remove('hidden');
+          resetSubmitBtn();
+        }
+      }
+
+      function resetSubmitBtn() {
+        const submitBtn = document.getElementById('modal-submit-btn');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = currentAmount === 0 
+          ? `<span>Verify & Claim Free Trial</span> <span class="text-lg">🎉</span>`
+          : `<span>Verify & Proceed to Payment</span> <span class="text-lg">🚀</span>`;
+      }
+
+      function showSuccessKeyModal(licenseKey, isTrial = false) {
+        const modal = document.getElementById('payment-success-modal');
+        const loadingEl = document.getElementById('key-loading-state');
+        const displayEl = document.getElementById('key-display-state');
+        const keyEl = document.getElementById('success-rendered-key');
+
+        setSuccessStatusLabel(isTrial ? 'trial' : 'paid');
+        if (keyEl) keyEl.innerText = licenseKey;
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (displayEl) displayEl.classList.remove('hidden');
+        if (modal) modal.classList.remove('hidden');
+      }
+
+      async function copySuccessKey() {
+        const keyEl = document.getElementById('success-rendered-key');
+        const btnEl = document.getElementById('copy-key-btn');
+        if (!keyEl) return;
+
+        try {
+          await navigator.clipboard.writeText(keyEl.innerText.trim());
+          btnEl.innerHTML = `<span>✓ Key Copied to Clipboard!</span>`;
+          btnEl.classList.replace('bg-sky-500', 'bg-emerald-600');
+          btnEl.classList.remove('hover:bg-sky-600');
+          setTimeout(() => {
+            btnEl.innerHTML = `<span>📋 Copy License Key</span>`;
+            btnEl.classList.replace('bg-emerald-600', 'bg-sky-500');
+            btnEl.classList.add('hover:bg-sky-600');
+          }, 3000);
+        } catch (err) {
+          alert("Key: " + keyEl.innerText.trim());
+        }
+      }
+
+      // ------------------------------------------------------------------------
+      // 頁面載入時進行付款完成狀態輪詢 (Polling)
+      // ------------------------------------------------------------------------
+      async function checkPaymentSuccessOnLoad() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const billingStatus = urlParams.get('billing');
+        const orderId = urlParams.get('order_id') || urlParams.get('order');
+
+        if (billingStatus === 'success') {
+          setSuccessStatusLabel('confirming');
+          document.getElementById('payment-success-modal').classList.remove('hidden');
+          const loadingEl = document.getElementById('key-loading-state');
+          const displayEl = document.getElementById('key-display-state');
+          const keyEl = document.getElementById('success-rendered-key');
+
+          const sessionToken = sessionStorage.getItem('tg_checkout_session') || "";
+
+          let pollAttempts = 0;
+          const maxAttempts = 12;
+          let isPolling = true;
+
+          // [P2 修正] 使用遞迴 setTimeout 取代 setInterval，確保非同步請求不會互相重疊
+          const pollOrderStatus = async () => {
+            if (!isPolling) return;
+            pollAttempts++;
+
+            loadingEl.innerHTML = `
+              <div class="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
+              <p class="text-xs text-sky-400 animate-pulse">Confirming payment... (Attempt ${pollAttempts}/${maxAttempts})</p>
+            `;
+
+            try {
+              const res = await fetch(`${API_BASE}/api/order-status?order_id=${encodeURIComponent(orderId || '')}`, {
+                headers: { "Authorization": `Bearer ${sessionToken}` }
+              });
+              const resData = await res.json();
+
+              if (resData.success && resData.payment_status === "completed") {
+                isPolling = false; // 停止輪詢
+                const isTrial = resData.tier === 'trial';
+                setSuccessStatusLabel(isTrial ? 'trial' : 'paid');
+                if (resData.license_key) {
+                  keyEl.innerText = resData.license_key;
+                  loadingEl.classList.add('hidden');
+                  displayEl.classList.remove('hidden');
+                } else {
+                  loadingEl.innerHTML = `
+                    <div class="text-emerald-400 font-bold mb-2 text-lg">✓ Payment Completed</div>
+                    <p class="text-sm text-slate-300">Your license key has been securely delivered to your email.</p>
+                    <p class="text-[11px] text-slate-500 mt-3 border-t border-slate-800 pt-2">For security reasons, keys are only displayed within the original verified session.</p>
+                  `;
+                }
+                return; // 結束執行
+              }
+            } catch (err) {
+              console.warn("Polling error:", err);
+            }
+
+            if (pollAttempts >= maxAttempts) {
+              isPolling = false;
+              loadingEl.innerHTML = `
+                <p class="text-xs text-amber-400">Transaction is still confirming on the blockchain.</p>
+                <p class="text-[11px] text-slate-400 mt-1">Please check your email inbox for your license key in a few minutes.</p>
+              `;
+            } else {
+              // 請求結束後，等待 3 秒再發起下一次
+              setTimeout(pollOrderStatus, 3000);
+            }
+          };
+
+          // 啟動第一次輪詢
+          pollOrderStatus();
+        }
+      }
+
+      // ------------------------------------------------------------------------
+      // DOM 全域事件與快捷鍵監聽
+      // ------------------------------------------------------------------------
+      window.addEventListener('DOMContentLoaded', () => {
+        checkPaymentSuccessOnLoad();
+
+        // FAQ Accordion：一次只展開一個答案
+        const faqItems = document.querySelectorAll('#faq-accordion details.faq-item');
+        faqItems.forEach((item) => {
+          item.addEventListener('toggle', () => {
+            if (item.open) {
+              faqItems.forEach((other) => {
+                if (other !== item && other.open) {
+                  other.open = false;
+                }
+              });
+            }
+          });
+        });
+
+        document.getElementById('modal-email-input')?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendOtpCode();
+          }
+        });
+
+        document.getElementById('modal-otp-input')?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            verifyOtpAndCheckout();
+          }
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeCheckoutModal();
+          closeSuccessModal();
+          closeImageLightbox();
+          closeDownloadNotice();
+        }
+      });
+
+      document.getElementById('checkout-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'checkout-modal') {
+          closeCheckoutModal();
+        }
+      });
+
+      document.getElementById('payment-success-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'payment-success-modal') {
+          closeSuccessModal();
+        }
+      });
+
+      document.getElementById('image-lightbox-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'image-lightbox-modal' || e.target.parentElement?.id === 'image-lightbox-modal') {
+          closeImageLightbox();
+        }
+      });
+
+      document.getElementById('download-notice-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'download-notice-modal') closeDownloadNotice();
+      });
+
+      // 匯出至全域 window 物件以供 inline onclick 呼叫
+      window.openDownloadNotice = openDownloadNotice;
+      window.closeDownloadNotice = closeDownloadNotice;
+      window.updateDownloadNoticeConfirmation = updateDownloadNoticeConfirmation;
+      window.confirmDownloadNotice = confirmDownloadNotice;
+      window.openCheckoutModal = openCheckoutModal;
+      window.closeCheckoutModal = closeCheckoutModal;
+      window.closeSuccessModal = closeSuccessModal;
+      window.openImageLightbox = openImageLightbox;
+      window.closeImageLightbox = closeImageLightbox;
+      window.copySuccessKey = copySuccessKey;
+      window.sendOtpCode = sendOtpCode;
+      window.verifyOtpAndCheckout = verifyOtpAndCheckout;
+    </script>
   </body>
 </html>
