@@ -11,7 +11,13 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="api-base" content={apiBase} />
-    <title>TradeGuard - Automated Risk Discipline for Binary Options Traders</title>
+    <meta
+      name="description"
+      content="TradeGuard is a binary options risk management tool for Windows. Set daily stop-loss and take-profit limits, monitor trading risk, and enforce platform lockouts."
+    />
+    <link rel="canonical" href="https://gettradeguard.app/" />
+    <link rel="icon" type="image/png" href="/48-new.png" />
+    <title>Binary Options Risk Management Tool | TradeGuard</title>
     <!-- [安全修正] 載入 Cloudflare Turnstile 驗證腳本 -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
@@ -54,11 +60,10 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         🎯 Automated Risk Discipline for Binary Options Traders
       </div>
       <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-        Take Control of Emotional Trading.<br />
-        <span class="text-sky-400">Automated Discipline for Binary Options Traders.</span>
+        Binary Options Risk Management Software
       </h1>
       <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-        TradeGuard combines a browser extension with a Windows enforcement agent to restrict access to supported binary options trading platforms, including Pocket Option and Quotex, when your configured risk limits are reached.
+        Automate your daily stop-loss and take-profit rules with TradeGuard. Monitor your trading activity and restrict access to the platform when your configured risk limits are reached.
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <a href="#download" class="bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
@@ -69,7 +74,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         </a>
       </div>
       <div class="flex flex-wrap justify-center items-center gap-6 mt-12 text-xs text-slate-500">
-        <span>📈 Pocket Option & Quotex Support</span>
+        <span>📈 Works with Pocket Option & Quotex</span>
         <span>⚡ MV3 WebSocket Interceptor</span>
         <span>🛡️ Automated Policy Deployment</span>
         <span>🐕 Active Process Watchdog</span>
