@@ -13,7 +13,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
     <meta name="api-base" content={apiBase} />
     <meta
       name="description"
-      content="TradeGuard is a binary options risk management tool for Windows. Set daily stop-loss and take-profit limits, monitor trading risk, and enforce platform lockouts."
+      content="TradeGuard is a binary options risk management tool for Windows. Start with free manual trading lockouts, or upgrade to PRO for automated stop-loss and take-profit protection."
     />
     <link rel="canonical" href="https://gettradeguard.app/" />
     <link rel="icon" type="image/png" href="/48-new.png" />
@@ -38,7 +38,6 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         <a href="#" class="text-xl font-bold text-sky-400 flex items-center gap-2 hover:opacity-90 transition cursor-pointer" aria-label="TradeGuard Home">
           <img src="/48-new.png" alt="" width="28" height="28" class="w-7 h-7 object-contain shrink-0" />
           <span>TradeGuard</span>
-          <span class="text-xs bg-sky-950 text-sky-400 px-2 py-0.5 rounded border border-sky-800">PRO</span>
         </a>
         <div class="hidden md:flex space-x-6 text-sm">
           <a href="#who-is-it-for" class="hover:text-sky-400 transition">Who It's For</a>
@@ -56,24 +55,27 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
 
     <!-- ==================== 2. Hero Section ==================== -->
     <section class="py-20 text-center max-w-4xl mx-auto px-4">
-      <div class="inline-block bg-slate-800 text-sky-400 text-xs px-3 py-1 rounded-full border border-slate-700 mb-6">
-        🎯 Automated Risk Discipline for Binary Options Traders
+      <div class="inline-block bg-emerald-950/80 text-emerald-400 text-xs font-semibold px-3.5 py-1 rounded-full border border-emerald-800/80 mb-6">
+        🛡️ Free Manual Lock Included • Automated Risk Discipline
       </div>
       <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
         Binary Options Risk Management Software
       </h1>
-      <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-        Automate your daily stop-loss and take-profit rules with TradeGuard. Monitor your trading activity and restrict access to the platform when your configured risk limits are reached.
+      <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+        Start with <strong class="text-slate-200 font-semibold">Free Manual Lock</strong> to take a break from trading whenever you need it. Upgrade to <strong class="text-sky-400 font-semibold">PRO</strong> for automated stop-loss and take-profit protection.
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <a href="#download" class="bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
-          <span>⬇️ Download App</span>
+          <span>⬇️ Download Free</span>
         </a>
-        <a href="#pricing" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition">
-          🔒 Enforce Your Trading Rules
+        <a href="#pricing" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+          <span>🔒 Explore PRO</span>
         </a>
       </div>
-      <div class="flex flex-wrap justify-center items-center gap-6 mt-12 text-xs text-slate-500">
+      <p class="text-xs text-slate-400 mt-4">
+        Free Manual Lock included • PRO features available separately
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-6 mt-10 text-xs text-slate-500">
         <span>📈 Works with Pocket Option & Quotex</span>
         <span>⚡ MV3 WebSocket Interceptor</span>
         <span>🛡️ Automated Policy Deployment</span>
@@ -182,7 +184,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
                 <div class="text-xs font-bold text-sky-400 mb-1">01. FAST CONFIGURATION</div>
                 <h3 class="text-lg font-bold text-white mb-2">Set Your Risk Limits</h3>
                 <p class="text-slate-400 text-xs leading-relaxed">
-                  Launch <code class="text-slate-200">TradeGuard.exe</code> on Windows and configure your Daily Stop-Loss, Take-Profit target, or manual lock duration in seconds.
+                  Launch <code class="text-slate-200">TradeGuard.exe</code> on Windows—start with <strong class="text-emerald-400 font-semibold">Free Manual Lock</strong> to restrict trading access for your chosen duration, or upgrade to PRO to configure automated daily stop-loss and take-profit limits.
                 </p>
               </div>
             </div>
@@ -319,12 +321,12 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
     <!-- ==================== 6. Download Section ==================== -->
     <section id="download" class="py-16 bg-slate-900 border-t border-slate-800">
       <div class="max-w-4xl mx-auto px-4 text-center">
-        <div class="inline-block bg-sky-950 text-sky-400 text-xs px-3 py-1 rounded-full border border-sky-800 mb-4">
-          ⬇️ Official Download
+        <div class="inline-block bg-emerald-950/80 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-800/80 mb-4">
+          ⬇️ Official Download • Free Manual Lock Included
         </div>
         <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Get TradeGuard for Windows</h2>
         <p class="text-slate-400 mb-8 max-w-xl mx-auto text-sm md:text-base">
-          Download the latest installation package. Single-installer setup automatically configures desktop enforcer & browser extensions.
+          <strong class="text-slate-200 font-semibold">Free Manual Lock included — no PRO purchase required to get started.</strong> Single-installer setup automatically configures the desktop enforcer and browser extensions.
         </p>
 
         <div class="bg-slate-800/80 p-8 rounded-2xl border border-slate-700 max-w-2xl mx-auto shadow-xl">
@@ -334,7 +336,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
                 <span>💻</span> TradeGuard_Setup_v1.1.0_x64.exe
               </div>
               <div class="text-xs text-slate-400 mt-1 space-y-0.5">
-                <p>Version: <span class="text-sky-400 font-semibold">1.1.0 (Stable)</span></p>
+                <p>Version: <span class="text-sky-400 font-semibold">1.1.0 (Stable)</span> • <span class="text-emerald-400 font-semibold">Manual Lock Free</span></p>
                 <p>OS Support: Windows 10 / 11 (64-bit)</p>
               </div>
             </div>
@@ -358,7 +360,27 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-10">
           <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Protect Your Binary Trading Capital</h2>
-          <p class="text-slate-400">One emotional trade can cost hundreds. Invest in automated discipline.</p>
+          <p class="text-slate-400">Start free with Manual Lock, or unlock automated stop-loss & take-profit protection with PRO.</p>
+        </div>
+
+        <!-- Free Manual Lock Highlight Banner -->
+        <div class="bg-gradient-to-r from-emerald-950/70 via-slate-800/90 to-slate-800/90 border border-emerald-500/40 rounded-2xl p-5 md:p-6 mb-6 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+          <div class="text-center md:text-left space-y-1">
+            <div class="inline-flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+              <span>🆓 Free Manual Lock</span>
+              <span class="text-slate-600">•</span>
+              <span>Available Without a PRO License</span>
+            </div>
+            <p class="text-slate-200 text-sm md:text-base font-semibold">
+              Manually restrict access to supported trading platforms for your chosen lock duration — $0.
+            </p>
+            <p class="text-slate-400 text-xs">
+              Need automated Daily Stop-Loss, Take-Profit, and real-time trade monitoring? Choose a PRO plan or 3-Day Free Trial below.
+            </p>
+          </div>
+          <a href="#download" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs md:text-sm font-bold px-5 py-3 rounded-xl shadow-md transition whitespace-nowrap shrink-0">
+            Download & Use Free
+          </a>
         </div>
 
         <div class="bg-slate-800/90 border border-sky-500/40 rounded-xl p-4 mb-12 max-w-4xl mx-auto text-center text-xs md:text-sm text-sky-200 flex flex-wrap justify-center items-center gap-4 md:gap-8 shadow-lg">
@@ -371,15 +393,15 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- 3-Day Free Trial -->
+          <!-- 3-Day Free PRO Trial -->
           <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
             <div>
               <div class="inline-block bg-slate-700 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide mb-3">
-                1 Free per PC
+                Try PRO • 1 Free per PC
               </div>
               <h3 class="text-lg font-bold mb-1">3-Day Free Trial</h3>
-              <p class="text-slate-400 text-xs mb-4">Try TradeGuard's risk-control features free for 3 days.</p>
-              <div class="text-3xl font-extrabold mb-6 text-white">$0</div>
+              <p class="text-slate-400 text-xs mb-4">Explore automated stop-loss, take-profit, and PRO risk controls for 3 days.</p>
+              <div class="text-3xl font-extrabold mb-6 text-white">$0 <span class="text-xs font-normal text-slate-400">/ 3 days</span></div>
               <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
                 <li>✓ Full Dual-Engine Protection</li>
                 <li>✓ Automated TP & SL Risk Control</li>
@@ -390,7 +412,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
               onclick="openCheckoutModal('trial', 0, '3-Day Free Trial')" 
               class="w-full bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-center font-bold py-3 rounded-lg text-sm transition duration-150 cursor-pointer"
             >
-              Claim Free Trial
+              Claim Free PRO Trial
             </button>
           </div>
 
@@ -466,7 +488,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
           </div>
         </div>
 
-        <!-- 推薦付款幣種說明（由原 OTP Modal 移至此處） -->
+        <!-- 推薦付款幣種說明 -->
         <p class="text-center text-xs md:text-sm text-slate-400 mt-8">
           💡 <strong class="text-slate-200">Recommended payment options:</strong> <span class="text-sky-400 font-semibold">USDT (BEP-20), LTC, XRP, or TRX</span> — typically offering lower network fees.
         </p>
@@ -479,7 +501,31 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
         <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
         
         <div id="faq-accordion" class="space-y-3">
-          <!-- 1 -->
+          <!-- 1 (New: Free usage) -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>Is TradeGuard free to use?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p>Yes! TradeGuard includes a <strong class="text-slate-200">free Manual Lock</strong> feature that lets you manually restrict access to supported trading platforms for a selected duration. No paid PRO license is required to use Manual Lock.</p>
+              <p>Advanced features such as automated daily stop-loss, take-profit, and real-time trading risk monitoring are available with a PRO license (which also includes a 3-Day Free Trial).</p>
+            </div>
+          </details>
+
+          <!-- 2 (New: Free vs PRO) -->
+          <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
+            <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
+              <span>What's the difference between Free Manual Lock and PRO?</span>
+              <span class="text-sky-400 text-xl font-normal transition-transform duration-200 group-open:rotate-45 shrink-0">+</span>
+            </summary>
+            <div class="px-6 pb-5 pt-1 text-slate-400 text-sm leading-relaxed border-t border-slate-700/60 space-y-2">
+              <p><strong class="text-slate-200">Free Manual Lock</strong> lets you manually activate a trading lockout for a chosen duration whenever you decide to step away from the charts.</p>
+              <p><strong class="text-sky-400">PRO</strong> adds automated risk management: you can configure daily stop-loss and take-profit limits so TradeGuard monitors supported trading activity in real time and automatically triggers protective lockouts the moment your limits are reached.</p>
+            </div>
+          </details>
+
+          <!-- 3 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>How do I receive my License Key after payment?</span>
@@ -490,7 +536,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 2 -->
+          <!-- 4 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>Why do I need to provide my email address?</span>
@@ -502,7 +548,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 3 -->
+          <!-- 5 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>When does my license duration start counting down?</span>
@@ -513,7 +559,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 4 -->
+          <!-- 6 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>What happens if I renew or upgrade my plan early?</span>
@@ -526,7 +572,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 5 -->
+          <!-- 7 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>Is TradeGuard an auto-recurring subscription?</span>
@@ -537,7 +583,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 6 -->
+          <!-- 8 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>Can I uninstall TradeGuard?</span>
@@ -550,7 +596,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 7 -->
+          <!-- 9 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>Do I need to manually install the Extension?</span>
@@ -561,7 +607,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 8 -->
+          <!-- 10 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>What system requirements and platforms are supported?</span>
@@ -572,7 +618,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 9 -->
+          <!-- 11 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>Which crypto network or currency do you recommend?</span>
@@ -583,7 +629,7 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || "https://api.gettradeguard.ap
             </div>
           </details>
 
-          <!-- 10 -->
+          <!-- 12 -->
           <details class="faq-item group bg-slate-800 rounded-xl border border-slate-700 open:border-sky-500/50 transition">
             <summary class="flex items-center justify-between gap-4 px-6 py-4 font-bold text-base md:text-lg text-white cursor-pointer select-none hover:text-sky-400 transition">
               <span>Will this slow down my PC or conflict with my VPN?</span>
